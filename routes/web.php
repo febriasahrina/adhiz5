@@ -20,20 +20,42 @@ Route::get('/token', function () {
 });
 Route::get('/', function () {return view('homepage');});
 Route::get('/participate', function () { return view('participate');});
+
+Route::get('cek-pendaftar/{id}', [
+    'as' => 'cek-pendaftar',
+    'uses' => 'ParticipateController@cekPendaftar']);
+
+
 Route::get('/panduan', function () { return view('panduan');});
 Route::get('/login', function () { return view('login');});
+
+Route::get('/upload', function () { return view('upload');});
+
 Route::post('actionlogin', [
     'as' => 'actionlogin',
     'uses' => 'LoginController@actionlogin']);
+
+// Route::get('upload', [
+//     'as' => 'upload',
+//     'uses' => 'LoginController@actionlogout']);
+
 Route::get('logout', [
     'as' => 'actionlogout',
     'uses' => 'LoginController@actionlogout']);
+
+Route::get('actionFirst', [
+    'as' => 'actionFirst',
+    'uses' => 'LoginController@actionFirst']);
 
 // insert tim
 Route::post('insert-tim', [
     'as' => 'insert-tim',
     'uses' => 'ParticipateController@store']);
 
-Route::post('insert-file', [
+Route::post('set-session', [
+    'as' => 'set-session',
+    'uses' => 'ParticipateController@setSession']);
+
+Route::post('insert-file/{route}', [
     'as' => 'insert-file',
     'uses' => 'ParticipateController@store_file']);

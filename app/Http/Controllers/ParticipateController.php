@@ -5,8 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Routing\Redirector;
 use DB;
+use File;
+use App\Video;
+use Storage;
 use DataTables;
+use Exception;
 
 class ParticipateController extends Controller
 {
@@ -159,47 +165,75 @@ class ParticipateController extends Controller
         }
     }
 
-    public function store_file(Request $request)
+    public function setSession(Request $request)
     {
-        // dd("hai");
-        // $this->validate($request, [
-        //     'filenames' => 'required',
-        //     'filenames.*' => 'mimes:doc,pdf,docx,zip,png,jpge,jpg'
-        // ]);
-        // if($request->hasfile('filenames'))
-        // {
-            foreach($request->file('filenames') as $file)
-            {
-                $name = time().'.'.$file->extension();
-                $file->move(base_path() . 'files/', $name);
-                $data[] = $name;
-            }
-        // }
+        $data = $request->all();
+        $arr = [];
 
-        dd(json_encode($data));
-        $file= new File();
-        $file->filenames=json_encode($data);
-        $file->save();
+        foreach ($data as $key => $value) {
+            $arr[$key] = $value;
+        }
+        Session::put('save-data', $arr);
+    }
 
-        //  $uniqueFileName = uniqid() . $request->get('upload_file')->getClientOriginalName() . '.' . $request->get('upload_file')->getClientOriginalExtension();
+    public function cekPendaftar($id = '')
+    {
+        $id_email = $id;
+        $checkPendaftar = DB::table('tb_tim')
+            ->where('tb_tim.email', '=', $id_email)
+            ->where('status_tim', '=', 'leader')
+            ->whereNull('deleted_at')
+            ->value('id_kepesertaan');
 
-        // $request->get('upload_file')->move(public_path('files') . $uniqueFileName);
-
-
-         if ($file) {
+        // if ($checkPendaftar) {
             return response()->json([
-                'data' => [
-                    'success' => true,
-                    'message' => 'Insert Data Berhasil.'
-                ]
+                'success' => true,
+                'message' => 'Get Data Berhasil.',
+                'data' => $checkPendaftar
             ], 201);
-        } else {
-            return response()->json([
-                'data' => [
-                    'success' => false,
-                    'message' => 'Insert Data Gagal.'
-                ]
-            ], 504);
+        // } else {
+        //     return response()->json([
+        //         'success' => false,
+        //         'message' => 'Get Data Gagal.',
+        //         'data' => ''
+        //     ], 504);
+        // }
+    }
+
+    public function store_file(Request $request, $route = '')
+    {
+        $email = Session::get('email');
+        $data = Session::get('save-data');
+        if ($route == 'ppt')
+        {
+            $request->validate([
+                'file' => 'required|mimes:pptx|max:2048',
+            ]);
+            
+            
+            $fileName = $email.'.'.$request->file->extension();  
+    
+            $request->file->move(public_path('files'), $fileName);
+            return back()->with('success','Berhasil Upload File Materi.');
+            
+        }
+        else if ($route == 'video')
+        {
+            $request->validate([
+                'video' => 'required|file|mimetypes:video/mp4|max:30000',
+            ]);
+
+            $videoSrc = "";
+            $thumbnailSrc = "";
+
+            $file = $request->file('video');        
+           
+            $destinationPath = 'files';
+            $fileName = $email.'.'.$file->getClientOriginalExtension();
+            $uploadSuccess = $file->move($destinationPath, $fileName);
+            $videoSrc = '/'.$destinationPath.'/'.$fileName;
+            
+            return back()->with('success','Berhasil Upload File Video.');
         }
     }
 

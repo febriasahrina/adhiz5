@@ -88,6 +88,11 @@ class LoginController extends Controller
         return redirect('/login')->with('alert', 'Kamu berhasil logout');
     }
 
+    public function actionFirst()
+    {
+        return redirect('/login')->with('alert', 'Mohon login terlebih dahulu');
+    }
+
 }
 
 

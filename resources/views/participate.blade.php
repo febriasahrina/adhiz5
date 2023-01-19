@@ -62,10 +62,10 @@
                             <h4 class="font-weight-bold mb-4">John Doe</h4>
                             @endif
                             <div class="text-muted mb-4">
-                            <a href="{{url('/participate')}}" class="succ-btn">
+                            <a href="" class="succ-btn" id="sudah_mendaftar" style="display : none">
                             <span>Sudah Mendaftar</span></a>
 
-                            <a href="{{url('/participate')}}" class="warn-btn">
+                            <a href="" class="warn-btn" id="belum_mendaftar" style="display : none">
                             <span>Belum Mendaftar</span></a>
                             </div>
                         </div>
@@ -91,10 +91,29 @@
     </div>
     <section id="features" class="services-area"> -->
         <div class="container">
-            <div class="row justify-content-center">
+            <div class="row justify-content-center" id="form_utama">
                 <div class="card card-body">
                     <form action="" enctype="multipart/form-data">
                         {{ csrf_field() }}
+                        <?php
+                            if(Session::get('save-data'))
+                            {
+                                $saveData = Session::get('save-data');
+                            }
+                            else
+                            {
+                                $saveData = "";
+                            }
+
+                            if(Session::get('email'))
+                            {
+                                $emailPendaftar = Session::get('email');
+                            }
+                            else
+                            {
+                                $emailPendaftar = "";
+                            }
+                        ?>
                         <div id="wizard">
                             <!-- SECTION 1 -->
                             <h4></h4>
@@ -102,7 +121,7 @@
                                 <h5>Silahkan Pilih Jenis Kepesertaan Anda</h5>
                                 <br>
                                 <select class="form-control" id="selectJenisKepersetaan" name="selectJenisKepersetaan" onchange="selectJenisKepersetaanChange()">
-                                    <option selected="selected" disabled>Pilih Jenis Kepersetaan</option>
+                                    <option selected="selected" value="null" disabled>Pilih Jenis Kepersetaan</option>
                                     <option value="individu">Individu</option>
                                     <option value="group">Tim</option>
                                 </select>
@@ -110,7 +129,7 @@
                                     <h5>Silahkan Pilih Jumlah Anggota</h5>
                                     <br>
                                     <select class="form-control" id="selectJumlahAnggota" name="selectJumlahAnggota" onchange="selectJumlahAnggotaChange()">
-                                        <option selected="selected" disabled>Pilih Jumlah Anggota</option>
+                                        <option selected="selected" value="null" disabled>Pilih Jumlah Anggota</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                     </select>
@@ -378,7 +397,7 @@
                                                     <span class="text-danger">*</span>
                                                 </th>
                                                 <th>
-                                                    <input type="text" id="inputNoHpIndividu" class="form-control" placeholder="Masukkan Nomor HP">
+                                                    <input type="number" id="inputNoHpIndividu" class="form-control" placeholder="Masukkan Nomor HP">
                                                 </th>
                                             </tr>
 
@@ -430,35 +449,68 @@
 
                                 </div>
                             </section> <!-- SECTION 3 -->
+                            </form>
                             <h4></h4>
                             <section>
                             <div class="card-body">
                                 <div class="cardx mx-2 mb-4">
-                                    <div class="card-body">
-                                        <table id="table-pasar" class="table table-borderless table-hover">
-                                            <form method="post" action="insert-file" enctype="multipart/form-data">
-                                                {{csrf_field()}}
-                                                <tr>
-                                                    <th>
-                                                        <label>File Materi (ppt)</label>
-                                                        <span class="text-danger">*</span>
-                                                    </th>
-                                                    <th>
-                                                        <input type="file" class="form-control" name="filenames[]" />
-                                                    </th>
-                                                </tr>
-                                                <button type="submit" class="btn btn-success w-100 p-3" style="margin-top:10px">Submit</button>
-                                            </form>
-                                            <tr>
-                                                <th>
-                                                    <label>Link Video</label>
-                                                    <span class="text-danger">*</span>
-                                                </th>
-                                                <th>
-                                                    <textarea class="form-control" placeholder="Masukkan Link Video"></textarea>
-                                                </th>
-                                            </tr>
-                                        </table>
+                                    <div class="card card-body">
+                                        @if ($message = Session::get('success'))
+                                            <div class="alert alert-success alert-block">
+                                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                                <strong>{{ $message }}</strong>
+                                            </div>
+                                        @endif
+                            
+                                        @if (count($errors) > 0)
+                                        <div class="alert alert-danger">
+                                            <button type="button" class="close" data-dismiss="alert">×</button>
+                                            <strong>Whoops!</strong> Upload Gagal.
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        @endif
+                                        <form method="post" action="insert-file/ppt" enctype="multipart/form-data" id="upload-ppt">
+                                            {{csrf_field()}}
+                                            <div class="row">
+                                                <div class="col-lg-8">
+                                                    <tr>
+                                                        <th>
+                                                            <label>File Materi (ppt)</label>
+                                                            <span class="text-danger">*</span>
+                                                        </th>
+                                                        <th>
+                                                            <input type="file" class="form-control" name="file" />
+                                                        </th>
+                                                    </tr>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <button type="submit" class="btn btn-success w-100" style="margin-top:30px">Upload</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <form method="post" action="insert-file/video" enctype="multipart/form-data" id="upload-video" class="pt-3">
+                                            {{csrf_field()}}
+                                            <div class="row">
+                                                <div class="col-lg-8">
+                                                    <tr>
+                                                        <th>
+                                                            <label>File Video (max: 300mb)</label>
+                                                            <span class="text-danger">*</span>
+                                                        </th>
+                                                        <th>
+                                                            <input type="file" class="form-control" name="video" />
+                                                        </th>
+                                                    </tr>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <button type="submit" class="btn btn-success w-100" style="margin-top:30px">Upload</button>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
 
@@ -475,23 +527,35 @@
                                 <p>Terima kasih telah berpartisipasi dalam kompetisi ADHI Z</p>
                             </section>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
     <section>
     <footer id="footer" class="footer-area pt-120">
-    <div class="container">
-        @include('layouts.footer2')
-    </div>
-</footer>
+        <div class="container">
+            @include('layouts.footer2')
+        </div>
+    </footer>
 </div>
 
 
 @push('custom-script')
     <script type='text/javascript'>$(function(){
         var element = document.getElementById("nav-participate");
+        $users = "<?php echo $emailPendaftar; ?>";
+
+        if ($users != '')
+        {
+            cekPendaftar();
+        }
+        else
+        {
+            window.location.href = "{{ route('actionFirst')}}";
+        }
+
         element.classList.add("active");
+        $objEmp = {};
+        var objUpload = {};
 
         $.ajaxSetup({
             headers: {
@@ -499,25 +563,128 @@
             }
         });
 
-        function submitData() {
-            var objEmp = {};
-            var objUpload = {};
+        function cekPendaftar(){
+            $.ajax({
+                type: 'GET',
+                url: 'cek-pendaftar/'+$users,
+                success: function(data) {
+                    console.log(data.data)
+                    if (data.data != null)
+                    {
+                        document.getElementById("sudah_mendaftar").style.display = "";
+                        document.getElementById("belum_mendaftar").style.display = "none";
+                        document.getElementById("form_utama").style.display = "none";
+                    }
 
-            objEmp["jenisKepesertaan"] =  $('select[name=selectJenisKepersetaan] option').filter(':selected').val();
+                    else
+                    {
+                        document.getElementById("sudah_mendaftar").style.display = "none";
+                        document.getElementById("belum_mendaftar").style.display = "";
+                        document.getElementById("form_utama").style.display = "";
+                    }
+                }
+            });
+        }
 
-            if (objEmp["jenisKepesertaan"] == "individu")
+        function alertSuccess(){
+            var translate = { 'jenisKepesertaan': 'selectJenisKepersetaan','jumlah_anggota':'selectJumlahAnggota','no_hp': 'inputNoHpIndividu',
+                'nama_tim': 'inputNamaTim','judul_ide': 'inputJudulIde','deskripsi_ide': 'inputDeskripsi'};
+
+            var translateIndividu = {'npp_individu': 'inputNppIndividu','nama_individu': 'inputNamaIndividu', 
+                'unit_kerja_individu': 'inputUnitKerjaIndividu','email_individu': 'inputEmailIndividu'}              
+
+            var translateGroup = {'npp': 'inputNpp','nama': 'inputNama','unit_kerja': 'inputUnitKerja',
+                    'email': 'inputEmail','no_hp': 'inputNoHp'};
+
+            
+            var passedArray = <?php echo json_encode($saveData); ?>;
+
+            if (passedArray != ''){
+                $.each(translate, function(key2, value2) {
+                    if (passedArray[key2]) {
+                        if (key2 == 'jenisKepesertaan' || key2 == 'jumlah_anggota')
+                        {
+                            $("#"+value2).val(passedArray[key2]);
+                            selectJenisKepersetaanChange();
+                            selectJumlahAnggotaChange();
+                        }
+                        else
+                        {
+                            document.getElementById(value2).value = passedArray[key2];
+                            console.log(document.getElementById(value2).value);
+                        }
+                    }
+                });
+
+                if (passedArray['jenisKepesertaan'] == 'individu')
+                {
+                    $.each(translateIndividu, function(key2, value2) {
+                        if (passedArray[key2]) {
+                            document.getElementById(value2).value = passedArray[key2];
+                        }
+                    });
+                }
+                else if (passedArray['jenisKepesertaan'] == 'group')
+                {
+                    var jumlahAnggota = parseInt(passedArray['jumlah_anggota']);
+                    for (var x = 1; x < jumlahAnggota+2; x++) {
+                        $.each(translateGroup, function(key2, value2) {
+                            if (passedArray['group'][x-1][key2]) {
+                                document.getElementById(value2+x).value = passedArray['group'][x-1][key2];
+                            }
+                        });
+                    }
+                }
+            }
+
+        
+            $("#wizard").steps("next",{});
+            $("#wizard").steps("next",{});
+            $("#wizard").steps("next",{});
+
+            
+        }
+
+        $(document).ready( function() {
+            // Draw all slots
+            $('div.alert').each(function(i, d) {
+                alertSuccess();
+            });
+        });
+
+        // $("#upload-ppt").submit(function(event) {
+        //   event.preventDefault(); //prevent default action 
+        //   let post_url = $(this).attr("action"); //get form action url
+        //   let request_method = $(this).attr("method"); //get form GET/POST method
+        //   let form_data = $(this).serialize(); //Encode form elements for submission	
+        //   $.ajax({
+        //         url: post_url,
+        //         type: request_method,
+        //         data: form_data,
+        //         success: function(data){
+        //             console.log(data);
+        //             alertSuccess();
+        //         } 
+        //     });
+        // });
+
+        function assignValue()
+        {
+            $objEmp["jenisKepesertaan"] =  $('select[name=selectJenisKepersetaan] option').filter(':selected').val();
+
+            if ($objEmp["jenisKepesertaan"] == "individu")
             {
-                objEmp["npp_individu"] = $("#inputNppIndividu").val();
-                objEmp["nama_individu"] = $("#inputNamaIndividu").val();
-                objEmp["unit_kerja_individu"] = $("#inputUnitKerjaIndividu").val();
-                objEmp["email_individu"] = $("#inputEmailIndividu").val();
-                objEmp["no_hp"] = $("#inputNoHpIndividu").val();
-                objEmp["status_tim"] = 'leader';
+                $objEmp["npp_individu"] = $("#inputNppIndividu").val();
+                $objEmp["nama_individu"] = $("#inputNamaIndividu").val();
+                $objEmp["unit_kerja_individu"] = $("#inputUnitKerjaIndividu").val();
+                $objEmp["email_individu"] = $("#inputEmailIndividu").val();
+                $objEmp["no_hp"] = $("#inputNoHpIndividu").val();
+                $objEmp["status_tim"] = 'leader';
             }
 
             else
             {
-                objEmp["group"] = objEmp["group"] || [];
+                $objEmp["group"] = $objEmp["group"] || [];
                 var jumlahAnggota = parseInt(document.getElementById("selectJumlahAnggota").value);
 
                 for (var x = 1; x < jumlahAnggota+2; x++) {
@@ -543,35 +710,71 @@
                             "status_tim" : 'member',
                         }
                     }
-                    objEmp["group"].push(object);
+                    $objEmp["group"].push(object);
                 }
             }
 
-            objEmp["nama_tim"] = $("#inputNamaTim").val();
-            objEmp["judul_ide"] = $("#inputJudulIde").val();
-            objEmp["deskripsi_ide"] = $("#inputDeskripsi").val();
-            // objEmp["upload_file"] = $("#upload_file").val();
+            $objEmp["nama_tim"] = $("#inputNamaTim").val();
+            $objEmp["judul_ide"] = $("#inputJudulIde").val();
+            $objEmp["deskripsi_ide"] = $("#inputDeskripsi").val();
+            $objEmp["jumlah_anggota"] = jumlahAnggota;
+        }
 
-            var formData = new FormData()
-            
-            var files = $('#upload_file')[0].files;
-            formData.append('file', files[0])
-            // objUpload["upload_file"] = files[0];
+        function submitData() {
+            $objEmp["jenisKepesertaan"] =  $('select[name=selectJenisKepersetaan] option').filter(':selected').val();
 
-            console.log(formData);
-            // var datas = new FormData($('input[name^="upload_file"]'));     
-            //     jQuery.each($('input[name^="upload_file"]')[0].files, function(i, file) {
-            //         datas.append(i, file);
-            // });
+            if ($objEmp["jenisKepesertaan"] == "individu")
+            {
+                $objEmp["npp_individu"] = $("#inputNppIndividu").val();
+                $objEmp["nama_individu"] = $("#inputNamaIndividu").val();
+                $objEmp["unit_kerja_individu"] = $("#inputUnitKerjaIndividu").val();
+                $objEmp["email_individu"] = $("#inputEmailIndividu").val();
+                $objEmp["no_hp"] = $("#inputNoHpIndividu").val();
+                $objEmp["status_tim"] = 'leader';
+            }
 
-            // var datas = new FormData(document.getElementById("upload_file"));
+            else
+            {
+                $objEmp["group"] = $objEmp["group"] || [];
+                var jumlahAnggota = parseInt(document.getElementById("selectJumlahAnggota").value);
+
+                for (var x = 1; x < jumlahAnggota+2; x++) {
+                    if (x == 1)
+                    {
+                        var object = {
+                            "npp" : $("#inputNpp"+x).val(),
+                            "nama" : $("#inputNama"+x).val(),
+                            "unit_kerja" : $("#inputUnitKerja"+x).val(),
+                            "email" : $("#inputEmail"+x).val(),
+                            "no_hp" : $("#inputNoHp"+x).val(),
+                            "status_tim" : 'leader',
+                        }
+                    }
+                    else
+                    {
+                        var object = {
+                            "npp" : $("#inputNpp"+x).val(),
+                            "nama" : $("#inputNama"+x).val(),
+                            "unit_kerja" : $("#inputUnitKerja"+x).val(),
+                            "email" : $("#inputEmail"+x).val(),
+                            "no_hp" : $("#inputNoHp"+x).val(),
+                            "status_tim" : 'member',
+                        }
+                    }
+                    $objEmp["group"].push(object);
+                }
+            }
+
+            $objEmp["nama_tim"] = $("#inputNamaTim").val();
+            $objEmp["judul_ide"] = $("#inputJudulIde").val();
+            $objEmp["deskripsi_ide"] = $("#inputDeskripsi").val();
 
             var notMandatory = [];
 
             var arrEmptyData = [];
             let shouldSkip = false;
 
-            $.each(objEmp, function(key, value) {
+            $.each($objEmp, function(key, value) {
                 if (value == "" || value == key) {
                     if (!notMandatory.includes(key)) {
                         strEmpty = key.replace(/[ *_#]/g, ' ');
@@ -580,14 +783,6 @@
                 }
             })
 
-            // if(objEmp["npwp"]!="" && (objEmp["npwp"].length<19 || objEmp["npwp"].length>20))
-            // {
-            //     showNotifKuesioner("Silahkan masukkan data NPWP dengan benar!", null);
-            // }
-            // else if((objEmp["email"]!="" && !validateEmail(objEmp["email"])) || (objEmp["email_pengisi"]!="" && !validateEmail(objEmp["email_pengisi"])))
-            // {
-            //     showNotifKuesioner("Silahkan masukkan data Email dengan benar!", null);
-            // }
             if(arrEmptyData.length != 0)
             {
                 showNotifKuesioner("Silahkan isi data " + arrEmptyData.join(', ') + "!", null);
@@ -597,24 +792,25 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: '/insert-file',
-                    data: formData,
-                    processData: false,
-                    // contentType: false,
+                    url: 'insert-tim',
+                    data: $objEmp,
                     dataType: 'json',
                     success: function(data) {
-                        console.log(data.data.message);
                         if (data.data.message == 'Insert Data Berhasil.') {
                             setTimeout(hideLoading, 1000);
-                            showNotifTerimakasih(data.data.type);
+                            // showNotifKuesioner(data.data.message + "!", null);
                         } else {
+                            setTimeout(hideLoading, 1000);
                             showNotifKuesioner(data.data.message + "!", null);
                         }
+                    }, error: function(data) {
+                        console.log('Error POST');
+                        console.log(data);
                     }
                 });
             }
-            }
-
+        }
+        
         $("#wizard").steps({
             headerTag: "h4",
             bodyTag: "section",
@@ -623,26 +819,109 @@
             transitionEffectSpeed: 500,
             onStepChanging: function (event, currentIndex, newIndex) { 
                 console.log(newIndex);
+                $err = 'no';
                 if ( newIndex === 1 ) {
-                    $('.steps ul').addClass('step-2');
+                    $jenisKepesertaan =  $('select[name=selectJenisKepersetaan] option').filter(':selected').val();
+                    if ($jenisKepesertaan != 'null')
+                    {
+                        if ($jenisKepesertaan == 'group')
+                        {
+                            $jumlahAnggota =  parseInt($('select[name=selectJumlahAnggota] option').filter(':selected').val()); 
+                            if ($jumlahAnggota == 'null')
+                            {
+                                showNotifKuesioner("Mohon pilih jumlah anggota", null);
+                                $err = 'yes';
+                                return;
+                            }
+                            else{
+                                $('.steps ul').addClass('step-2');
+                            }
+                        } 
+                        
+                    }
+                    else
+                    {
+                        showNotifKuesioner("Mohon pilih jenis kepesertaan", null);
+                        $err = 'yes';
+                        return;
+                    }
                 } else {
                     $('.steps ul').removeClass('step-2');
                 }
                 if ( newIndex === 2 ) {
+                    var arrCheck = ["inputNpp", "inputNama", "inputUnitKerja", "inputEmail", "inputNoHp"];
+
+                    if ($jenisKepesertaan == "group")
+                    {
+                        for (var con = 1; con < $jumlahAnggota+2; con++) 
+                        {
+                            console.log(con);
+                            for (var x = 0; x < arrCheck.length; x++)
+                            {
+                                if($("#"+arrCheck[x]+(con)).val() == "")
+                                {
+                                    showNotifKuesioner("Mohon lengkapi data", null);
+                                    $err = 'yes';
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                    else if ($jenisKepesertaan == "individu")
+                    {
+                        for (var x = 0; x < arrCheck.length; x++)
+                        {
+                            if($("#"+arrCheck[x]+"Individu").val() == "")
+                            {
+                                showNotifKuesioner("Mohon lengkapi data", null);
+                                $err = 'yes';
+                                return;
+                            }
+                        }
+                    }
                     $('.steps ul').addClass('step-3');
                 } else {
                     $('.steps ul').removeClass('step-3');
                 }
 
                 if ( newIndex === 3 ) {
+                    var arrCheck = ["inputNamaTim", "inputJudulIde", "inputDeskripsi"];
+                    for (var x = 0; x < arrCheck.length; x++)
+                    {
+                        if($("#"+arrCheck[x]).val() == "")
+                        {
+                            showNotifKuesioner("Mohon lengkapi data", null);
+                            $err = 'yes';
+                            return;
+                        }
+                    }
                     $('.steps ul').addClass('step-4');
+                    if ($err == 'no')
+                    {
+                        assignValue();
+                        console.log($objEmp);
+                        
+                        $.ajax({
+                            type: 'POST',
+                            url: 'set-session',
+                            data: $objEmp,
+                            dataType: 'json',
+                            success: function(data) {
+                                console.log(data);
+                            }, error: function(data) {
+                                console.log('Error POST');
+                                console.log(data);
+                            }
+                        });
+                    //     submitData();
+                    }
                 } else {
                     $('.steps ul').removeClass('step-4');
                 }
                 
                 if ( newIndex === 4 ) {
                     $('.steps ul').addClass('step-5');
-                    // submitData();
+                    submitData();
                 } else {
                     $('.steps ul').removeClass('step-5');
                     $('.actions ul').removeClass('step-last');
@@ -657,9 +936,12 @@
         });
         // Custom Steps Jquery Steps
         $('.wizard > .steps li a').click(function(){
-            $(this).parent().addClass('checked');
-            $(this).parent().prevAll().addClass('checked');
-            $(this).parent().nextAll().removeClass('checked');
+            if ($err == 'no')
+            {
+                $(this).parent().addClass('checked');
+                $(this).parent().prevAll().addClass('checked');
+                $(this).parent().nextAll().removeClass('checked');
+            }
         });
         // Custom Button Jquery Steps
         $('.forward').click(function(){
@@ -674,8 +956,6 @@
             $(this).addClass('active');
         })
     })
-
-
 
     function selectJenisKepersetaanChange() {
         var x = document.getElementById("selectJenisKepersetaan").value;

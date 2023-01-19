@@ -133,7 +133,7 @@
                                 <div class="line"></div>
                                 <h3 class="title">Requirements</span></h3>
                             </div> <!-- section title -->
-                            <p class="text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, seiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+                            <p class="text">Materi presentasi yang diunggah mencakup seluruh poin-poin pokok yang telah ditentukan, yaitu :</p>
                         </div> <!-- counter content -->
                         <div class="row no-gutters">
                             <div class="col-2">

@@ -5,7 +5,7 @@
                 <a class="logo" href="#">
                     <img src="{{asset('')}}assets/img/adhi-z-fix.png" alt="logo">
                 </a>
-                <p class="text"><span> Kita percaya bahwa dimulai dari sebuah</span> ide <span>yang diberikan tempat untuk didengar, maka hal-hal besar bisa terwujud.</span>
+                <p class="text" style="text-align: left !important;"><span> Kita percaya bahwa dimulai dari sebuah</span> ide <span>yang diberikan tempat untuk didengar, maka hal-hal besar bisa terwujud.</span>
                         <br>Oleh karena itu, ADHI-Z muncul sebagai wadah bagi Insan ADHI yang memiliki ide dalam bentuk solusi untuk memecahkan permasalahan yang telah menimbulkan kegusaran.</p>
                 <ul class="social">
                     <li><a href="https://www.instagram.com/adhi63tahun/?igshid=YmMyMTA2M2Y%3D"><i class="lni-linkedin-original"></i></a></li>
