@@ -15,10 +15,10 @@ $(function () {
         var scroll = $(window).scrollTop();
         if (scroll < 20) {
             $(".navbar-area").removeClass("sticky");
-            $(".navbar .navbar-brand img").attr("src", "assets/img/adhi-z-resize-1.png");
+            $(".navbar .navbar-brand img").attr("src", "assets/img/adhi-z-fix-resize.png");
         } else {
             $(".navbar-area").addClass("sticky");
-            $(".navbar .navbar-brand img").attr("src", "assets/img/adhi-z-resize-1.png");
+            $(".navbar .navbar-brand img").attr("src", "assets/img/adhi-z-fix-resize.png");
         }
     });
 

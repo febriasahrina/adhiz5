@@ -155,6 +155,68 @@ p {
     color: #fff;
     background-position: right center; }
 
+.succ-btn {
+  display: inline-block;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 0 25px;
+  font-size: 16px;
+  line-height: 48px;
+  border-radius: 8px;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  z-index: 5;
+  -webkit-transition: all 0.4s ease-out 0s;
+  -moz-transition: all 0.4s ease-out 0s;
+  -ms-transition: all 0.4s ease-out 0s;
+  -o-transition: all 0.4s ease-out 0s;
+  transition: all 0.4s ease-out 0s;
+  background: -webkit-linear-gradient(left, #24F755 0%, #32C75A 50%, #D2AC10 100%);
+  background: -o-linear-gradient(left, #24F755 0%, #32C75A 50%, #D2AC10 100%);
+  background: linear-gradient(to right, #24F755 0%, #32C75A 50%, #D2AC10 100%);
+  background-size: 200%; }
+  .main-btn:hover {
+    color: #fff;
+    background-position: right center; }
+
+.warn-btn {
+  display: inline-block;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 0 25px;
+  font-size: 16px;
+  line-height: 48px;
+  border-radius: 8px;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  z-index: 5;
+  -webkit-transition: all 0.4s ease-out 0s;
+  -moz-transition: all 0.4s ease-out 0s;
+  -ms-transition: all 0.4s ease-out 0s;
+  -o-transition: all 0.4s ease-out 0s;
+  transition: all 0.4s ease-out 0s;
+  background: -webkit-linear-gradient(left, #E9F724 0%, #C7BD32 50%, #C79032 100%);
+  background: -o-linear-gradient(left, #E9F724 0%, #C7BD32 50%, #C79032 100%);
+  background: linear-gradient(to right, #E9F724 0%, #C7BD32 50%, #C79032 100%);
+  background-size: 200%; }
+  .main-btn:hover {
+    color: #fff;
+    background-position: right center; }
+
 /*===== All SECTION TITLE Style =====*/
 .section-title .line {
   background: -webkit-linear-gradient(#fe8464 0%, #fe6e9a 100%);

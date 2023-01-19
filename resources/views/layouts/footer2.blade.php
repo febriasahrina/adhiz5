@@ -3,14 +3,12 @@
         <div class="col-lg-4 col-md-6 col-sm-8">
             <div class="footer-about mt-50 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
                 <a class="logo" href="#">
-                    <img src="{{asset('')}}assets/img/adhi-z.png" alt="logo">
+                    <img src="{{asset('')}}assets/img/adhi-z-fix.png" alt="logo">
                 </a>
-                <p class="text">Lorem ipsum dolor sit amet consetetur sadipscing elitr, sederfs diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam.</p>
+                <p class="text"><span> Kita percaya bahwa dimulai dari sebuah</span> ide <span>yang diberikan tempat untuk didengar, maka hal-hal besar bisa terwujud.</span>
+                        <br>Oleh karena itu, ADHI-Z muncul sebagai wadah bagi Insan ADHI yang memiliki ide dalam bentuk solusi untuk memecahkan permasalahan yang telah menimbulkan kegusaran.</p>
                 <ul class="social">
-                    <li><a href="#"><i class="lni-facebook-filled"></i></a></li>
-                    <li><a href="#"><i class="lni-twitter-filled"></i></a></li>
-                    <li><a href="#"><i class="lni-instagram-filled"></i></a></li>
-                    <li><a href="#"><i class="lni-linkedin-original"></i></a></li>
+                    <li><a href="https://www.instagram.com/adhi63tahun/?igshid=YmMyMTA2M2Y%3D"><i class="lni-linkedin-original"></i></a></li>
                 </ul>
             </div> <!-- footer about -->
         </div>
@@ -20,9 +18,9 @@
                     <h4 class="title">Contact Us</h4>
                 </div>
                 <ul class="contact">
-                    <li>(021) 7975312</li>
-                    <li>@adhikaryaid</li>
-                    <li>www.adhi.co.id</li>
+                    <li>087721276896</li>
+                    <li>Aini Damayanti</li>
+                    <li>Departemen Human Capital</li>
                     <li>Jl. Raya Pasar Minggu No.Km.18, RT.13/RW.1, Pejaten Timur, Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12510</li>
                 </ul>
             </div> <!-- footer contact -->

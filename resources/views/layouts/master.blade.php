@@ -17,7 +17,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <!--====== Favicon Icon ======-->
-    <link rel="icon" href="{{asset('')}}assets/img/adhi-z-resize-1.png" type="image/icon type">
+    <link rel="icon" href="{{asset('')}}assets/img/adhi-z-fix-resize.png" type="image/icon type">
         
     <!--====== Animate CSS ======-->
     <link rel="stylesheet" href="{{asset('')}}assets/css/animate.css">
@@ -87,7 +87,7 @@
                     <div class="col-lg-12">
                         <nav class="navbar navbar-expand-lg">
                             <a class="navbar-brand" href="{{url('/')}}">
-                                <img src="{{asset('')}}assets/img/adhi-z-resize-1.png" alt="Logo">
+                                <img src="{{asset('')}}assets/img/adhi-z-fix-resize.png" alt="Logo">
                             </a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="toggler-icon"></span>
@@ -159,6 +159,59 @@
     <section class="content">
         @yield('content')
     </section>
+    <div class="modal fade" id="showNotifModalKuesioner" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <div class="modal-body">
+                    <h5 id="msg_notif_kuesioner" class="text-center">Notification</h5>
+
+                </div>
+                <div class="modal-footer" id="modal-footerq">
+                    <button type="button" class="btn" data-dismiss="modal" id="btn_oke_kuesioner">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModalWoi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog ">
+            <div class="modal-content" style="background-color: white !important;">
+                <div class="modal-header">
+                    <!-- <h4 class="modal-title">Success Modal</h4>
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h3 id="msg_loading" class="text-center"> <i class="fas fa-sync-alt fa-spin"></i>Now Loading</h3>
+                    </div>
+
+                </div>
+                <div class="modal-footer" id="modal-footerq">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="showNotifModalThank" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <div class="modal-body text-center">
+                    <img src="{{asset('')}}assets/dist/img/thankyou.jpg" alt="Responsive image" style="width: auto; height: 130px;" class="rounded-circle">
+                    <div class="h2 my-4">Terima kasih telah mengisi <span id='type-form'>survei</span></div>
+                    <div class="h6">
+                        Terima kasih banyak atas tanggapan Anda. Kami sangat menghargai itu. Informasi Anda sangat penting bagi kami. Data berhasil diinput.
+                    </div>
+                </div>
+                <div class="modal-footer" id="modal-footerq">
+                    <button type="button" class="btn" data-dismiss="modal" id="btn_oke_kuesioner">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- /.content -->
   
     <!-- JQUERY STEP -->
@@ -198,5 +251,32 @@
     
     <!--====== Main js ======-->
     <script src="{{asset('')}}assets/js/main.js"></script>
+    <script>
+        function showNotifKuesioner(message) {
+            $('#msg_notif_kuesioner').html(message);
+            $('#showNotifModalKuesioner').modal('show');
+            $('#btn_oke_kuesioner').click(function() {
+                $('#showNotifModalKuesioner').modal('hide');
+                // action();
+            });
+        }
+
+        function showNotifTerimakasih(message) {
+            $('#type-form').html(message);
+            $('#showNotifModalThank').modal('show');
+            $('#btn_oke_kuesioner').click(function() {
+                $('#showNotifModalThank').modal('hide');
+                action();
+            });
+        }
+
+        function showLoading() {
+            $('#myModalWoi').modal('show');
+        }
+
+        function hideLoading() {
+            $('#myModalWoi').modal('hide');
+        }
+    </script>
     @stack('custom-script')
 </html>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ParticipateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +29,11 @@ Route::get('logout', [
     'as' => 'actionlogout',
     'uses' => 'LoginController@actionlogout']);
 
-// Route::get('logout', [LoginController::class, 'actionlogout']);
+// insert tim
+Route::post('insert-tim', [
+    'as' => 'insert-tim',
+    'uses' => 'ParticipateController@store']);
+
+Route::post('insert-file', [
+    'as' => 'insert-file',
+    'uses' => 'ParticipateController@store_file']);

@@ -17,7 +17,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <!--====== Favicon Icon ======-->
-    <link rel="icon" href="{{asset('')}}assets/img/adhi-z-resize-1.png" type="image/icon type">
+    <link rel="icon" href="{{asset('')}}assets/img/adhi-z-fix-resize.png" type="image/icon type">
         
     <!--====== Animate CSS ======-->
     <link rel="stylesheet" href="{{asset('')}}assets/css/animate.css">

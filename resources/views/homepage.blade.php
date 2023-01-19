@@ -22,13 +22,17 @@
 @section('content')
     <div id="home" class="header-hero bg_cover" style="background-image: url({{asset('')}}assets/img/banner-bg.svg)">
         <div class="container">
+            <!-- <div class="col-lg-4" style="margin-top:90px">
+                    <img src="{{asset('')}}assets/img/adhi63thAdhi.png" alt="hero">
+            </div> -->
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="header-hero-content text-center">
                         <h2 class="header-title wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.5s">ADHI - Z</h2>
                         <h3 class="header-sub-title wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.2s">Where Idea Grow and Blow</h3>
                         <!-- <p class="text wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.8s">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p> -->
-                        <a href="{{url('/participate')}}" class="main-btn wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1.1s">Let's Participate</a>
+                        <a href="{{url('/participate')}}" class="main-btn wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1.1s" style="height: 70px;width: 270px; font-size: 25px; font-weight: 500;">
+                        <span style="margin-top: 10px;">Let's Participate</span></a>
                     </div> <!-- header hero content -->
                 </div>
             </div> <!-- row -->
@@ -36,9 +40,9 @@
                 <div class="col-lg-12 mt-5">
                     <div class="header-hero-image text-center wow fadeIn" data-wow-duration="1.3s" data-wow-delay="1.4s">
                         <img src="{{asset('')}}assets/img/adhi63thAdhi.png" alt="hero">
-                    </div> <!-- header hero image -->
+                    </div>
                 </div>
-            </div> <!-- row -->
+            </div>
         </div> <!-- container -->
     </div> <!-- header hero -->
 
@@ -181,7 +185,7 @@
                     <div class="mt-50 wow fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
                         <div class="section-title">
                             <div class="line"></div>
-                            <h3 class="title">ISSUES</h3>
+                            <h3 class="title">Issues</h3>
                         </div> <!-- section title -->
                         <P>Beberapa isu atau permasalahan yang berada pada konteks ESG:</P>
                         <br>
@@ -242,7 +246,7 @@
                     <li class="list-inline-item items-list">
                         <div class="px-2">
                         <div class="event-date badge bg-warning" style="color : white;">11 Februari</div>
-                        <h5 class="pt-2">Pengumuman 1</h5>
+                        <h6 class="pt-2">Pengumuman Tahap 1</h6>
                         <!-- <p class="text-muted">Pengumuman Tahap 1</p> -->
                         <!-- <div>
                             <a href="#" class="btn btn-primary btn-sm">Read more</a>
@@ -291,153 +295,16 @@
 
     
     <!--====== SERVICES PART ENDS ======-->
-    
-    <!--====== OVERVIEW SUBMISSION START ======-->
-    
-    <section id="about" class="about-area pt-70">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="about-content mt-50 wow fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
-                        <div class="section-title">
-                            <div class="line"></div>
-                            <h3 class="title">Overview <span>Submission</span></h3>
-                        </div> <!-- section title -->
-                        <p class="text">
-                            - Materi diunggah dalam format Power Point (pptx) dan power point yang di telah di PDF-kan <br>
-                            - Maksimal materi dibuat dalam 10 slide <br>
-                            - Materi presentasi mencakup seluruh <b>Requirements</b> yang telah ditentukan <br>
-                            - Diunggah sebelum tenggat waktu penutupan submission <br>
-                            - Disusun oleh maksimal 3 (tiga) orang <br>
-                            - Materi tidak dapat direvisi setelah tenggat waktu penutupan submission <br>
-                            </p>
-                        <!-- <a href="#" class="main-btn">Try it Free</a> -->
-                    </div> <!-- about content -->
-                </div>
-                <div class="col-lg-6">
-                    <div class="about-image text-center mt-50 wow fadeInRightBig" data-wow-duration="1s" data-wow-delay="0.5s">
-                        <img src="{{asset('')}}assets/img/overview1.jpg" alt="about">
-                    </div> <!-- about image -->
-                </div>
-            </div> <!-- row -->
-        </div> <!-- container -->
-        <div class="about-shape-1">
-            <img src="{{asset('')}}assets/img/about-shape-1.svg" alt="shape">
-        </div>
-    </section>
-    
-    <!--====== OVERVIEW SUBMISSION ENDS ======-->
-
-    <!--====== REQUIREMENTS START ======-->
-
-    <section id="facts" class="video-counter pt-70">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="counter-wrapper mt-50 wow fadeIn pl-0" data-wow-duration="1s" data-wow-delay="0.8s">
-                        <div class="counter-content">
-                            <div class="section-title">
-                                <div class="line"></div>
-                                <h3 class="title">Requirements</span></h3>
-                            </div> <!-- section title -->
-                            <p class="text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, seiam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-                        </div> <!-- counter content -->
-                        <div class="row no-gutters">
-                            <div class="col-2">
-                                <div class="single-counter counter-color-1 d-flex align-items-center justify-content-center">
-                                    <div class="counter-items text-center">
-                                        <span class="count">01</span>
-                                        <p class="text">Cover: Judul Project, Nama-Unit Kerja seluruh anggota</p>
-                                    </div>
-                                </div> <!-- single counter -->
-                            </div>
-                            <div class="col-2 pl-2">
-                                <div class="single-counter counter-color-2 d-flex align-items-center justify-content-center">
-                                    <div class="counter-items text-center">
-                                        <span class="count">02</span>
-                                        <p class="text">Latar Belakang</p>
-                                    </div>
-                                </div> <!-- single counter -->
-                            </div>
-                            <div class="col-2 pl-2">
-                                <div class="single-counter counter-color-3 d-flex align-items-center justify-content-center">
-                                    <div class="counter-items text-center">
-                                        <span class="count">03</span>
-                                        <p class="text">Analisa Masalah</p>
-                                    </div>
-                                </div> <!-- single counter -->
-                            </div>
-                            <div class="col-2 pl-2">
-                                <div class="single-counter counter-color-4 d-flex align-items-center justify-content-center">
-                                    <div class="counter-items text-center">
-                                        <span class="count">04</span>
-                                        <p class="text">Solusi</p>
-                                    </div>
-                                </div> <!-- single counter -->
-                            </div>
-                            <div class="col-2 pl-2">
-                                <div class="single-counter counter-color-5 d-flex align-items-center justify-content-center">
-                                    <div class="counter-items text-center">
-                                        <span class="count">05</span>
-                                        <p class="text">Indikator Keberhasilan Solusi</p>
-                                    </div>
-                                </div> <!-- single counter -->
-                            </div>
-                            <div class="col-2 pl-2">
-                                <div class="single-counter counter-color-6 d-flex align-items-center justify-content-center">
-                                    <div class="counter-items text-center">
-                                        <span class="count">06</span>
-                                        <p class="text">Dampak Keberhasilan</p>
-                                    </div>
-                                </div> <!-- single counter -->
-                            </div>
-                        </div> <!-- row -->
-                    </div> <!-- counter wrapper -->
-                </div>
-            </div> <!-- row -->
-        </div> <!-- container -->
-    </section>
-    
-    <!--====== REQUIREMENTS ENDS ======-->
-    
-    <!--====== OVERFIEW FINAL STARTS ======-->
-    
-    <section class="about-area pt-70">
-        <div class="about-shape-2">
-            <img src="{{asset('')}}assets/img/about-shape-2.svg" alt="shape">
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 order-lg-last">
-                    <div class="about-content mt-50 wow fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
-                        <div class="section-title">
-                            <div class="line"></div>
-                            <h3 class="title">Overview <span> Final</span></h3>
-                        </div> <!-- section title -->
-                        <p class="text">
-                            - Dihadiri seluruh anggota yang tim-nya dinyatakan lolos ke tahap presentasi<br>
-                            - Sesi paparan materi dipresentasikan oleh hanya 1 (satu) orang yang telah ditetapkan oleh tim masing-masing<br>
-                            - Sesi diskusi atau tanya jawab bersama dewan juri dilakukan bersama dengan seluruh peserta di tim yang sedang diujikan, tidak hanya yang presentasi<br>
-                            - Materi yang dipresentasikan adalah materi yang telah di-submission oleh peserta diawal<br>
-                            
-                        </p>
-                        <!-- <a href="#" class="main-btn">Try it Free</a> -->
-                    </div> <!-- about content -->
-                </div>
-                <div class="col-lg-6 order-lg-first">
-                    <div class="about-image text-center mt-50 wow fadeInRightBig" data-wow-duration="1s" data-wow-delay="0.5s">
-                        <img src="{{asset('')}}assets/img/overview2.jpg" alt="about">
-                    </div> <!-- about image -->
-                </div>
-            </div> <!-- row -->
-        </div> <!-- container -->
-    </section>
 
     <!--====== FOOTER PART START ======-->
     
     <footer id="footer" class="footer-area pt-120">
         <div class="container">
             <div class="subscribe-area wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
+                <div class="section-title pb-5">
+                    <div class="line"></div>
+                    <h3 class="title">Winner <span> Category</span></h3>
+                </div> <!-- section title -->
                 <div class="row">
                     <div class="col-lg-3 col-md-7 col-sm-8">
                         <img class="shape" src="{{asset('')}}assets/img/first.png" alt="shape">
