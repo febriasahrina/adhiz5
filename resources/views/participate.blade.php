@@ -96,22 +96,30 @@
                     <form action="" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <?php
+
+                            $saveData = "";
+                            $emailPendaftar = "";
+                            $uploadPpt = "";
+                            $uploadVideo = "";
+
                             if(Session::get('save-data'))
                             {
                                 $saveData = Session::get('save-data');
-                            }
-                            else
-                            {
-                                $saveData = "";
                             }
 
                             if(Session::get('email'))
                             {
                                 $emailPendaftar = Session::get('email');
                             }
-                            else
+
+                            if(Session::get('upload-ppt'))
                             {
-                                $emailPendaftar = "";
+                                $uploadPpt = Session::get('upload-ppt');
+                            }
+
+                            if(Session::get('upload-video'))
+                            {
+                                $uploadVideo = Session::get('upload-video');
                             }
                         ?>
                         <div id="wizard">
@@ -196,7 +204,7 @@
                                                     <span class="text-danger">*</span>
                                                 </th>
                                                 <th>
-                                                    <input type="text" id="inputNoHp1" class="form-control" placeholder="Masukkan Nomor HP">
+                                                    <input type="number" id="inputNoHp1" class="form-control" placeholder="Masukkan Nomor HP">
                                                 </th>
                                             </tr>
 
@@ -261,7 +269,7 @@
                                                     <span class="text-danger">*</span>
                                                 </th>
                                                 <th>
-                                                    <input type="text" id="inputNoHp2" class="form-control" placeholder="Masukkan Nomor HP Tim 1 ">
+                                                    <input type="number" id="inputNoHp2" class="form-control" placeholder="Masukkan Nomor HP Tim 1 ">
                                                 </th>
                                             </tr>
 
@@ -326,7 +334,7 @@
                                                     <span class="text-danger">*</span>
                                                 </th>
                                                 <th>
-                                                    <input type="text" id="inputNoHp3" class="form-control" placeholder="Masukkan Nomor HP Tim 2">
+                                                    <input type="number" id="inputNoHp3" class="form-control" placeholder="Masukkan Nomor HP Tim 2">
                                                 </th>
                                             </tr>
 
@@ -502,12 +510,12 @@
                                                             <span class="text-danger">*</span>
                                                         </th>
                                                         <th>
-                                                            <input type="file" class="form-control" name="video" />
+                                                            <input type="file" class="form-control" id="input-video" name="video" disabled />
                                                         </th>
                                                     </tr>
                                                 </div>
                                                 <div class="col-lg-4">
-                                                    <button type="submit" class="btn btn-success w-100" style="margin-top:30px">Upload</button>
+                                                    <button type="submit" class="btn btn-success w-100" id="button-video" style="margin-top:30px" disabled>Upload</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -546,6 +554,8 @@
         $objEmp = {};
         var objUpload = {};
         $users = "<?php echo $emailPendaftar; ?>";
+        $uploadPpt = "<?php echo $uploadPpt; ?>";
+        $uploadVideo = "<?php echo $uploadVideo; ?>";
 
         if ($users != '')
         {
@@ -643,13 +653,14 @@
                     }
                 }
             }
-
         
             $("#wizard").steps("next",{});
             $("#wizard").steps("next",{});
             $("#wizard").steps("next",{});
 
-            
+            $('#input-video').prop('disabled', false);
+            $('#button-video').prop('disabled', false);
+           
         }
 
         $(document).ready( function() {
@@ -789,7 +800,7 @@
                     success: function(data) {
                         if (data.data.message == 'Insert Data Berhasil.') {
                             setTimeout(hideLoading, 1000);
-                            setTimeout(function(){window.location.href = "{{ url('participate')}}"}, 7000);
+                            setTimeout(function(){window.location.href = "{{ url('participate')}}"}, 5000);
                         } else {
                             setTimeout(hideLoading, 1000);
                             showNotifKuesioner(data.data.message + "!", null);
@@ -816,8 +827,9 @@
                     {
                         if ($jenisKepesertaan == 'group')
                         {
-                            $jumlahAnggota =  parseInt($('select[name=selectJumlahAnggota] option').filter(':selected').val()); 
-                            if ($jumlahAnggota == 'null')
+                            $jumlahAnggota =  parseInt($('select[name=selectJumlahAnggota] option').filter(':selected').val());
+                            $jumlahAnggotaOri =  $('select[name=selectJumlahAnggota] option').filter(':selected').val(); 
+                            if ($jumlahAnggotaOri == 'null')
                             {
                                 showNotifKuesioner("Mohon pilih jumlah anggota", null);
                                 $err = 'yes';
@@ -909,6 +921,20 @@
                 
                 if ( newIndex === 4 ) {
                     $('.steps ul').addClass('step-5');
+
+                    if($uploadPpt == "")
+                    {
+                        showNotifKuesioner("Mohon upload file materi", null);
+                        $err = 'yes';
+                        return;
+                    }
+                    else if($uploadVideo == "")
+                    {
+                        showNotifKuesioner("Mohon upload file video", null);
+                        $err = 'yes';
+                        return;
+                    }
+
                     submitData();
                 } else {
                     $('.steps ul').removeClass('step-5');

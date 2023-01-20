@@ -207,15 +207,15 @@ class ParticipateController extends Controller
         if ($route == 'ppt')
         {
             $request->validate([
-                'file' => 'required|mimes:pptx|max:2048',
+                'file' => 'required|mimes:pptx|max:15000',
             ]);
             
             
             $fileName = $email.'.'.$request->file->extension();  
     
             $request->file->move(public_path('files'), $fileName);
-            return back()->with('success','Berhasil Upload File Materi.');
-            
+            Session::put('upload-ppt', true);
+            return back()->with('success','Berhasil Upload File Materi.');            
         }
         else if ($route == 'video')
         {
@@ -233,6 +233,7 @@ class ParticipateController extends Controller
             $uploadSuccess = $file->move(public_path('files'), $fileName);
             $videoSrc = '/'.$destinationPath.'/'.$fileName;
             
+            Session::put('upload-video', true);
             return back()->with('success','Berhasil Upload File Video.');
         }
     }

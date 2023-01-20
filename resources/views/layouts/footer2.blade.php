@@ -8,7 +8,7 @@
                 <p class="text" style="text-align: left !important;"><span> Kita percaya bahwa dimulai dari sebuah</span> ide <span>yang diberikan tempat untuk didengar, maka hal-hal besar bisa terwujud.</span>
                         <br>Oleh karena itu, ADHI-Z muncul sebagai wadah bagi Insan ADHI yang memiliki ide dalam bentuk solusi untuk memecahkan permasalahan yang telah menimbulkan kegusaran.</p>
                 <ul class="social">
-                    <li><a href="https://www.instagram.com/adhi63tahun/?igshid=YmMyMTA2M2Y%3D"><i class="lni-linkedin-original"></i></a></li>
+                    <li><a href="https://www.instagram.com/adhi63tahun/?igshid=YmMyMTA2M2Y%3D"><i class="lni-instagram-original"></i></a></li>
                 </ul>
             </div> <!-- footer about -->
         </div>
@@ -18,7 +18,7 @@
                     <h4 class="title">Contact Us</h4>
                 </div>
                 <ul class="contact">
-                    <li>087721276896</li>
+                    <li>087721276896 (WA)</li>
                     <li>Aini Damayanti</li>
                     <li>Departemen Human Capital</li>
                     <li>Jl. Raya Pasar Minggu No.Km.18, RT.13/RW.1, Pejaten Timur, Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12510</li>
