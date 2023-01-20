@@ -473,7 +473,7 @@
                                             </ul>
                                         </div>
                                         @endif
-                                        <form method="post" action="insert-file/ppt" enctype="multipart/form-data" id="upload-ppt">
+                                        <form method="post" action="insert-file/ppt" enctype="multipart/form-data">
                                             {{csrf_field()}}
                                             <div class="row">
                                                 <div class="col-lg-8">
@@ -488,7 +488,7 @@
                                                     </tr>
                                                 </div>
                                                 <div class="col-lg-4">
-                                                    <button type="submit" class="btn btn-success w-100" style="margin-top:30px">Upload</button>
+                                                    <button type="submit" id="submit-ppt" class="btn btn-success w-100" style="margin-top:30px">Upload</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -568,7 +568,6 @@
                 type: 'GET',
                 url: 'cek-pendaftar/'+$users,
                 success: function(data) {
-                    console.log(data.data)
                     if (data.data != null)
                     {
                         document.getElementById("sudah_mendaftar").style.display = "";
@@ -611,7 +610,6 @@
                         else
                         {
                             document.getElementById(value2).value = passedArray[key2];
-                            console.log(document.getElementById(value2).value);
                         }
                     }
                 });
@@ -651,22 +649,6 @@
                 alertSuccess();
             });
         });
-
-        // $("#upload-ppt").submit(function(event) {
-        //   event.preventDefault(); //prevent default action 
-        //   let post_url = $(this).attr("action"); //get form action url
-        //   let request_method = $(this).attr("method"); //get form GET/POST method
-        //   let form_data = $(this).serialize(); //Encode form elements for submission	
-        //   $.ajax({
-        //         url: post_url,
-        //         type: request_method,
-        //         data: form_data,
-        //         success: function(data){
-        //             console.log(data);
-        //             alertSuccess();
-        //         } 
-        //     });
-        // });
 
         function assignValue()
         {
@@ -769,7 +751,7 @@
             $objEmp["judul_ide"] = $("#inputJudulIde").val();
             $objEmp["deskripsi_ide"] = $("#inputDeskripsi").val();
 
-            var notMandatory = [];
+            var notMandatory = ["group"];
 
             var arrEmptyData = [];
             let shouldSkip = false;
@@ -798,7 +780,7 @@
                     success: function(data) {
                         if (data.data.message == 'Insert Data Berhasil.') {
                             setTimeout(hideLoading, 1000);
-                            // showNotifKuesioner(data.data.message + "!", null);
+                            setTimeout(function(){window.location.href = "{{ url('participate')}}"}, 10000);
                         } else {
                             setTimeout(hideLoading, 1000);
                             showNotifKuesioner(data.data.message + "!", null);
@@ -818,7 +800,6 @@
             enableAllSteps: true,
             transitionEffectSpeed: 500,
             onStepChanging: function (event, currentIndex, newIndex) { 
-                console.log(newIndex);
                 $err = 'no';
                 if ( newIndex === 1 ) {
                     $jenisKepesertaan =  $('select[name=selectJenisKepersetaan] option').filter(':selected').val();
@@ -855,7 +836,6 @@
                     {
                         for (var con = 1; con < $jumlahAnggota+2; con++) 
                         {
-                            console.log(con);
                             for (var x = 0; x < arrCheck.length; x++)
                             {
                                 if($("#"+arrCheck[x]+(con)).val() == "")
@@ -899,7 +879,6 @@
                     if ($err == 'no')
                     {
                         assignValue();
-                        console.log($objEmp);
                         
                         $.ajax({
                             type: 'POST',
@@ -925,6 +904,11 @@
                 } else {
                     $('.steps ul').removeClass('step-5');
                     $('.actions ul').removeClass('step-last');
+                }
+
+                if ( newIndex === 5 ) {
+                    
+                    window.location.href = "{{ url('participate')}}";
                 }
                 return true; 
             },

@@ -230,7 +230,7 @@ class ParticipateController extends Controller
            
             $destinationPath = 'files';
             $fileName = $email.'.'.$file->getClientOriginalExtension();
-            $uploadSuccess = $file->move($destinationPath, $fileName);
+            $uploadSuccess = $file->move(public_path('files'), $fileName);
             $videoSrc = '/'.$destinationPath.'/'.$fileName;
             
             return back()->with('success','Berhasil Upload File Video.');

@@ -61,7 +61,7 @@
                             <div class="counter-wrapper mt-10 wow fadeIn pl-0" data-wow-duration="1s" data-wow-delay="0.5s">
                                 <div class="section-title">
                                     <div class="line"></div>
-                                    <h3 class="title">Panduan <span> Pendaftaran</span></h3>
+                                    <h3 class="title">Syarat <span> Pendaftaran</span></h3>
                                 </div> <!-- section title -->
                                 <br>
                                 <p class="text">
@@ -210,7 +210,7 @@
                                 <br>
                                 <p class="text">
                                 1.	Video menjelaskan ide solusi yang telah disusun secara lugas dengan maksimal durasi 10 menit <br>
-                                2.	Format video yang diunggah adalah xxx <br>
+                                2.	Format video yang diunggah adalah mp4 dengan maksimum 300mb <br>
                                 3.	Materi tidak dapat direvisi setelah tenggat waktu penutupan submission <br>
                                 </p>
                                 <br>
