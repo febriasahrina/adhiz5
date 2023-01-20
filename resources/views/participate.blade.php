@@ -473,7 +473,7 @@
                                             </ul>
                                         </div>
                                         @endif
-                                        <form method="post" action="insert-file/ppt" enctype="multipart/form-data">
+                                        <form method="post" action="insert-file/ppt" enctype="multipart/form-data" id="upload-ppt">
                                             {{csrf_field()}}
                                             <div class="row">
                                                 <div class="col-lg-8">
@@ -542,6 +542,9 @@
 @push('custom-script')
     <script type='text/javascript'>$(function(){
         var element = document.getElementById("nav-participate");
+        element.classList.add("active");
+        $objEmp = {};
+        var objUpload = {};
         $users = "<?php echo $emailPendaftar; ?>";
 
         if ($users != '')
@@ -552,11 +555,17 @@
         {
             window.location.href = "{{ route('actionFirst')}}";
         }
+        
+        $(document).ready(function(){
+            $("#upload-ppt").on("submit", function(){
+                showLoading();
+            });
 
-        element.classList.add("active");
-        $objEmp = {};
-        var objUpload = {};
-
+            $("#upload-video").on("submit", function(){
+                showLoading();
+            });
+        });
+        
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -780,7 +789,7 @@
                     success: function(data) {
                         if (data.data.message == 'Insert Data Berhasil.') {
                             setTimeout(hideLoading, 1000);
-                            setTimeout(function(){window.location.href = "{{ url('participate')}}"}, 10000);
+                            setTimeout(function(){window.location.href = "{{ url('participate')}}"}, 7000);
                         } else {
                             setTimeout(hideLoading, 1000);
                             showNotifKuesioner(data.data.message + "!", null);
