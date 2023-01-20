@@ -762,6 +762,7 @@
         }
 
         function submitData() {
+            $objEmp = {};
             $objEmp["jenisKepesertaan"] =  $('select[name=selectJenisKepersetaan] option').filter(':selected').val();
 
             if ($objEmp["jenisKepesertaan"] == "individu")
