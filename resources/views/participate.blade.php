@@ -491,7 +491,9 @@
                                                             <span class="text-danger">*</span>
                                                         </th>
                                                         <th>
-                                                            <input type="file" class="form-control" name="file" />
+                                                            <input type="file" class="form-control" name="file" accept=".pptx" />
+                                                            @if(Session::get('upload-ppt') == TRUE)
+                                                            <span>{{Session::get('upload-ppt')}}</span>@endif
                                                         </th>
                                                     </tr>
                                                 </div>
@@ -510,7 +512,9 @@
                                                             <span class="text-danger">*</span>
                                                         </th>
                                                         <th>
-                                                            <input type="file" class="form-control" id="input-video" name="video" disabled />
+                                                            <input type="file" class="form-control" id="input-video" accept=".mp4" name="video" disabled />
+                                                            @if(Session::get('upload-video') == TRUE)
+                                                            <span>{{Session::get('upload-video')}}</span>@endif
                                                         </th>
                                                     </tr>
                                                 </div>
@@ -557,6 +561,12 @@
         $uploadPpt = "<?php echo $uploadPpt; ?>";
         $uploadVideo = "<?php echo $uploadVideo; ?>";
 
+        if($uploadPpt != "")
+        {
+            $('#input-video').prop('disabled', false);
+            $('#button-video').prop('disabled', false);
+        }
+
         if ($users != '')
         {
             cekPendaftar();
@@ -565,6 +575,39 @@
         {
             window.location.href = "{{ route('actionFirst')}}";
         }
+        function removeNotNumber(angka)
+        {
+            var number_string = angka.replace(/[^,\d]/g, '').toString();
+
+            return number_string;
+        }
+
+        const formatToPhone = (event) => {
+            console.log(event.target.value);
+            event.target.value = removeNotNumber(event.target.value);
+            const input = event.target.value.substring(0,13); // First ten digits of input only
+            if (input.length >11) {
+                var areaCode = input.substring(0,4);
+                var middle = input.substring(4,8);
+                var last = input.substring(8,13);
+            } else {
+                var areaCode = input.substring(0,3);
+                var middle = input.substring(3,7);
+                var last = input.substring(7,12);
+            }
+                if(input.length > 7){event.target.value = `${areaCode} ${middle} ${last}`;}
+                else if(input.length > 3){event.target.value = `${areaCode} ${middle}`;}
+                else if(input.length > 0){event.target.value = `${areaCode}`;}
+        };
+
+        // const inputNoHpIndividu = document.getElementById('inputNoHpIndividu');
+        // inputNoHpIndividu.addEventListener('keyup',formatToPhone);
+
+        var inputNoHpIndividu = document.getElementById("inputNoHpIndividu");
+        inputNoHpIndividu.addEventListener("keyup", function(e) 
+        {
+            console.log(this.value);
+        });
         
         $(document).ready(function(){
             $("#upload-ppt").on("submit", function(){
@@ -656,11 +699,7 @@
         
             $("#wizard").steps("next",{});
             $("#wizard").steps("next",{});
-            $("#wizard").steps("next",{});
-
-            $('#input-video').prop('disabled', false);
-            $('#button-video').prop('disabled', false);
-           
+            $("#wizard").steps("next",{});           
         }
 
         $(document).ready( function() {
@@ -930,6 +969,8 @@
                     }
                     else if($uploadVideo == "")
                     {
+                        $('#input-video').prop('disabled', false);
+                        $('#button-video').prop('disabled', false);
                         showNotifKuesioner("Mohon upload file video", null);
                         $err = 'yes';
                         return;

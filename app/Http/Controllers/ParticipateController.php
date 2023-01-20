@@ -210,11 +210,11 @@ class ParticipateController extends Controller
                 'file' => 'required|mimes:pptx|max:15000',
             ]);
             
-            
+            $oriFileName = $request->file->getClientOriginalName();
             $fileName = $email.'.'.$request->file->extension();  
     
             $request->file->move(public_path('files'), $fileName);
-            Session::put('upload-ppt', true);
+            Session::put('upload-ppt', $oriFileName);
             return back()->with('success','Berhasil Upload File Materi.');            
         }
         else if ($route == 'video')
@@ -229,11 +229,13 @@ class ParticipateController extends Controller
             $file = $request->file('video');        
            
             $destinationPath = 'files';
+
+            $oriFileName = $file->getClientOriginalName();
             $fileName = $email.'.'.$file->getClientOriginalExtension();
             $uploadSuccess = $file->move(public_path('files'), $fileName);
             $videoSrc = '/'.$destinationPath.'/'.$fileName;
             
-            Session::put('upload-video', true);
+            Session::put('upload-video', $oriFileName);
             return back()->with('success','Berhasil Upload File Video.');
         }
     }
