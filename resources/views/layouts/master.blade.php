@@ -39,6 +39,9 @@
     
     <!--====== Default CSS ======-->
     <link rel="stylesheet" href="{{asset('')}}assets/css/default.css">
+
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{asset('')}}assets/css/select2/css/select2.min.css">
     
     <!--====== Style CSS ======-->
     <link rel="stylesheet" href="{{asset('')}}assets/css/style.css">
@@ -54,6 +57,32 @@
         .text-center{
             text-align: center;
         }
+
+        
+        .coming {
+            padding: 0 0; }
+            @media only screen and (min-width: 768px) and (max-width: 991px) {
+                .coming {
+                padding: 0 0; } }
+            @media (max-width: 767px) {
+                .coming {
+                padding: 0 15px; } }
+            @media (max-width: 767px) {
+                .coming {
+                width: 0%; } }
+            @media only screen and (min-width: 576px) and (max-width: 767px) {
+                .coming {
+                width: 33.33%; } }
+            .coming img {
+                width: 100%;
+                opacity: 0.5;
+                -webkit-transition: all 0.3s ease-out 0s;
+                -moz-transition: all 0.3s ease-out 0s;
+                -ms-transition: all 0.3s ease-out 0s;
+                -o-transition: all 0.3s ease-out 0s;
+                transition: all 0.3s ease-out 0s; }
+            .coming:hover img {
+                opacity: 3; }
     </style>
     
 </head>
@@ -106,15 +135,15 @@
                                     <li class="nav-item" id="nav-participate">
                                         <a class="page-scroll" href="{{url('/participate')}}">Participate</a>
                                     </li>
-                                    <li class="nav-item">
+                                    <li class="nav-item coming">
                                         <img src="{{asset('')}}assets/img/comingsoon.png" alt="Logo" style="position:absolute;z-index: -1;margin-left: 40px">
                                         <a class="page-scroll" href="#">Voting</a>
                                     </li>
-                                    <li class="nav-item">
+                                    <li class="nav-item coming">
                                         <img src="{{asset('')}}assets/img/comingsoon.png" alt="Logo" style="position:absolute;z-index: -1;margin-left: 40px">
                                         <a class="page-scroll" href="#">Judges</a>
                                     </li>
-                                    <li class="nav-item">
+                                    <li class="nav-item coming">
                                         <img src="{{asset('')}}assets/img/comingsoon.png" alt="Logo" style="position:absolute;z-index: -1;margin-left: 40px">
                                         <a class="page-scroll" href="#">Recap</a>
                                     </li>
@@ -215,15 +244,13 @@
     <!-- /.content -->
   
     <!-- JQUERY STEP -->
+    <script src="{{asset('')}}assets/js/jquery/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.min.js"></script>
-    <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
-    <!--====== Jquery js ======-->
-    <!-- <script src="assets/js/vendor/jquery-1.12.4.min.js"></script> -->
     <script src="{{asset('')}}assets/js/vendor/modernizr-3.7.1.min.js"></script>
     
     <!--====== Bootstrap js ======-->
-    <script src="{{asset('')}}assets/js/popper.min.js"></script>
-    <script src="{{asset('')}}assets/js/bootstrap.min.js"></script>
+    <!-- <script src="{{asset('')}}assets/js/popper.min.js"></script> -->
+    <script src="{{asset('')}}assets/js/bootstrap/js/bootstrap.min.js"></script>
     <!--====== Plugins js ======-->
     <script src="{{asset('')}}assets/js/plugins.js"></script>
     
@@ -251,6 +278,12 @@
     
     <!--====== Main js ======-->
     <script src="{{asset('')}}assets/js/main.js"></script>
+
+    <!-- Select2 -->
+    <script src="{{asset('')}}assets/css/select2/js/select2.min.js"></script>
+
+    <!-- Bootstrap 4 -->
+    <script src="{{asset('')}}assets/js/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script>
         function showNotifKuesioner(message) {
             $('#msg_notif_kuesioner').html(message);

@@ -1,0 +1,23 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1921 1055" width="1921" height="1055">
+	<title>footer-bg-svg</title>
+	<defs>
+		<linearGradient id="g1" x1="960.1" y1="1054.9" x2="960.1" y2="0" gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="#361cc1"/>
+			<stop offset="1" stop-color="#2e82ef"/>
+		</linearGradient>
+		<linearGradient id="g2" x1="960.1" y1="1054.9" x2="960.1" y2=".1" gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="#76cbd3"/>
+			<stop offset=".1" stop-color="#76cbd3"/>
+			<stop offset=".6" stop-color="#c3d668"/>
+			<stop offset="1" stop-color="#839a3b"/>
+		</linearGradient>
+	</defs>
+	<style>
+		.s0 { opacity: .1;fill: url(#g1) } 
+		.s1 { fill: url(#g2) } 
+	</style>
+	<g id="Group_111">
+		<path id="Path_195" class="s0" d="m1920.2 1054.9h-1920.1c0 0-0.1-1054.9-0.1-1054.9 118.2 159.1 198 228.4 420.6 180.6 222.6-47.7 475.8-65.9 574.6 79.2 98.9 145.2 237.5 212.7 538.3 145.2 300.8-67.6 386.7 270.2 386.7 270.2z"/>
+		<path id="Path_194" class="s1" d="m1920.1 1054.9h-1920c0 0 0.1-1046.8 0-1054.8 41.5 104.2 193.4 277 421.5 220.6 228-56.3 478-51.5 576.5 88.4 98.5 139.8 236.5 204.9 536.1 139.8 299.7-65.1 386 226.4 386 226.4z"/>
+	</g>
+</svg>

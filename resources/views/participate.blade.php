@@ -3,8 +3,8 @@
 
 <!--====== Participate CSS ======-->
 <link rel="stylesheet" href="assets/css/participate.css">
-<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
-<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<!-- <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'> -->
+<!-- <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script> -->
 @push('custom-css')
 
 
@@ -44,6 +44,18 @@
         border-radius: 0.25rem;
         box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
     }
+
+    .select2-container .select2-selection--single {
+        width: 100%;
+        height: 38px !important;
+        font-size: 13px;
+        font-weight: normal;
+    }
+
+    .selection {
+        width: 100%;
+    }
+    
 </style>
 @endpush
 
@@ -72,24 +84,8 @@
                     </div>
                 </div>
             </div>
-            <!-- <form method="post" action="insert-file" enctype="multipart/form-data">
-                {{csrf_field()}}
-                <tr>
-                    <th>
-                        <label>File Materi (ppt)</label>
-                        <span class="text-danger">*</span>
-                    </th>
-                    <th>
-                        <input type="file" class="form-control" name="filenames[]" />
-                    </th>
-                </tr>
-                <button type="submit" class="btn btn-success w-100 p-3" style="margin-top:10px">Submit</button>
-            </form> -->
         </div>
         <br>
-    <!-- </section>
-    </div>
-    <section id="features" class="services-area"> -->
         <div class="container">
             <div class="row justify-content-center" id="form_utama">
                 <div class="card card-body">
@@ -182,8 +178,10 @@
                                                     <span class="text-danger">*</span>
                                                 </th>
                                                 <th>
-                                                    <input type="text" id="inputUnitKerja1" class="form-control" placeholder="Masukkan Unit Kerja Anda"
+                                                    <input type="text" id="inputUnitKerja1" name="inputUnitKerja1" class="form-control" placeholder="Masukkan Unit Kerja Anda"
                                                     value="@if(Session::get('loginStatus') == TRUE){{Session::get('department')}}" disabled @endif>
+
+                                                    <input type="hidden" id="inputDepartment1" name="inputDepartment1" class="form-control" value="0">
                                                 </th>
                                             </tr>
 
@@ -193,7 +191,7 @@
                                                     <span class="text-danger">*</span>
                                                 </th>
                                                 <th>
-                                                    <input type="email" id="inputEmail1" class="form-control" placeholder="Masukkan Email Anda"
+                                                    <input type="email" id="inputEmail1" name="inputEmail1" class="form-control" placeholder="Masukkan Email Anda"
                                                     value="@if(Session::get('loginStatus') == TRUE){{Session::get('email')}}" disabled @endif>
                                                 </th>
                                             </tr>
@@ -249,10 +247,16 @@
                                                     <span class="text-danger">*</span>
                                                 </th>
                                                 <th>
-                                                    <input type="text" id="inputUnitKerja2" class="form-control" placeholder="Masukkan Unit Kerja Tim 1 Anda">
+                                                    <select class="form-control js-example-basic-single" id="inputUnitKerja2" name="inputUnitKerja2" onchange="selectUnitKerja2()" style="width: 100%; font-size:13px">
+                                                        <option selected="selected" value="">--Pilih Unit Kerja--</option>
+                                                    </select>
+                                                    <div id="divDepartment2" style="display: none" class="pt-4">
+                                                        <select class="form-control js-example-basic-single" id="inputDepartment2" name="inputDepartment2" style="width: 100%; font-size:13px; display:none">
+                                                            <option selected="selected" value="0">--Pilih Department--</option>
+                                                        </select>
+                                                    </div>
                                                 </th>
                                             </tr>
-
                                             <tr>
                                                 <th>
                                                     <label>Email</label>
@@ -314,7 +318,14 @@
                                                     <span class="text-danger">*</span>
                                                 </th>
                                                 <th>
-                                                    <input type="text" id="inputUnitKerja3" class="form-control" placeholder="Masukkan Unit Kerja Tim 2 Anda">
+                                                    <select class="form-control js-example-basic-single" id="inputUnitKerja3" onchange="selectUnitKerja3()" style="width: 100%; font-size:13px">
+                                                        <option selected="selected" value="">--Pilih Unit Kerja--</option>
+                                                    </select>
+                                                    <div id="divDepartment3" style="display: none" class="pt-4">
+                                                        <select class="form-control js-example-basic-single" id="inputDepartment3" style="width: 100%; font-size:13px; display:none">
+                                                            <option selected="selected" value="0">--Pilih Department--</option>
+                                                        </select>
+                                                    </div>
                                                 </th>
                                             </tr>
 
@@ -561,6 +572,34 @@
         $uploadPpt = "<?php echo $uploadPpt; ?>";
         $uploadVideo = "<?php echo $uploadVideo; ?>";
 
+        $(document).ready(function() {
+            showDropDown();
+            $('#inputUnitKerja2').select2({
+                // width: '100%',
+                // closeOnSelect: true,
+                selectOnClose: true,
+                width: 'resolve'
+            });
+            $('#inputUnitKerja3').select2({
+                // width: '100%',
+                // closeOnSelect: true,
+                selectOnClose: true,
+                width: 'resolve'
+            });
+            $('#inputDepartment2').select2({
+                // width: '100%',
+                // closeOnSelect: true,
+                selectOnClose: true,
+                width: 'resolve'
+            });
+            $('#inputDepartment3').select2({
+                // width: '100%',
+                // closeOnSelect: true,
+                selectOnClose: true,
+                width: 'resolve'
+            });
+        });
+
         if($uploadPpt != "")
         {
             $('#input-video').prop('disabled', false);
@@ -655,7 +694,9 @@
                 'unit_kerja_individu': 'inputUnitKerjaIndividu','email_individu': 'inputEmailIndividu'}              
 
             var translateGroup = {'npp': 'inputNpp','nama': 'inputNama','unit_kerja': 'inputUnitKerja',
-                    'email': 'inputEmail','no_hp': 'inputNoHp'};
+                    'department':'inputDepartment','email': 'inputEmail','no_hp': 'inputNoHp'};
+
+            var arrSelect = ["inputUnitKerja", "inputDepartment"];
 
             
             var passedArray = <?php echo json_encode($saveData); ?>;
@@ -690,10 +731,50 @@
                     for (var x = 1; x < jumlahAnggota+2; x++) {
                         $.each(translateGroup, function(key2, value2) {
                             if (passedArray['group'][x-1][key2]) {
-                                document.getElementById(value2+x).value = passedArray['group'][x-1][key2];
+                                if(arrSelect.includes(value2) && x > 1)
+                                {
+                                    console.log('#'+value2+x);
+                                    console.log(passedArray['group'][x-1][key2]);
+
+                                    // $('#'+value2+x).val(passedArray['group'][x-1][key2]).select2().trigger("change");
+                                    // console.log($('#'+value2+x).find(':selected'));
+                                    // if ($('#'+value2+x).find("option[value=" + passedArray['group'][x-1][key2] + "]").length) {
+                                    //     console.log("find");
+                                    //     $('#'+value2+x).val(passedArray['group'][x-1][key2]).trigger('change');
+                                    // } else { 
+                                    //     console.log("nott find");
+                                    //     // Create a DOM Option and pre-select by default
+                                    //     var newOption = new Option(data.text, data.id, true, true);
+                                    //     // Append it to the select
+                                    //     $('#'+value2+x).append(newOption).trigger('change');
+                                    // }
+
+                                    const $select = document.querySelector('#'+value2+x);
+                                    const $options = Array.from($select.options);
+                                    const optionToSelect = $options.find(item => item.value === passedArray['group'][x-1][key2]);
+                                    if(optionToSelect != undefined)
+                                    {
+                                        optionToSelect.selected = true;
+                                    }
+                                    
+                                    $('#'+value2+x).val(passedArray['group'][x-1][key2]).trigger("change");
+
+                                    // $("#"+value2+x).select2('destroy');
+                                    // $("#"+value2+x).val(passedArray['group'][x-1][key2]);
+                                    // $("#"+value2+x).select2();
+                                    // $('#'+value2+x).val("2").select2().trigger("change");
+                                    // console.log($("#"+value2+x).val());
+                                    // console.log(document.getElementById(value2+x).value);
+                                }
+                                else
+                                {
+                                    document.getElementById(value2+x).value = passedArray['group'][x-1][key2];
+                                }
                             }
                         });
                     }
+                    // selectUnitKerja2();
+                    // selectUnitKerja3();
                 }
             }
         
@@ -702,15 +783,9 @@
             $("#wizard").steps("next",{});           
         }
 
-        $(document).ready( function() {
-            // Draw all slots
-            $('div.alert').each(function(i, d) {
-                alertSuccess();
-            });
-        });
-
         function assignValue()
         {
+            $objEmp = {};
             $objEmp["jenisKepesertaan"] =  $('select[name=selectJenisKepersetaan] option').filter(':selected').val();
 
             if ($objEmp["jenisKepesertaan"] == "individu")
@@ -735,6 +810,7 @@
                             "npp" : $("#inputNpp"+x).val(),
                             "nama" : $("#inputNama"+x).val(),
                             "unit_kerja" : $("#inputUnitKerja"+x).val(),
+                            "department" : 0,
                             "email" : $("#inputEmail"+x).val(),
                             "no_hp" : $("#inputNoHp"+x).val(),
                             "status_tim" : 'leader',
@@ -746,6 +822,7 @@
                             "npp" : $("#inputNpp"+x).val(),
                             "nama" : $("#inputNama"+x).val(),
                             "unit_kerja" : $("#inputUnitKerja"+x).val(),
+                            "department" : $("#inputDepartment"+x).val(),
                             "email" : $("#inputEmail"+x).val(),
                             "no_hp" : $("#inputNoHp"+x).val(),
                             "status_tim" : 'member',
@@ -759,6 +836,76 @@
             $objEmp["judul_ide"] = $("#inputJudulIde").val();
             $objEmp["deskripsi_ide"] = $("#inputDeskripsi").val();
             $objEmp["jumlah_anggota"] = jumlahAnggota;
+        }
+
+        function showDropDown() {
+            $.ajax({
+                type: 'GET',
+                url: 'show-drop-down',
+                success: function(data) {
+                    //dropdown unit kerja
+                    var selectUnitKerja = document.getElementById("inputUnitKerja2");
+                    var selectUnitKerja3 = document.getElementById("inputUnitKerja3");
+                    var unitKerjaList = [];
+
+                    //dropdown department
+                    var selectDepartment = document.getElementById("inputDepartment2");
+                    var selectDepartment3 = document.getElementById("inputDepartment3");
+                    var departmentList = [];    
+                                        
+                    for (var con = 0; con < data.unit_kerja.length; con++) {
+                        var unitKerjaObj = {
+                            "id_unit_kerja": data.unit_kerja[con].id_unit_kerja,
+                            "nama_unit_kerja": data.unit_kerja[con].nama_unit_kerja,
+                        }
+                        unitKerjaList.push(unitKerjaObj);
+                    }
+
+                    for (var con = 0; con < data.department.length; con++) {
+                        var departmentObj = {
+                            "id_department": data.department[con].id_department,
+                            "nama_department": data.department[con].nama_department,
+                        }
+                        departmentList.push(departmentObj);
+                    }
+
+                    for (var listCon = 0; listCon < unitKerjaList.length; listCon++) {
+                        var el = document.createElement("option");
+                        el.textContent = unitKerjaList[listCon].nama_unit_kerja;
+                        el.value = unitKerjaList[listCon].id_unit_kerja;
+                        selectUnitKerja.appendChild(el);
+                    }
+
+                    for (var listCon = 0; listCon < unitKerjaList.length; listCon++) {
+                        var el = document.createElement("option");
+                        el.textContent = unitKerjaList[listCon].nama_unit_kerja;
+                        el.value = unitKerjaList[listCon].id_unit_kerja;
+                        selectUnitKerja3.appendChild(el);
+                    }
+
+                    for (var listCon = 0; listCon < departmentList.length; listCon++) {
+                        var el = document.createElement("option");
+                        el.textContent = departmentList[listCon].nama_department;
+                        el.value = departmentList[listCon].id_department;
+                        selectDepartment.appendChild(el);
+                    }
+
+                    for (var listCon = 0; listCon < departmentList.length; listCon++) {
+                        var el = document.createElement("option");
+                        el.textContent = departmentList[listCon].nama_department;
+                        el.value = departmentList[listCon].id_department;
+                        selectDepartment3.appendChild(el);
+                    }
+                    
+                    $('div.alert').each(function(i, d) {
+                        alertSuccess();
+                    });
+                }
+                , error: function(data) {
+                    console.log('Error GET');
+                    console.log(data);
+                }
+            })
         }
 
         function submitData() {
@@ -787,6 +934,7 @@
                             "npp" : $("#inputNpp"+x).val(),
                             "nama" : $("#inputNama"+x).val(),
                             "unit_kerja" : $("#inputUnitKerja"+x).val(),
+                            "department" : 0,
                             "email" : $("#inputEmail"+x).val(),
                             "no_hp" : $("#inputNoHp"+x).val(),
                             "status_tim" : 'leader',
@@ -798,6 +946,7 @@
                             "npp" : $("#inputNpp"+x).val(),
                             "nama" : $("#inputNama"+x).val(),
                             "unit_kerja" : $("#inputUnitKerja"+x).val(),
+                            "department" : $("#inputDepartment"+x).val(),
                             "email" : $("#inputEmail"+x).val(),
                             "no_hp" : $("#inputNoHp"+x).val(),
                             "status_tim" : 'member',
@@ -1018,6 +1167,28 @@
         })
     })
 
+    function selectUnitKerja2() {
+        var x = document.getElementById("inputUnitKerja2").value;
+        var element = document.getElementById("divDepartment2");
+
+        if (x === "1") {
+            element.style.display = "block";
+        } else {
+            element.style.display = "none";
+        }
+    }
+
+    function selectUnitKerja3() {
+        var x = document.getElementById("inputUnitKerja3").value;
+        var element = document.getElementById("divDepartment3");
+
+        if (x === "1") {
+            element.style.display = "block";
+        } else {
+            element.style.display = "none";
+        }
+    }
+
     function selectJenisKepersetaanChange() {
         var x = document.getElementById("selectJenisKepersetaan").value;
 
@@ -1055,4 +1226,6 @@
     myLink.addEventListener('click', function(e) {
         e.preventDefault();
     });</script>
+
+    <script src="{{asset('')}}assets/js/jquery-ui/jquery-ui.min.js"></script>
 @endpush

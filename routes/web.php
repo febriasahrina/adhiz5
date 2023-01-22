@@ -47,6 +47,10 @@ Route::get('actionFirst', [
     'as' => 'actionFirst',
     'uses' => 'LoginController@actionFirst']);
 
+Route::get('show-drop-down', [
+    'as' => 'show-drop-down',
+    'uses' => 'ParticipateController@showDropDown']);
+
 // insert tim
 Route::post('insert-tim', [
     'as' => 'insert-tim',

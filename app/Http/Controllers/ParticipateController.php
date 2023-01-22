@@ -91,6 +91,7 @@ class ParticipateController extends Controller
                     'nama' => $request->nama_individu,
                     'npp' => $request->npp_individu,
                     'unit_kerja' => $request->unit_kerja_individu,
+                    'id_department' => 0,
                     'email' => $request->email_individu,
                     'no_hp' => $request->no_hp,
                     'status_tim' => $request->status_tim,
@@ -125,6 +126,7 @@ class ParticipateController extends Controller
                         'nama' => $group[$key]['nama'],
                         'npp' => $group[$key]['npp'],
                         'unit_kerja' => $group[$key]['unit_kerja'],
+                        'id_department' => $group[$key]['department'],
                         'email' => $group[$key]['email'],
                         'no_hp' => $group[$key]['no_hp'],
                         'status_tim' => $group[$key]['status_tim'],
@@ -173,6 +175,14 @@ class ParticipateController extends Controller
         foreach ($data as $key => $value) {
             $arr[$key] = $value;
         }
+        
+        if(Session::has('save-data'))
+        {
+            var_dump(Session::get('save-data'));
+            Session::forget('save-data');
+            var_dump(Session::get('save-data'));
+        }
+
         Session::put('save-data', $arr);
     }
 
@@ -238,6 +248,28 @@ class ParticipateController extends Controller
             Session::put('upload-video', $oriFileName);
             return back()->with('success','Berhasil Upload File Video.');
         }
+    }
+
+    public function showDropDown()
+    {
+        $get_unit_kerja =  DB::table('tb_unit_kerja')
+            ->select('id_unit_kerja','nama_unit_kerja')
+            ->whereNull('deleted_at')
+            ->orderBy('id_unit_kerja', 'ASC')
+            ->get();
+
+        $get_department =  DB::table('tb_department')
+            ->select('id_department','nama_department')
+            ->whereNull('deleted_at')
+            ->orderBy('nama_department', 'ASC')
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Get Data Berhasil.',
+            'unit_kerja' => $get_unit_kerja,
+            'department' => $get_department
+        ], 201);
     }
 
 }

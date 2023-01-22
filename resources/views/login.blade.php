@@ -10,7 +10,7 @@
 <style>
     body {
         background: #007bff;
-        background: linear-gradient(to right, #0062E6, #33AEFF);
+        background: linear-gradient(to right, #76cbd3, #c3d668, #839a3b);
     }
 
     .btn-login {

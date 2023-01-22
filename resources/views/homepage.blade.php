@@ -55,7 +55,7 @@
                     <div class="section-title text-center pb-40">
                         <h2 class="title">About Us</span></h2>
                         <div class="line m-auto"></div>
-                        <h3 class="title"><span> Kita percaya bahwa dimulai dari sebuah</span> ide <span>yang diberikan tempat untuk didengar, maka hal-hal besar bisa terwujud.</span></h3>
+                        <h3 class="title"><span> Kami percaya bahwa dimulai dari sebuah</span> ide <span>yang diberikan tempat untuk didengar, maka hal-hal besar bisa terwujud.</span></h3>
                         <br><h5>Oleh karena itu, ADHI-Z muncul sebagai wadah bagi Insan ADHI yang memiliki ide dalam bentuk solusi untuk memecahkan permasalahan yang telah menimbulkan kegusaran.</h5>
                     </div> <!-- section title -->
                 </div>
