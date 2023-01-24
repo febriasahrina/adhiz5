@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-8">
             <div class="footer-about mt-50 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
-                <a class="logo" href="#">
+                <a class="logo logos" href="#">
                     <img src="{{asset('')}}assets/img/adhi-z-fix.png" alt="logo">
                 </a>
                 <p class="text"><span> Kita percaya bahwa dimulai dari sebuah</span> ide <span>yang diberikan tempat untuk didengar, maka hal-hal besar bisa terwujud.</span>

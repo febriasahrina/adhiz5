@@ -2,22 +2,21 @@
 <html class="no-js" lang="en">
 
 <head>
-    <meta charset="utf-8">
-    
-    <!--====== Title ======-->
-    <title>@yield('title', 'ADHIZ | XX')</title>
-    
+    <meta charset="utf-8">   
     <meta name="description" content="">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="cache-control" content="nocache, no-store, max-age=0, must-revalidate">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="expires" content="0">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-
+    <!--====== Title ======-->
+    <title>@yield('title', 'ADHIZ | XX')</title>
+    
     <!--====== Favicon Icon ======-->
-    <link rel="icon" href="{{asset('')}}assets/img/adhi-z-fix-resize.png" type="image/icon type">
+    <link rel="icon" href="{{asset('')}}assets/img/favicon.ico">
+    <img src="{{asset('')}}assets/img/favicon.ico" alt="Logo">
         
     <!--====== Animate CSS ======-->
     <link rel="stylesheet" href="{{asset('')}}assets/css/animate.css">
@@ -45,6 +44,7 @@
     
     <!--====== Style CSS ======-->
     <link rel="stylesheet" href="{{asset('')}}assets/css/style.css">
+    
     @stack('custom-css')
     <style>
         img {
@@ -83,6 +83,18 @@
                 transition: all 0.3s ease-out 0s; }
             .coming:hover img {
                 opacity: 3; }
+
+
+        @media (max-width: 767px) {
+            .logos {
+            padding: 0 15px; } }
+        @media (max-width: 767px) {
+            .logos {
+            width: 30%; }
+        
+            .issue-img {
+                width:70%;
+            }}
     </style>
     
 </head>
@@ -108,15 +120,18 @@
     <!--====== PRELOADER PART ENDS ======-->
     
     <!--====== HEADER PART START ======-->
-    
+    @section('footer-js') <script> $(function() {alert('Jquery is defined and ready for service.');});</script> @endsection
+
+
     <header class="header-area">
         <div class="navbar-area">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <nav class="navbar navbar-expand-lg">
-                            <a class="navbar-brand" href="{{url('/')}}">
+                            <a class="navbar-brand logos" href="{{url('/')}}">
                                 <img src="{{asset('')}}assets/img/adhi-z-fix-resize.png" alt="Logo">
+                                <link rel="icon" href="{{asset('')}}assets/img/favicon.ico" type="image/x-icon">
                             </a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="toggler-icon"></span>
@@ -229,7 +244,6 @@
                 <div class="modal-header">
                 </div>
                 <div class="modal-body text-center">
-                    <img src="{{asset('')}}assets/dist/img/thankyou.jpg" alt="Responsive image" style="width: auto; height: 130px;" class="rounded-circle">
                     <div class="h2 my-4">Terima kasih telah mengisi <span id='type-form'>survei</span></div>
                     <div class="h6">
                         Terima kasih banyak atas tanggapan Anda. Kami sangat menghargai itu. Informasi Anda sangat penting bagi kami. Data berhasil diinput.
@@ -242,9 +256,10 @@
         </div>
     </div>
     <!-- /.content -->
-  
+    
     <!-- JQUERY STEP -->
     <script src="{{asset('')}}assets/js/jquery/jquery.min.js"></script>
+    @stack('custom-script')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.min.js"></script>
     <script src="{{asset('')}}assets/js/vendor/modernizr-3.7.1.min.js"></script>
     
@@ -311,5 +326,5 @@
             $('#myModalWoi').modal('hide');
         }
     </script>
-    @stack('custom-script')
+    </body>
 </html>

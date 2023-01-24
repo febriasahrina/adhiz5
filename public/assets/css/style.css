@@ -869,7 +869,11 @@ p {
     max-width: 650px; }
     @media (max-width: 767px) {
       .header-hero-image img {
-        max-width: 100%; } }
+        max-width: 70%; } 
+      .services-area{
+        padding-top:0;
+      }
+      }
   @media (max-width: 767px) {
     .header-hero-image {
       padding-top: 30px; } }

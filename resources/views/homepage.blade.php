@@ -1,10 +1,6 @@
 @extends('layouts.master')
 @section('title', 'ADHIZ - Homepage')
 
-<!-- <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script> -->
-<script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
-@push('custom-css')
-
 <style>
     img {
         display: block;
@@ -16,19 +12,22 @@
     .text-center{
         text-align: center;
     }
+    .check{
+        display: none;
+    }
 </style>
+
+@push('custom-css')
 @endpush
 
 @section('content')
     <div id="home" class="header-hero bg_cover" style="background-image: url({{asset('')}}assets/img/banner-bg.svg)">
         <div class="container">
-            <!-- <div class="col-lg-4" style="margin-top:90px">
-                    <img src="{{asset('')}}assets/img/adhi63thAdhi.png" alt="hero">
-            </div> -->
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="header-hero-content text-center">
                         <h2 class="header-title wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.5s">ADHI - Z</h2>
+                        <div class="check">Hidden by default</div>
                         <h3 class="header-sub-title wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.2s">Where Idea Grow and Blow</h3>
                         <!-- <p class="text wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.8s">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p> -->
                         <a href="{{url('/participate')}}" class="main-btn wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1.1s" style="height: 70px;width: 270px; font-size: 25px; font-weight: 500;">
@@ -39,7 +38,7 @@
             <div class="row">
                 <div class="col-lg-12 mt-5">
                     <div class="header-hero-image text-center wow fadeIn" data-wow-duration="1.3s" data-wow-delay="1.4s">
-                        <img src="{{asset('')}}assets/img/adhi63thAdhi.png" alt="hero">
+                        <img src="{{asset('')}}assets/img/adhi63thAdhi-res.png" alt="hero">
                     </div>
                 </div>
             </div>
@@ -205,7 +204,7 @@
                     </div> <!-- about content -->
                 </div>
                 <div class="col-lg-4 order-lg-first">
-                    <div class="about-image text-center mt-50 wow fadeInRightBig" data-wow-duration="1s" data-wow-delay="0.5s">
+                    <div class="about-image text-center mt-50 wow fadeInRightBig issue-img" data-wow-duration="1s" data-wow-delay="0.5s">
                         <img src="{{asset('')}}assets/img/issue.jpg" alt="about">
                     </div> <!-- about image -->
                 </div>
@@ -265,7 +264,7 @@
                     </li>
                     <li class="list-inline-item items-list">
                         <div class="px-2">
-                        <div class="event-date badge bg-danger" style="color : white;">23 Februari</div>
+                        <div class="event-date badge bg-success" style="color : white;">23 Februari</div>
                         <h5 class="pt-2">Penjurian Final</h5>
                         <!-- <p class="text-muted">Pengumuman Final</p> -->
                         <!-- <div>
@@ -306,22 +305,22 @@
                     <h3 class="title">Winner <span> Category</span></h3>
                 </div> <!-- section title -->
                 <div class="row">
-                    <div class="col-lg-3 col-md-7 col-sm-8">
+                    <div class="col-lg-3 col-md-7 col-sm-8 issue-img">
                         <img class="shape" src="{{asset('')}}assets/img/first.png" alt="shape">
                         <br>
                         <h5 class="text-center">1st Place</h5>
                     </div>
-                    <div class="col-lg-3 col-md-7 col-sm-8">
+                    <div class="col-lg-3 col-md-7 col-sm-8 issue-img">
                         <img class="shape" src="{{asset('')}}assets/img/second.png" alt="shape">
                         <br>
                         <h5 class="text-center">2nd Place</h5>
                     </div>
-                    <div class="col-lg-3 col-md-7 col-sm-8">
+                    <div class="col-lg-3 col-md-7 col-sm-8 issue-img">
                         <img class="shape" src="{{asset('')}}assets/img/third.png" alt="shape">
                         <br>
                         <h5 class="text-center">3rd Place</h5>
                     </div>
-                    <div class="col-lg-3 col-md-7 col-sm-8">
+                    <div class="col-lg-3 col-md-7 col-sm-8 issue-img">
                         <img class="shape" src="{{asset('')}}assets/img/favorite.png" alt="shape">
                         <br>
                         <h5 class="text-center">Favorite Place</h5>
@@ -332,7 +331,6 @@
             @include('layouts.footer')
         </div> <!-- container -->
     </footer>
-
     @push('custom-script')
     <script>
         var element = document.getElementById("nav-home");

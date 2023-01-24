@@ -1209,7 +1209,7 @@ S2.define('select2/results',[
       $next.trigger('mouseenter');
 
       var currentOffset = self.$results.offset().top;
-      var nextTop = $next.offset().top;
+      var nextTop = $next.offset();
       var nextOffset = self.$results.scrollTop() + (nextTop - currentOffset);
 
       if (nextIndex === 0) {
