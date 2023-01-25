@@ -13,6 +13,7 @@ use App\Video;
 use Storage;
 use DataTables;
 use Exception;
+use Response;
 
 class ParticipateController extends Controller
 {
@@ -59,6 +60,76 @@ class ParticipateController extends Controller
     //         return view('department', compact('tb_employee'));
     //     }
     // }
+
+    public function showData($id='')
+    {
+        if (!Session::get('name_employee')) {
+            return redirect('login')->with('alert', 'Mohon untuk login terlebih dulu');
+        } else if($id != '') {
+            $variable = DB::table('tb_kepesertaan')
+                ->join('tb_tim', 'tb_tim.id_kepesertaan', '=', 'tb_kepesertaan.id_kepesertaan')
+                ->join('tb_ide', 'tb_ide.id_kepesertaan', '=', 'tb_kepesertaan.id_kepesertaan')
+                ->leftjoin('tb_unit_kerja', 'tb_unit_kerja.id_unit_kerja', '=', 'tb_tim.unit_kerja')
+                ->leftjoin('tb_department', 'tb_department.id_department', '=', 'tb_tim.id_department')
+                ->where('tb_kepesertaan.deleted_at', null)
+                ->where('tb_kepesertaan.id_kepesertaan', '=', $id)
+                ->get([
+                    'tb_kepesertaan.id_kepesertaan',
+                    'tb_kepesertaan.status_kepesertaan',
+                    'tb_kepesertaan.created_at',
+                    'tb_tim.nama',
+                    'tb_tim.npp',
+                    'tb_tim.unit_kerja',
+                    'tb_tim.email',
+                    'tb_tim.no_hp',
+                    'tb_tim.status_tim',
+                    'tb_ide.nama_tim',
+                    'tb_ide.judul_ide',
+                    'tb_ide.deskripsi',
+                    'tb_unit_kerja.nama_unit_kerja',
+                    'tb_department.nama_department'
+                ]);
+            
+            // return view('participate', compact('variable'));
+            if (count($variable)==0)
+            {
+                // dd(count($variable));
+                $variable = [];
+            }
+            return view('/participate', [
+                "showData" => $variable
+            ]);
+        }
+        else{
+            if(Session::get('id_employee'))
+            {
+                $id_employee = Session::get('id_employee');
+                $variable = DB::table('tb_tim')
+                    ->where('deleted_at', null)
+                    ->where('id_employee', '=', $id_employee)
+                    ->pluck('id_kepesertaan');
+
+                if(count($variable)>0)
+                {
+                    return redirect('participate/'.$variable[0]);
+                    // dd($variable[0]);
+                }
+                else
+                {
+                    $variable = [];
+                    return view('participate', [
+                        "showData" => $variable
+                    ]);
+                }
+            }
+
+
+            $variable = [];
+            return view('participate', [
+                "showData" => $variable
+            ]);
+        }
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -270,6 +341,35 @@ class ParticipateController extends Controller
             'unit_kerja' => $get_unit_kerja,
             'department' => $get_department
         ], 201);
+    }
+
+    public function showFilePdf($filename = '')
+    {
+        // $filename = 'test.pdf';
+        // $filePath = public_path('files/'.$filename.'.pdf');
+        $filePath = public_path('files\test.pptx');
+        // dd($filePath);
+
+        $pdfContent = Storage::get($filePath);
+        dd($pdfContent);
+
+        // for pdf, it will be 'application/pdf'
+        $type       = Storage::mimeType($filePath);
+        $fileName   = Storage::name($filePath);
+    
+        return Response::make($pdfContent, 200, [
+          'Content-Type'        => $type,
+          'Content-Disposition' => 'inline; filename="'.$fileName.'"'
+        ]);
+
+        // return response(file_get_contents($path), 200, [
+        //     'Content-Type' => 'application/pdf',
+        //     'Content-Disposition' => 'inline; filename="'.$filename.'"'
+        // ]);
+
+        // return response(file_get_contents($path), 200)
+        //       ->header('Content-Type', 'application/pdf')
+        //       ->header('Content-Disposition', 'inline; filename="'.$filename.'"');
     }
 
 }

@@ -2,9 +2,9 @@
 @section('title', 'ADHIZ - Participate')
 
 <!--====== Participate CSS ======-->
-<link rel="stylesheet" href="assets/css/participate.css">
 @push('custom-css')
-
+<link rel="stylesheet" href="{{asset('')}}assets/css/participate.css">
+<link rel="stylesheet" href="{{asset('')}}assets/css/profile.css">
 
 <style>
     ::-webkit-scrollbar {
@@ -72,9 +72,13 @@
                             <h4 class="font-weight-bold mb-4">John Doe</h4>
                             @endif
                             <div class="text-muted mb-4">
-                            <a href="" class="succ-btn" id="sudah_mendaftar" style="display : none">
-                            <span>Sudah Mendaftar</span></a>
-
+                                <div id="sudah_mendaftar" style="display : none">
+                                    <div class="succ-btn">Sudah Mendaftar</div>
+                                    @if (count($showData) > 0)
+                                    <div class="pt-2 pl-2">{{$showData[0]->created_at}}</div>
+                                    @endif
+                                </div>
+                                
                             <a href="" class="warn-btn" id="belum_mendaftar" style="display : none">
                             <span>Belum Mendaftar</span></a>
                             </div>
@@ -85,7 +89,7 @@
         </div>
         <br>
         <div class="container">
-            <div class="row justify-content-center" id="form_utama">
+            <div class="row justify-content-center" id="form_utama" style="display: none;">
                 <div class="card card-body">
                     <form action="" enctype="multipart/form-data">
                         {{ csrf_field() }}
@@ -543,14 +547,127 @@
                                     <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 " />
                                 </svg>
                                 <br>
-                                <p class="success">Data berhasil diinput</p>
+                                <p class="success" style="text-align: center;">Data berhasil diinput</p>
                                 <br>
-                                <p>Terima kasih telah berpartisipasi dalam kompetisi ADHI Z</p>
+                                <p style="text-align: center;">Terima kasih telah berpartisipasi dalam kompetisi ADHI Z</p>
                             </section>
                         </div>
                 </div>
             </div>
         </div>
+
+        @if (count($showData) > 0)
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="card card-body">
+                    <div class="user-card-full">
+                        <div class="row m-l-0 m-r-0">
+                            <div class="col-sm-1 bg-c-lite-green user-profile">
+                            </div>
+                            <div class="col-sm-11">
+                                <div class="card-block">                                    
+                                    <h6 class="m-b-20 p-b-5 b-b-default f-w-600 pt-5">Keanggotaan</h6>
+                                    <?php
+                                        if(count($showData)>0)
+                                        {
+                                            for($i=0; $i<count($showData); $i++)
+                                            {
+                                    ?>
+                                    <div class="row">
+                                        <div class="col-sm-1">
+                                            <p class="m-b-10 f-w-600">No</p>
+                                            <h6 class="text-muted f-w-400">{{$i+1}}</h6>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p class="m-b-10 f-w-600">Nama</p>
+                                            <h6 class="text-muted f-w-400">{{$showData[$i]->nama}}</h6>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p class="m-b-10 f-w-600">Unit Kerja</p>
+                                            <h6 class="text-muted f-w-400">
+                                                @if (strlen($showData[$i]->unit_kerja) <= 2)
+                                                    @if ($showData[$i]->unit_kerja == 1)
+                                                    {{$showData[$i]->nama_unit_kerja}} - {{$showData[$i]->nama_department}}
+                                                    @else
+                                                    {{$showData[$i]->nama_unit_kerja}}
+                                                    @endif
+                                                @else
+                                                {{$showData[$i]->unit_kerja}}
+                                                @endif
+                                            </h6>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p class="m-b-10 f-w-600">NPP</p>
+                                            <h6 class="text-muted f-w-400">{{$showData[$i]->npp}}</h6>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <p class="m-b-10 f-w-600">Email</p>
+                                            <h6 class="text-muted f-w-400">{{$showData[$i]->email}}</h6>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p class="m-b-10 f-w-600">No Hp</p>
+                                            <h6 class="text-muted f-w-400">{{$showData[$i]->no_hp}}</h6>
+                                        </div>
+                                    </div>
+                                    
+                                    <?php
+                                        }}
+                                    ?>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                                <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600 pt-5">Tim</h6>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <p class="m-b-10 f-w-600">Nama Tim</p>
+                                                        <h6 class="text-muted f-w-400 pb-4" id="judul-ide">{{$showData[0]->nama_tim}}</h6>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <p class="m-b-10 f-w-600">Jenis Kepesertaan</p>
+                                                        <h6 class="text-muted f-w-400 pb-4" id="deskripsi-ide">{{$showData[0]->status_kepesertaan}}</h6>
+                                                    </div>
+                                                </div>
+
+                                                <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600 pt-2">Ide</h6>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <p class="m-b-10 f-w-600">Judul Ide</p>
+                                                        <h6 class="text-muted f-w-400 pb-4" id="judul-ide">{{$showData[0]->judul_ide}}</h6>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <p class="m-b-10 f-w-600">Deskripsi</p>
+                                                        <h6 class="text-muted f-w-400 pb-4" id="deskripsi-ide">{{$showData[0]->deskripsi}}</h6>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600 pt-5">File</h6>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <p class="m-b-10 f-w-600">Materi</p>
+                                                    <h6 class="text-muted f-w-400 pb-4" id="file-pdf"><a href='{{asset('files/')}}/{{$showData[0]->email}}.pptx' role="button" target="_blank">file.pptx</a></h6>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <p class="m-b-10 f-w-600">Video</p>
+                                                    <video src='{{asset('files/')}}/{{$showData[0]->email}}.mp4' width="100%" height="100%" controls></video>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <ul class="social-link list-unstyled m-t-40 m-b-10">
+                                        <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="facebook" data-abc="true"><i class="mdi mdi-facebook feather icon-facebook facebook" aria-hidden="true"></i></a></li>
+                                        <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="twitter" data-abc="true"><i class="mdi mdi-twitter feather icon-twitter twitter" aria-hidden="true"></i></a></li>
+                                        <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true"><i class="mdi mdi-instagram feather icon-instagram instagram" aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        @endif
+        
     <section>
     <footer id="footer" class="footer-area pt-120">
         <div class="container">
@@ -665,7 +782,8 @@
         function cekPendaftar(){
             $.ajax({
                 type: 'GET',
-                url: 'cek-pendaftar/'+$users,
+                url: "{{url('cek-pendaftar')}}"+"/"+$users,
+                // url: "{{ url('show-drop-down')}}",
                 success: function(data) {
                     if (data.data != null)
                     {
@@ -839,7 +957,7 @@
         function showDropDown() {
             $.ajax({
                 type: 'GET',
-                url: 'show-drop-down',
+                url: "{{ url('show-drop-down')}}",
                 success: function(data) {
                     //dropdown unit kerja
                     var selectUnitKerja = document.getElementById("inputUnitKerja2");
@@ -981,7 +1099,7 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: 'insert-tim',
+                    url: "{{ url('insert-tim')}}",
                     data: $objEmp,
                     dataType: 'json',
                     success: function(data) {
@@ -1090,7 +1208,7 @@
                         
                         $.ajax({
                             type: 'POST',
-                            url: 'set-session',
+                            url: "{{ url('set-session')}}",
                             data: $objEmp,
                             dataType: 'json',
                             success: function(data) {

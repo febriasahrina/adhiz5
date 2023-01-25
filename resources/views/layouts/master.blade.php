@@ -131,7 +131,6 @@
                         <nav class="navbar navbar-expand-lg">
                             <a class="navbar-brand logos" href="{{url('/')}}">
                                 <img src="{{asset('')}}assets/img/adhi-z-fix-resize.png" alt="Logo">
-                                <link rel="icon" href="{{asset('')}}assets/img/favicon.ico" type="image/x-icon">
                             </a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="toggler-icon"></span>

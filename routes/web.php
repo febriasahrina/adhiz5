@@ -19,7 +19,15 @@ Route::get('/token', function () {
     return csrf_token();
 });
 Route::get('/', function () {return view('homepage');});
-Route::get('/participate', function () { return view('participate');});
+Route::get('/participate/{id}', ['as' => 'participate', 'uses' => 'ParticipateController@showData']);
+Route::get('/participate', ['as' => 'participate', 'uses' => 'ParticipateController@showData']);
+
+Route::get('/showFilePdf/{id}', ['as' => 'showFilePdf', 'uses' => 'ParticipateController@showFilePdf']);
+
+// Route::name('participate')->get('/participate/{id}', [
+//     'as' => 'participate', 'uses' => 'ParticipateController@showData'
+// ]);
+// Route::get('/participate', function () { return view('participate');});
 
 Route::get('cek-pendaftar/{id}', [
     'as' => 'cek-pendaftar',
