@@ -105,7 +105,9 @@
                         </div>
                         <div class="services-content mt-30">
                             <h4 class="services-title"><a href="#">Environment</a></h4>
-                            <p class="text">Mencakup energi yang digunakan perusahaan dan limbah yang dibuangnya, sumber daya alam yang dibutuhkan, dan dampaknya bagi makhluk hidup. Paling tidak, E mencakup emisi karbon dan perubahan iklim. Setiap perusahaan menggunakan energi dan sumber daya alam; setiap perusahaan mempengaruhi, dan dipengaruhi oleh, lingkungan.</p>
+                            <p class="text text-justify">Mencakup energi yang digunakan perusahaan dan limbah yang dibuangnya, sumber daya alam yang dibutuhkan, 
+                                dan dampaknya bagi makhluk hidup. Paling tidak, <i>environment</i> mencakup emisi karbon & perubahan iklim. 
+                                Setiap perusahaan menggunakan energi dan sumber daya alam, setiap perusahaan mempengaruhi dan dipengaruhi oleh lingkungan.</p>
                             <!-- <a class="more" href="#">Learn More <i class="lni-chevron-right"></i></a> -->
                         </div>
                     </div> <!-- single services -->
@@ -119,7 +121,9 @@
                         </div>
                         <div class="services-content mt-30">
                             <h4 class="services-title"><a href="#">Social</a></h4>
-                            <p class="text">Kriteria sosial, membahas hubungan yang dimiliki perusahaan dan reputasi yang dibangun dengan orang dan lembaga di lingkungan tempat perusahaan menjalankan bisnis. S didalamnya termasuk hubungan kerja & keberagaman dan inklusi. Setiap perusahaan menjalankan bisnisnya dalam masyarakat yang luas & beragam.</p>
+                            <p class="text text-justify">Kriteria sosial, membahas hubungan yang dimiliki perusahaan dan reputasi yang dibangun dengan orang dan lembaga 
+                                di lingkungan tempat perusahaan menjalankan bisnis. <i>Social</i> didalamnya termasuk hubungan kerja & keberagaman dan inklusi. 
+                                Setiap perusahaan menjalankan bisnisnya dalam masyarakat yang luas & beragam.</p>
                             <!-- <a class="more" href="#">Learn More <i class="lni-chevron-right"></i></a> -->
                         </div>
                     </div> <!-- single services -->
@@ -133,7 +137,9 @@
                         </div>
                         <div class="services-content mt-30">
                             <h4 class="services-title"><a href="#">Governance</a></h4>
-                            <p class="text">Tata kelola, adalah sistem, kontrol, dan prosedur internal yang diterapkan perusahaan untuk mengatur dirinya sendiri, membuat keputusan yang efektif, mematuhi hukum, dan memenuhi kebutuhan stakeholder. Setiap perusahaan sejatinya merupakan produk hukum sehingga membutuhkan tata Kelola dalam pengoperasiannya.</p>
+                            <p class="text text-justify">Tata kelola adalah sistem, kontrol, dan prosedur internal yang diterapkan perusahaan untuk mengatur dirinya sendiri, 
+                                membuat keputusan yang efektif, mematuhi hukum, dan memenuhi kebutuhan <i>stakeholder</i>. 
+                                Setiap perusahaan sejatinya merupakan produk hukum sehingga membutuhkan tata Kelola dalam pengoperasiannya.</p>
                             <!-- <a class="more" href="#">Learn More <i class="lni-chevron-right"></i></a> -->
                         </div>
                     </div> <!-- single services -->
@@ -237,9 +243,9 @@
                     <ul class="list-inline items">
                     <li class="list-inline-item items-list">
                         <div class="px-2">
-                        <div class="event-date badge bg-info" style="color : white;">20 Jan - 1 Feb</div>
+                        <div class="event-date badge bg-info" style="color : white;">26 Jan - 5 Feb</div>
                         <h5 class="pt-2">Submission</h5>
-                        <!-- <p class="text-muted">Informasi Kegiatan</p> -->
+                        <p class="text-muted">Closed Submission : 5 Feb Pukul 09.00 WIB</p>
                         <!-- <div>
                             <a href="#" class="btn btn-primary btn-sm">Read more</a>
                         </div> -->
@@ -277,7 +283,7 @@
                     </li>
                     <li class="list-inline-item items-list">
                         <div class="px-2">
-                        <div class="event-date badge bg-danger" style="color : white;">Acara Puncak HUT</div>
+                        <div class="event-date badge bg-danger" style="color : white;">Awarding Night</div>
                         <h5 class="pt-2">Pengumuman Final</h5>
                         <!-- <p class="text-muted">Pengumuman Final</p> -->
                         <!-- <div>

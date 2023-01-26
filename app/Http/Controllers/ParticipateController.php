@@ -84,6 +84,7 @@ class ParticipateController extends Controller
                     'tb_tim.no_hp',
                     'tb_tim.status_tim',
                     'tb_ide.nama_tim',
+                    'tb_ide.tema_ide',
                     'tb_ide.judul_ide',
                     'tb_ide.deskripsi',
                     'tb_unit_kerja.nama_unit_kerja',
@@ -214,6 +215,7 @@ class ParticipateController extends Controller
             ->insert([
                 'id_kepesertaan' => $id_kepesertaan,
                 'nama_tim' => $request->nama_tim,
+                'tema_ide' => $request->tema_ide,
                 'judul_ide' => $request->judul_ide,
                 'deskripsi' => $request->deskripsi_ide,
                 'created_at' => date('Y-m-d H:i:s'),

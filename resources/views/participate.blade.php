@@ -447,6 +447,29 @@
                                                 </tr>
                                                 <tr>
                                                     <th>
+                                                        <label>Tema Ide</label>
+                                                        <span class="text-danger">*</span>
+                                                    </th>
+                                                    <th>
+                                                        <!-- Default checkbox -->
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" name="test" type="checkbox" value="Environment" id="checkEnvironment" />
+                                                            <label for="checkEnvironment">Environment</label>
+                                                        </div>
+
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" name="test" type="checkbox" value="Social" id="checkSocial"/>
+                                                            <label for="checkSocial">Social</label>
+                                                        </div>
+
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" name="test" type="checkbox" value="Governance" id="checkGovernance"/>
+                                                            <label for="checkGovernance">Governance</label>
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th>
                                                         <label>Judul Ide</label>
                                                         <span class="text-danger">*</span>
                                                     </th>
@@ -632,11 +655,15 @@
                                                 <div class="row">
                                                     <div class="col-sm-12">
                                                         <p class="m-b-10 f-w-600">Judul Ide</p>
-                                                        <h6 class="text-muted f-w-400 pb-4" id="judul-ide">{{$showData[0]->judul_ide}}</h6>
+                                                        <h6 class="text-muted f-w-400 pb-2" id="judul-ide">{{$showData[0]->judul_ide}}</h6>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <p class="m-b-10 f-w-600">Tema Ide</p>
+                                                        <h6 class="text-muted f-w-400 pb-2" id="tema-ide">{{$showData[0]->tema_ide}}</h6>
                                                     </div>
                                                     <div class="col-sm-12">
                                                         <p class="m-b-10 f-w-600">Deskripsi</p>
-                                                        <h6 class="text-muted f-w-400 pb-4" id="deskripsi-ide">{{$showData[0]->deskripsi}}</h6>
+                                                        <h6 class="text-muted f-w-400 pb-2" id="deskripsi-ide">{{$showData[0]->deskripsi}}</h6>
                                                     </div>
                                                 </div>
                                         </div>
@@ -814,6 +841,8 @@
 
             var arrSelect = ["inputUnitKerja", "inputDepartment"];
 
+            var arrOption = ["inputUnitKerja", "inputDepartment"];
+
             
             var passedArray = <?php echo json_encode($saveData); ?>;
 
@@ -832,6 +861,23 @@
                         }
                     }
                 });
+
+                if (passedArray['tema_ide'] != null)
+                {
+                    if (passedArray['tema_ide'].includes(","))
+                    {
+                        var tema_ide = passedArray['tema_ide'].split(",");
+                    }
+                    else
+                    {
+                        var tema_ide = passedArray['tema_ide'];
+                    }
+
+                    let sourceLen = tema_ide.length;
+                    for (let i = 0; i < sourceLen; i++) {
+                        $("#check"+tema_ide[i]).prop('checked', true);
+                    }
+                }
 
                 if (passedArray['jenisKepesertaan'] == 'individu')
                 {
@@ -948,10 +994,21 @@
                 }
             }
 
+            if (arrCheckOption.length == 0)
+            {
+                var inputElements = document.getElementsByName('test');
+                for(var i=0; inputElements[i]; ++i){
+                    if(inputElements[i].checked){
+                        arrCheckOption.push(inputElements[i].value);
+                    }
+                }
+            }
+
             $objEmp["nama_tim"] = $("#inputNamaTim").val();
             $objEmp["judul_ide"] = $("#inputJudulIde").val();
             $objEmp["deskripsi_ide"] = $("#inputDeskripsi").val();
             $objEmp["jumlah_anggota"] = jumlahAnggota;
+            $objEmp["tema_ide"] = arrCheckOption.toString();
         }
 
         function showDropDown() {
@@ -1075,6 +1132,7 @@
             $objEmp["nama_tim"] = $("#inputNamaTim").val();
             $objEmp["judul_ide"] = $("#inputJudulIde").val();
             $objEmp["deskripsi_ide"] = $("#inputDeskripsi").val();
+            $objEmp["tema_ide"] = arrCheckOption.toString();
 
             var notMandatory = ["group"];
 
@@ -1117,6 +1175,28 @@
                 });
             }
         }
+
+        Array.prototype.remove = function() {
+            var what, a = arguments, L = a.length, ax;
+            while (L && this.length) {
+                what = a[--L];
+                while ((ax = this.indexOf(what)) !== -1) {
+                    this.splice(ax, 1);
+                }
+            }
+            return this;
+        };
+
+        var arrCheckOption = [];
+        $(document).on("change", "input[name='test']", function () {
+            var $box = $(this);
+            if ($box.is(":checked")) {
+                arrCheckOption.push($box.attr("value"))
+            } else {
+                arrCheckOption.remove($box.attr("value"));
+            }
+            console.log(arrCheckOption);
+        });
         
         $("#wizard").steps({
             headerTag: "h4",
@@ -1166,7 +1246,7 @@
                             {
                                 if($("#"+arrCheck[x]+(con)).val() == "")
                                 {
-                                    showNotifKuesioner("Mohon lengkapi data", null);
+                                    showNotifKuesioner("Mohon untuk lengkapi data", null);
                                     $err = 'yes';
                                     return;
                                 }
@@ -1179,7 +1259,7 @@
                         {
                             if($("#"+arrCheck[x]+"Individu").val() == "")
                             {
-                                showNotifKuesioner("Mohon lengkapi data", null);
+                                showNotifKuesioner("Mohon untuk lengkapi data", null);
                                 $err = 'yes';
                                 return;
                             }
@@ -1191,16 +1271,36 @@
                 }
 
                 if ( newIndex === 3 ) {
-                    var arrCheck = ["inputNamaTim", "inputJudulIde", "inputDeskripsi"];
-                    for (var x = 0; x < arrCheck.length; x++)
+                    var checkFillOption = 0;
+                    var arrCheckMandatory = ["inputNamaTim", "inputJudulIde", "inputDeskripsi"];
+                    var arrOption = ["checkEnvironment", "checkSocial", "checkGovernance"]
+                    for (var x = 0; x < arrCheckMandatory.length; x++)
                     {
-                        if($("#"+arrCheck[x]).val() == "")
+                        if($("#"+arrCheckMandatory[x]).val() == "")
                         {
-                            showNotifKuesioner("Mohon lengkapi data", null);
+                            showNotifKuesioner("Mohon untuk lengkapi data", null);
                             $err = 'yes';
                             return;
                         }
                     }
+
+                    if (arrCheckOption.length == 0)
+                    {
+                        var inputElements = document.getElementsByName('test');
+                        for(var i=0; inputElements[i]; ++i){
+                            if(inputElements[i].checked){
+                                arrCheckOption.push(inputElements[i].value);
+                            }
+                        }
+                    }
+
+                    if (arrCheckOption.length == 0)
+                    {
+                        showNotifKuesioner("Mohon untuk memilih tema ide", null);
+                        $err = 'yes';
+                        return;
+                    }
+
                     $('.steps ul').addClass('step-4');
                     if ($err == 'no')
                     {
