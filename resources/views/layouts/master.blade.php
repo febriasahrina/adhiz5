@@ -15,7 +15,7 @@
     <title>@yield('title', 'ADHIZ | XX')</title>
     
     <!--====== Favicon Icon ======-->
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="{{asset('')}}assets/img/adhi-z-icon.png">
         
     <!--====== Animate CSS ======-->
     <link rel="stylesheet" href="{{asset('')}}assets/css/animate.css">

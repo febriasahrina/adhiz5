@@ -245,7 +245,7 @@
                         <div class="px-2">
                         <div class="event-date badge bg-info" style="color : white;">26 Jan - 5 Feb</div>
                         <h5 class="pt-2">Submission</h5>
-                        <p class="text-muted">Closed Submission : 5 Feb Pukul 09.00 WIB</p>
+                        <p class="text-muted" style="font-size:14px">Closed : 5 Feb Pukul 09.00 WIB</p>
                         <!-- <div>
                             <a href="#" class="btn btn-primary btn-sm">Read more</a>
                         </div> -->
@@ -255,7 +255,7 @@
                         <div class="px-2">
                         <div class="event-date badge bg-warning" style="color : white;">11 Februari</div>
                         <h6 class="pt-2">Pengumuman Tahap 1</h6>
-                        <!-- <p class="text-muted">Pengumuman Tahap 1</p> -->
+                        <p class="text-muted"></p><br>
                         <!-- <div>
                             <a href="#" class="btn btn-primary btn-sm">Read more</a>
                         </div> -->
@@ -265,7 +265,7 @@
                         <div class="px-2">
                         <div class="event-date badge bg-secondary" style="color : white;">13 - 15 Februari</div>
                         <h5 class="pt-2">Feedback</h5>
-                        <!-- <p class="text-muted">Presentasi</p> -->
+                        <p class="text-muted"></p><br>
                         <!-- <div>
                             <a href="#" class="btn btn-primary btn-sm">Read more</a>
                         </div> -->
@@ -275,7 +275,7 @@
                         <div class="px-2">
                         <div class="event-date badge bg-success" style="color : white;">23 Februari</div>
                         <h5 class="pt-2">Penjurian Final</h5>
-                        <!-- <p class="text-muted">Pengumuman Final</p> -->
+                        <p class="text-muted"></p><br>
                         <!-- <div>
                             <a href="#" class="btn btn-primary btn-sm">Read more</a>
                         </div> -->
@@ -285,7 +285,7 @@
                         <div class="px-2">
                         <div class="event-date badge bg-danger" style="color : white;">Awarding Night</div>
                         <h5 class="pt-2">Pengumuman Final</h5>
-                        <!-- <p class="text-muted">Pengumuman Final</p> -->
+                        <p class="text-muted"></p><br>
                         <!-- <div>
                             <a href="#" class="btn btn-primary btn-sm">Read more</a>
                         </div> -->
