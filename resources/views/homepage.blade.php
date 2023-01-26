@@ -26,8 +26,11 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="header-hero-content text-center">
+                        @if(Session::get('email') == "febria.sahrina@adhi.co.id" || Session::get('email') == "aini.damayanti@adhi.co.id")
+                        <h4 style="color:#fff"><i class="lni lni-eye"><span id="count-visitor"></span></i></h4>
+                        @endif
                         <h2 class="header-title wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.5s">ADHI - Z</h2>
-                        <div class="check">Hidden by default</div>
+                        
                         <h3 class="header-sub-title wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.2s">Where Idea Grow and Blow</h3>
                         <!-- <p class="text wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.8s">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p> -->
                         <a href="{{url('/participate')}}" class="main-btn wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1.1s" style="height: 70px;width: 270px; font-size: 25px; font-weight: 500;">
@@ -116,7 +119,7 @@
                         </div>
                         <div class="services-content mt-30">
                             <h4 class="services-title"><a href="#">Social</a></h4>
-                            <p class="text">Kriteria sosial, membahas hubungan yang dimiliki perusahaan dan reputasi yang dibangung dengan orang dan lembaga di lingkungan tempat perusahaan menjalankan bisnis. S didalamnya termasuk hubungan kerja & keberagaman dan inklusi. Setiap perusahaan menjalankan bisnisnya dalam masyarakat yang luas & beragam.</p>
+                            <p class="text">Kriteria sosial, membahas hubungan yang dimiliki perusahaan dan reputasi yang dibangun dengan orang dan lembaga di lingkungan tempat perusahaan menjalankan bisnis. S didalamnya termasuk hubungan kerja & keberagaman dan inklusi. Setiap perusahaan menjalankan bisnisnya dalam masyarakat yang luas & beragam.</p>
                             <!-- <a class="more" href="#">Learn More <i class="lni-chevron-right"></i></a> -->
                         </div>
                     </div> <!-- single services -->
@@ -335,5 +338,13 @@
     <script>
         var element = document.getElementById("nav-home");
         element.classList.add("active");
+
+        $.ajax({
+            type: 'GET',
+            url: "{{url('countGuest')}}",
+            success: function(data) {
+                document.getElementById("count-visitor").textContent = data.data.count;
+            }
+        });
     </script>
     @endpush

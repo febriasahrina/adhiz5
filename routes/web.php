@@ -21,8 +21,9 @@ Route::get('/token', function () {
 Route::get('/', function () {return view('homepage');});
 Route::get('/participate/{id}', ['as' => 'participate', 'uses' => 'ParticipateController@showData']);
 Route::get('/participate', ['as' => 'participate', 'uses' => 'ParticipateController@showData']);
-
 Route::get('/showFilePdf/{id}', ['as' => 'showFilePdf', 'uses' => 'ParticipateController@showFilePdf']);
+
+Route::get('/countGuest', ['as' => 'countGuest', 'uses' => 'LoginController@countGuest']);
 
 // Route::name('participate')->get('/participate/{id}', [
 //     'as' => 'participate', 'uses' => 'ParticipateController@showData'

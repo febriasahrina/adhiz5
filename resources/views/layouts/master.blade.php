@@ -15,8 +15,7 @@
     <title>@yield('title', 'ADHIZ | XX')</title>
     
     <!--====== Favicon Icon ======-->
-    <link rel="icon" href="{{asset('')}}assets/img/favicon.ico">
-    <img src="{{asset('')}}assets/img/favicon.ico" alt="Logo">
+    <link rel="icon" href="favicon.ico">
         
     <!--====== Animate CSS ======-->
     <link rel="stylesheet" href="{{asset('')}}assets/css/animate.css">
@@ -120,8 +119,6 @@
     <!--====== PRELOADER PART ENDS ======-->
     
     <!--====== HEADER PART START ======-->
-    @section('footer-js') <script> $(function() {alert('Jquery is defined and ready for service.');});</script> @endsection
-
 
     <header class="header-area">
         <div class="navbar-area">

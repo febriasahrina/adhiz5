@@ -473,72 +473,72 @@
                             </form>
                             <h4></h4>
                             <section>
-                            <div class="card-body">
-                                <div class="cardx mx-2 mb-4">
-                                    <div class="card card-body">
-                                        @if ($message = Session::get('success'))
-                                            <div class="alert alert-success alert-block">
+                                <div class="card-body">
+                                    <div class="cardx mx-2 mb-4">
+                                        <div class="card card-body">
+                                            @if ($message = Session::get('success'))
+                                                <div class="alert alert-success alert-block">
+                                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                                    <strong>{{ $message }}</strong>
+                                                </div>
+                                            @endif
+                                
+                                            @if (count($errors) > 0)
+                                            <div class="alert alert-danger">
                                                 <button type="button" class="close" data-dismiss="alert">×</button>
-                                                <strong>{{ $message }}</strong>
+                                                <strong>Whoops!</strong> Upload Gagal.
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
                                             </div>
-                                        @endif
-                            
-                                        @if (count($errors) > 0)
-                                        <div class="alert alert-danger">
-                                            <button type="button" class="close" data-dismiss="alert">×</button>
-                                            <strong>Whoops!</strong> Upload Gagal.
-                                            <ul>
-                                                @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                                @endforeach
-                                            </ul>
+                                            @endif
+                                            <form method="post" action="insert-file/ppt" enctype="multipart/form-data" id="upload-ppt">
+                                                {{csrf_field()}}
+                                                <div class="row">
+                                                    <div class="col-lg-8">
+                                                        <tr>
+                                                            <th>
+                                                                <label>File Materi (ppt)</label>
+                                                                <span class="text-danger">*</span>
+                                                            </th>
+                                                            <th>
+                                                                <input type="file" class="form-control" name="file" accept=".pptx" />
+                                                                @if(Session::get('upload-ppt') == TRUE)
+                                                                <span>{{Session::get('upload-ppt')}}</span>@endif
+                                                            </th>
+                                                        </tr>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <button type="submit" id="submit-ppt" class="btn btn-success w-100" style="margin-top:30px">Upload</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form method="post" action="insert-file/video" enctype="multipart/form-data" id="upload-video" class="pt-3">
+                                                {{csrf_field()}}
+                                                <div class="row">
+                                                    <div class="col-lg-8">
+                                                        <tr>
+                                                            <th>
+                                                                <label>File Video (max: 300mb)</label>
+                                                                <span class="text-danger">*</span>
+                                                            </th>
+                                                            <th>
+                                                                <input type="file" class="form-control" id="input-video" accept=".mp4" name="video" disabled />
+                                                                @if(Session::get('upload-video') == TRUE)
+                                                                <span>{{Session::get('upload-video')}}</span>@endif
+                                                            </th>
+                                                        </tr>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <button type="submit" class="btn btn-success w-100" id="button-video" style="margin-top:30px" disabled>Upload</button>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
-                                        @endif
-                                        <form method="post" action="insert-file/ppt" enctype="multipart/form-data" id="upload-ppt">
-                                            {{csrf_field()}}
-                                            <div class="row">
-                                                <div class="col-lg-8">
-                                                    <tr>
-                                                        <th>
-                                                            <label>File Materi (ppt)</label>
-                                                            <span class="text-danger">*</span>
-                                                        </th>
-                                                        <th>
-                                                            <input type="file" class="form-control" name="file" accept=".pptx" />
-                                                            @if(Session::get('upload-ppt') == TRUE)
-                                                            <span>{{Session::get('upload-ppt')}}</span>@endif
-                                                        </th>
-                                                    </tr>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <button type="submit" id="submit-ppt" class="btn btn-success w-100" style="margin-top:30px">Upload</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <form method="post" action="insert-file/video" enctype="multipart/form-data" id="upload-video" class="pt-3">
-                                            {{csrf_field()}}
-                                            <div class="row">
-                                                <div class="col-lg-8">
-                                                    <tr>
-                                                        <th>
-                                                            <label>File Video (max: 300mb)</label>
-                                                            <span class="text-danger">*</span>
-                                                        </th>
-                                                        <th>
-                                                            <input type="file" class="form-control" id="input-video" accept=".mp4" name="video" disabled />
-                                                            @if(Session::get('upload-video') == TRUE)
-                                                            <span>{{Session::get('upload-video')}}</span>@endif
-                                                        </th>
-                                                    </tr>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <button type="submit" class="btn btn-success w-100" id="button-video" style="margin-top:30px" disabled>Upload</button>
-                                                </div>
-                                            </div>
-                                        </form>
                                     </div>
                                 </div>
-
                             </section> <!-- SECTION 4 -->
                             <h4></h4>
                             <section>

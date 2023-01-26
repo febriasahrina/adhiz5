@@ -47,7 +47,9 @@
           @endif
           <div class="card border-0 shadow rounded-3 my-5">
             <div class="card-body p-4 p-sm-5">
-              <img class="shape-1" src="{{asset('')}}assets/img/adhiz-x-sinta-fix.png" alt="shape">
+              <a href="{{url('/')}}">
+                <img class="shape-1" src="{{asset('')}}assets/img/adhiz-x-sinta-fix.png" alt="shape">
+              </a>
               <br>
               <!-- <h5 class="card-title text-center mb-5 fw-light fs-5">Sign In</h5> -->
               <form action="{{ route('actionlogin') }}" id="loginForm" name="loginForm" class="form-horizontal" method="POST" enctype="multipart/form-data">

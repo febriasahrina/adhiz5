@@ -85,12 +85,74 @@ class LoginController extends Controller
     public function actionlogout()
     {
         Session::flush();
-        return redirect('/login')->with('alert', 'Kamu berhasil logout');
+        return redirect('/');
     }
 
     public function actionFirst()
     {
         return redirect('/login')->with('alert', 'Mohon login terlebih dahulu');
+    }
+
+    public function countGuest()
+    {
+
+        $siteVisitsMap  = 'adhiz';
+        $visitorHashKey = '';           
+
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+
+        $visitorHashKey = $_SERVER['HTTP_CLIENT_IP'];
+
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+
+        $visitorHashKey = $_SERVER['HTTP_X_FORWARDED_FOR'];
+
+        } else {
+
+        $visitorHashKey = $_SERVER['REMOTE_ADDR'];
+        }
+    
+        $totalVisits = 0;
+
+        $checkVisitor = DB::table('tb_visitor')
+            ->where('visitor_key', '=', $visitorHashKey)
+            ->value('visitor_key');
+
+        if (!$checkVisitor)
+        {
+            $storeVisitor = DB::table('tb_visitor')
+                ->insert([
+                    'visitor_key' => $visitorHashKey,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ]);
+        }
+
+        $count = DB::table('tb_visitor')->count();
+
+        return response()->json([
+            'data' => [
+                'success' => true,
+                'message' => 'Insert Data Berhasil.',
+                'count' => $count
+            ]
+        ], 201);
+            
+
+        // if ($redis->hExists($siteVisitsMap, $visitorHashKey)) {
+
+        //     $visitorData = $redis->hMget($siteVisitsMap,  array($visitorHashKey));
+        //     $totalVisits = $visitorData[$visitorHashKey] + 1;
+
+        // } else {
+
+        //     $totalVisits = 1;
+
+        // }
+
+        // $redis->hSet($siteVisitsMap, $visitorHashKey, $totalVisits);
+
+        // echo "Welcome, you've visited this page " .  $totalVisits . " times\n";
     }
 
 }
