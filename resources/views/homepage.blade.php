@@ -208,7 +208,8 @@
                             -	Mengalokasikan modal secara lebih baik dan bijak untuk jangka panjang (misalnya, pabrik dan peralatan yang sustainable) <br>
                             -	Hindari investasi yang mungkin tidak membayar karena masalah lingkungan jangka Panjang <br>
                             -	Memformulasi ulang produk, desain, proses kerja, proses manufaktur, mendesain ulang peralatan, ataupun mendaur ulang serta menggunakan kembali limbah dari produksi <br>
-                        </p>
+                        </p> <br>
+                        <p>Apakah cuma isu-isu ini saja? Tentu <b>tidak</b>, ini hanya contoh yang bisa kalian angkat yaaa</p>
                         <!-- <a href="#" class="main-btn">Try it Free</a> -->
                     </div> <!-- about content -->
                 </div>
@@ -254,8 +255,8 @@
                     <li class="list-inline-item items-list">
                         <div class="px-2">
                         <div class="event-date badge bg-warning" style="color : white;">11 Februari</div>
-                        <h6 class="pt-2">Pengumuman Tahap 1</h6>
-                        <p class="text-muted"></p><br>
+                        <h6 class="pt-2">Pengumuman Tahap</h6>
+                        <p class="text-muted pt-2"><h6 style="font-size:15px">Awal</h6></p>
                         <!-- <div>
                             <a href="#" class="btn btn-primary btn-sm">Read more</a>
                         </div> -->

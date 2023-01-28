@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ParticipateController;
+use App\Http\Controllers\VotingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,8 @@ Route::get('/', function () {return view('homepage');});
 Route::get('/participate/{id}', ['as' => 'participate', 'uses' => 'ParticipateController@showData']);
 Route::get('/participate', ['as' => 'participate', 'uses' => 'ParticipateController@showData']);
 Route::get('/showFilePdf/{id}', ['as' => 'showFilePdf', 'uses' => 'ParticipateController@showFilePdf']);
+
+Route::get('/voting', ['as' => 'voting', 'uses' => 'VotingController@showData']);
 
 Route::get('/countGuest', ['as' => 'countGuest', 'uses' => 'LoginController@countGuest']);
 
