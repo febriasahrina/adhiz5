@@ -80,13 +80,15 @@ $(document).ready(function() {
 	});
 	//Edit row buttons
 	$('.dt-edit').each(function () {
+		var content = "";
 		$(this).on('click', function(evt){
 			$this = $(this);
 			var dtRow = $this.parents('tr');
 
+			$("#media-video").html("");
 			content = dtRow[0].cells[5].innerHTML;
 			$('#media-video').append(content);
-			
+
 			document.getElementById('modal-deskripsi-ide').innerText = dtRow[0].cells[4].innerHTML;
 			$('#myModalVoting').modal('show');
 		});
