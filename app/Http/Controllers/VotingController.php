@@ -28,9 +28,32 @@ class VotingController extends Controller
         if (!Session::get('name_employee')) {
             return redirect('login')->with('alert', 'Mohon untuk login terlebih dulu');
         } else if (Session::get('email') == "febria.sahrina@adhi.co.id" || Session::get('email') == "aini.damayanti@adhi.co.id"){
-            $variable = DB::table('tb_kepesertaan')
-                ->join('tb_tim', 'tb_tim.id_kepesertaan', '=', 'tb_kepesertaan.id_kepesertaan')
+            $ide = DB::table('tb_kepesertaan')
+                // ->join('tb_tim', 'tb_tim.id_kepesertaan', '=', 'tb_kepesertaan.id_kepesertaan')
                 ->join('tb_ide', 'tb_ide.id_kepesertaan', '=', 'tb_kepesertaan.id_kepesertaan')
+                // ->leftjoin('tb_unit_kerja', 'tb_unit_kerja.id_unit_kerja', '=', 'tb_tim.unit_kerja')
+                // ->leftjoin('tb_department', 'tb_department.id_department', '=', 'tb_tim.id_department')
+                ->where('tb_kepesertaan.deleted_at', null)
+                ->get([
+                    'tb_kepesertaan.id_kepesertaan',
+                    'tb_kepesertaan.status_kepesertaan',
+                    'tb_kepesertaan.created_at',
+                    // 'tb_tim.nama',
+                    // 'tb_tim.npp',
+                    // 'tb_tim.unit_kerja',
+                    // 'tb_tim.email',
+                    // 'tb_tim.no_hp',
+                    // 'tb_tim.status_tim',
+                    'tb_ide.nama_tim',
+                    'tb_ide.tema_ide',
+                    'tb_ide.judul_ide',
+                    'tb_ide.deskripsi',
+                    // 'tb_unit_kerja.nama_unit_kerja',
+                    // 'tb_department.nama_department'
+                ]);
+
+            $anggota = DB::table('tb_kepesertaan')
+                ->join('tb_tim', 'tb_tim.id_kepesertaan', '=', 'tb_kepesertaan.id_kepesertaan')
                 ->leftjoin('tb_unit_kerja', 'tb_unit_kerja.id_unit_kerja', '=', 'tb_tim.unit_kerja')
                 ->leftjoin('tb_department', 'tb_department.id_department', '=', 'tb_tim.id_department')
                 ->where('tb_kepesertaan.deleted_at', null)
@@ -44,22 +67,22 @@ class VotingController extends Controller
                     'tb_tim.email',
                     'tb_tim.no_hp',
                     'tb_tim.status_tim',
-                    'tb_ide.nama_tim',
-                    'tb_ide.tema_ide',
-                    'tb_ide.judul_ide',
-                    'tb_ide.deskripsi',
                     'tb_unit_kerja.nama_unit_kerja',
                     'tb_department.nama_department'
                 ]);
+
+            $ide[0]->anggota = $anggota;
+            // dd($ide[0]->);
+            
             
             // return view('participate', compact('variable'));
-            if (count($variable)==0)
+            if (count($ide)==0)
             {
                 // dd(count($variable));
-                $variable = [];
+                $ide = [];
             }
             return view('/voting', [
-                "showData" => $variable
+                "showData" => $ide
             ]);
         }
         else{

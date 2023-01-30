@@ -83,9 +83,11 @@ $(document).ready(function() {
 		$(this).on('click', function(evt){
 			$this = $(this);
 			var dtRow = $this.parents('tr');
-			var video = document.getElementById('media-video');
-			var base_url = window.location.origin;
-			video.src = base_url+'/files/'+dtRow[0].cells[5].innerHTML+'.mp4';
+
+			content = dtRow[0].cells[5].innerHTML;
+			$('#media-video').append(content);
+			
+			document.getElementById('modal-deskripsi-ide').innerText = dtRow[0].cells[4].innerHTML;
 			$('#myModalVoting').modal('show');
 		});
 	});

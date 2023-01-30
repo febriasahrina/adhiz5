@@ -27,9 +27,9 @@
                             <th>No</th>
                             <th>Nama Tim</th>
                             <th>Judul Ide</th>
-                            <th>Tema Ide</th>
-                            <th>Deskripsi Ide</th>
-                            <th style="display:none">Email</th>
+                            <th>Anggota Tim</th>
+                            <th style="display:none">Deskripsi Ide</th>
+                            <th style="display:none">Video</th>
                             <th style="text-align:center;width:100px;">Action
                                 <!-- <button type="button" data-func="dt-add" class="btn btn-success btn-xs dt-add">
                                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -48,9 +48,18 @@
                             <td>{{$i+1}}</td>
                             <td>{{$showData[$i]->nama_tim}}</td>
                             <td>{{$showData[$i]->judul_ide}}</td>
-                            <td>{{$showData[$i]->tema_ide}}</td>
-                            <td>{{$showData[$i]->deskripsi}}</td>
-                            <td style="display:none">{{$showData[$i]->email}}</td>
+                            <td>
+                            <?php
+                                for($j=0; $j<count($showData[$i]->anggota); $j++)
+                                {
+                                    $email = $showData[$i]->anggota[0]->email;                                    
+                            ?>
+                            
+                                <li>{{$showData[$i]->anggota[$j]->nama}}</li>
+                                <?php } ?>
+                            </td>
+                            <td style="display:none">{{$showData[$i]->deskripsi}}</td>
+                            <td style="display:none"><video src='{{asset('files/')}}/{{$email}}.mp4' width="100%" height="100%" controls></video></td>
                             <td>
                                 <button type="button" class="btn btn-primary btn-xs dt-edit" style="margin-right:16px;">
                                     <!-- <span class="lni lni-eye" aria-hidden="true">Details</span> -->

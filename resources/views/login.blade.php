@@ -64,7 +64,7 @@
                   <input type="password" class="form-control" id="passwordLogin" name="passwordLogin" placeholder="Password">
                 </div>
                 <div>
-                <h8>Note : Silahkan masukan email dan password yang digunakan pada aplikasi SINTA</h8>
+                <h8>Note : Silahkan masukan email dan password yang digunakan pada aplikasi SINTA</h8><br>
                 <br>
                 </div>
                 <div class="d-grid signin">

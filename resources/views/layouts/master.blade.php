@@ -166,7 +166,7 @@
                                             </div>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="nav-link dropdown-item" role="button" href="logout" id="btnLogout">
+                                            <a class="nav-link dropdown-item" role="button" href="{{ url('logout') }}" id="btnLogout">
                                                 <div class="row align-items-center">
                                                     <div class="col-2">
                                                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -244,7 +244,13 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <video id="media-video" width="100%" height="100%" controls></video>
+                <div id="media-video">
+
+                </div>
+                <div class="pt-2">
+                    <h7>Deskripsi Ide : </h7>
+                    <p id="modal-deskripsi-ide"></p>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
