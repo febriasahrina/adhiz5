@@ -517,7 +517,7 @@
                                                 </ul>
                                             </div>
                                             @endif
-                                            <form method="post" action="insert-file/ppt" enctype="multipart/form-data" id="upload-ppt">
+                                            <form method="post" action="{{ url('insert-file/ppt') }}" enctype="multipart/form-data" id="upload-ppt">
                                                 {{csrf_field()}}
                                                 <div class="row">
                                                     <div class="col-lg-8">
@@ -538,7 +538,7 @@
                                                     </div>
                                                 </div>
                                             </form>
-                                            <form method="post" action="insert-file/video" enctype="multipart/form-data" id="upload-video" class="pt-3">
+                                            <form method="post" action="{{ url('insert-file/video') }}" enctype="multipart/form-data" id="upload-video" class="pt-3">
                                                 {{csrf_field()}}
                                                 <div class="row">
                                                     <div class="col-lg-8">
