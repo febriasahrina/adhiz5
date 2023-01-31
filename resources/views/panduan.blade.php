@@ -66,7 +66,8 @@
                                 1.	Insan ADHI maksimal usia 35 tahun per 11 maret 2023 <br>
                                 2.	Peserta adalah individu ataupun tim dengan maksimal anggota sebanyak 3 (tiga) orang <br>
                                 3.	Materi diunggah dalam format Power Point (pptx) dan terdapat video penjelasan dengan maksimal durasi 10 menit <br>
-                                4.	Mengisikan data secara benar dan lengkap <br>
+                                4.  Ide solusi yang dikirimkan belum pernah diikutsertakan dan menang dalam ajang kompetisi lain <br>
+                                5.	Mengisikan data secara benar dan lengkap <br>
                                 </p>
                                 <br>
                             </div> <!-- about content -->

@@ -278,10 +278,10 @@
         </div>
     </div>
     <!-- /.content -->
-    
+        
+    @stack('custom-script')
     <!-- JQUERY STEP -->
     <script src="{{asset('')}}assets/js/jquery/jquery.min.js"></script>
-    @stack('custom-script')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.min.js"></script>
     <script src="{{asset('')}}assets/js/vendor/modernizr-3.7.1.min.js"></script>
     
