@@ -295,7 +295,7 @@ class ParticipateController extends Controller
         else if ($route == 'video')
         {
             $request->validate([
-                'video' => 'required|file|mimetypes:video/mp4|max:30000',
+                'video' => 'required|file|mimetypes:video/mp4|max:300000',
             ]);
 
             $videoSrc = "";
