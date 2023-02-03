@@ -268,19 +268,11 @@ class ParticipateController extends Controller
             ->whereNull('deleted_at')
             ->value('id_kepesertaan');
 
-        // if ($checkPendaftar) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Get Data Berhasil.',
-                'data' => $checkPendaftar
-            ], 201);
-        // } else {
-        //     return response()->json([
-        //         'success' => false,
-        //         'message' => 'Get Data Gagal.',
-        //         'data' => ''
-        //     ], 504);
-        // }
+        return response()->json([
+            'success' => true,
+            'message' => 'Get Data Berhasil.',
+            'data' => $checkPendaftar
+        ], 201);
     }
 
     public function store_file(Request $request, $route = '')

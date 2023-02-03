@@ -705,6 +705,7 @@
 
 
 @push('custom-script')
+    <script src="{{asset('')}}assets/js/jquery-ui/jquery-ui.min.js"></script>
     <script type='text/javascript'>$(function(){
         var element = document.getElementById("nav-participate");
         element.classList.add("active");
@@ -1442,6 +1443,4 @@
     myLink.addEventListener('click', function(e) {
         e.preventDefault();
     });</script>
-
-    <script src="{{asset('')}}assets/js/jquery-ui/jquery-ui.min.js"></script>
 @endpush

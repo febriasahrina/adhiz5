@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ParticipateController;
 use App\Http\Controllers\VotingController;
+use App\Http\Controllers\DetailsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +23,20 @@ Route::get('/token', function () {
 Route::get('/', function () {return view('homepage');});
 Route::get('/participate/{id}', ['as' => 'participate', 'uses' => 'ParticipateController@showData']);
 Route::get('/participate', ['as' => 'participate', 'uses' => 'ParticipateController@showData']);
+
+Route::get('/details/{id}', ['as' => 'details', 'uses' => 'DetailsController@showData']);
+Route::get('/details', ['as' => 'details', 'uses' => 'DetailsController@showData']);
+Route::post('convertPdf', ['as' => 'convertPdf', 'uses' => 'DetailsController@convertPdf']);
+
 Route::get('/showFilePdf/{id}', ['as' => 'showFilePdf', 'uses' => 'ParticipateController@showFilePdf']);
 
 Route::get('/voting', ['as' => 'voting', 'uses' => 'VotingController@showData']);
+Route::get('/count-vote', ['as' => 'count-vote', 'uses' => 'VotingController@countVote']);
+Route::get('/cek-have-vote/{id}', ['as' => 'cek-have-vote', 'uses' => 'VotingController@cekHaveVote']);
+Route::post('store-vote', [
+    'as' => 'store-vote',
+    'uses' => 'VotingController@store']);
+
 
 Route::get('/countGuest', ['as' => 'countGuest', 'uses' => 'LoginController@countGuest']);
 

@@ -3,7 +3,7 @@ $(document).ready(function() {
 	//Normally set in the title tag of your page.
 	// document.title='Simple DataTable';
 	// DataTable initialisation
-	$('#example').DataTable(
+	$('#tableDataVote').DataTable(
 		{
 			"dom": '<"dt-buttons"Bf><"clear">lirtp',
 			"paging": false,
@@ -11,6 +11,7 @@ $(document).ready(function() {
 			"columnDefs": [
 				{ "orderable": false, "targets": 5 }
 			],
+			"ordering": false,
 			"buttons": [
 				'colvis',
 				'copyHtml5',
@@ -79,20 +80,7 @@ $(document).ready(function() {
 		});
 	});
 	//Edit row buttons
-	$('.dt-edit').each(function () {
-		var content = "";
-		$(this).on('click', function(evt){
-			$this = $(this);
-			var dtRow = $this.parents('tr');
-
-			$("#media-video").html("");
-			content = dtRow[0].cells[5].innerHTML;
-			$('#media-video').append(content);
-
-			document.getElementById('modal-deskripsi-ide').innerText = dtRow[0].cells[4].innerHTML;
-			$('#myModalVoting').modal('show');
-		});
-	});
+	
 	//Delete buttons
 	$('.dt-delete').each(function () {
 		$(this).on('click', function(evt){

@@ -25,6 +25,7 @@ class VotingController extends Controller
 
     public function showData()
     {
+        $varAnggota = [];
         if (!Session::get('name_employee')) {
             return redirect('login')->with('alert', 'Mohon untuk login terlebih dulu');
         } else if (Session::get('email') == "febria.sahrina@adhi.co.id" || Session::get('email') == "aini.damayanti@adhi.co.id"){
@@ -44,6 +45,7 @@ class VotingController extends Controller
                     // 'tb_tim.email',
                     // 'tb_tim.no_hp',
                     // 'tb_tim.status_tim',
+                    'tb_ide.id_ide',
                     'tb_ide.nama_tim',
                     'tb_ide.tema_ide',
                     'tb_ide.judul_ide',
@@ -71,8 +73,27 @@ class VotingController extends Controller
                     'tb_department.nama_department'
                 ]);
 
-            $ide[0]->anggota = $anggota;
-            // dd($ide[0]->);
+            foreach ($ide as $key => $value) {
+                $varAnggota[$value->id_kepesertaan] = [];
+                foreach ($anggota as $keys => $values) {
+                    if ($values->id_kepesertaan == $value->id_kepesertaan)
+                    {
+                        array_push($varAnggota[$values->id_kepesertaan], $anggota[$keys]);
+                    }
+                }
+            }
+
+            foreach ($varAnggota as $key => $value) {
+                foreach ($ide as $keys => $values) {
+                    if ($key == $values->id_kepesertaan)
+                    {
+                        $ide[$keys]->anggota = $value;
+                    }
+                }
+            }
+
+            // $ide[0]->anggota = $anggota;
+            // dd($ide);
             
             
             // return view('participate', compact('variable'));
@@ -90,10 +111,89 @@ class VotingController extends Controller
         }
     }
 
+    public function cekHaveVote($id = '')
+    {
+        $id_employee = $id;
+        $checkVote = DB::table('tb_vote')
+            ->where('tb_vote.id_employee', '=', $id_employee)
+            ->whereNull('deleted_at')
+            ->value('id_vote');
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Get Data Berhasil.',
+            'data' => $checkVote
+        ], 201);
+    }
+
+    public function countVote()
+    {
+
+        $countVote = DB::table('tb_vote')
+            ->select('tb_vote.id_ide', 'tb_ide.nama_tim', DB::raw('count(*) as total'))
+            ->join('tb_ide', 'tb_ide.id_ide', '=', 'tb_vote.id_ide')
+            ->groupBy('tb_vote.id_ide', 'tb_ide.nama_tim')
+            ->whereNull('tb_vote.deleted_at')
+            ->orderBy('total', 'DESC')
+            ->get();
+
+        $countAllVote = DB::table('tb_vote')
+                    ->count();
+
+        if ($countVote) {
+            return response()->json([
+                'data' => [
+                    'success' => true,
+                    'message' => 'Insert Data Berhasil.',
+                    'data' => $countVote,
+                    'countAll' => $countAllVote
+                ]
+            ], 201);
+        } else {
+            return response()->json([
+                'data' => [
+                    'success' => false,
+                    'message' => 'Insert Data Gagal.',
+                    'data' => NULL
+                ]
+            ], 504);
+        }
+    }
+
+    
+
     /**
      * Store a newly created resource in storage.
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function store(Request $request)
+    {
+        $vote = DB::table('tb_vote')
+            ->insert([
+                'id_employee' => $request->id_employee,
+                'id_ide' => $request->id_ide,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+
+
+        if ($vote) {
+            return response()->json([
+                'data' => [
+                    'success' => true,
+                    'message' => 'Insert Data Berhasil.'
+                ]
+            ], 201);
+        } else {
+            return response()->json([
+                'data' => [
+                    'success' => false,
+                    'message' => 'Insert Data Gagal.'
+                ]
+            ], 504);
+        }
+    }
 
 }
