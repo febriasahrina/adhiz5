@@ -111,7 +111,7 @@
                                         <a href="{{ url('details')}}/{{$showData[$i]->id_kepesertaan}}" class="btn btn-primary btn-sm px-2" style="font-size: 12px; width: 70px;">Detail</a>
                                     </div>
                                     <div class="col mt-2">
-                                        <button id="buttonVote" class="btn btn-success btn-sm px-2" onclick="modalValidation({{$showData[$i]->nama_tim}},{{$showData[$i]->id_ide}})" style="font-size: 12px; width: 70px;">Vote</button>
+                                        <button id="buttonVote" class="btn btn-success btn-sm px-2" onclick="modalValidation('{{$showData[$i]->nama_tim}}',{{$showData[$i]->id_ide}})" style="font-size: 12px; width: 70px;">Vote</button>
                                         <!-- <a href="" class="btn btn-success btn-sm px-2" onclick="modalValidation()" style="font-size: 12px; width: 70px;">Vote</a> -->
                                     </div>
                                 </div>

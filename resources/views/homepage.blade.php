@@ -246,7 +246,7 @@
                         <div class="px-2">
                         <div class="event-date badge bg-info" style="color : white;">26 Jan - 5 Feb</div>
                         <h5 class="pt-2">Submission</h5>
-                        <p class="text-muted" style="font-size:14px">Closed : 5 Feb Pukul 09.00 WIB</p>
+                        <p class="text-muted" style="font-size:14px">Closed : 5 Feb Pukul 20.00 WIB</p>
                         <!-- <div>
                             <a href="#" class="btn btn-primary btn-sm">Read more</a>
                         </div> -->
