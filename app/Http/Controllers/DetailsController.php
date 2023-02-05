@@ -30,8 +30,9 @@ class DetailsController extends Controller
     {
         if (!Session::get('name_employee')) {
             return redirect('login')->with('alert', 'Mohon untuk login terlebih dulu');
-        } else if($id != '') {
-            $variable = DB::table('tb_kepesertaan')
+        } else if (Session::get('email') == "febria.sahrina@adhi.co.id" || Session::get('email') == "aini.damayanti@adhi.co.id"){
+            if($id != '') {
+                $variable = DB::table('tb_kepesertaan')
                 ->join('tb_tim', 'tb_tim.id_kepesertaan', '=', 'tb_kepesertaan.id_kepesertaan')
                 ->join('tb_ide', 'tb_ide.id_kepesertaan', '=', 'tb_kepesertaan.id_kepesertaan')
                 ->leftjoin('tb_unit_kerja', 'tb_unit_kerja.id_unit_kerja', '=', 'tb_tim.unit_kerja')
@@ -56,15 +57,16 @@ class DetailsController extends Controller
                     'tb_department.nama_department'
                 ]);
             
-            // return view('participate', compact('variable'));
-            if (count($variable)==0)
-            {
-                // dd(count($variable));
-                $variable = [];
+                // return view('participate', compact('variable'));
+                if (count($variable)==0)
+                {
+                    // dd(count($variable));
+                    $variable = [];
+                }
+                return view('/details', [
+                    "showData" => $variable
+                ]);
             }
-            return view('/details', [
-                "showData" => $variable
-            ]);
         }
         else{
             if(Session::get('id_employee'))
