@@ -349,11 +349,16 @@
             @include('layouts.footer')
         </div> <!-- container -->
     </footer>
+    
     @push('custom-script')
     <script>
         var element = document.getElementById("nav-home");
         element.classList.add("active");
 
+        $('document').ready(function() {
+            showExtend();
+        });
+        
         $.ajax({
             type: 'GET',
             url: "{{url('countGuest')}}",

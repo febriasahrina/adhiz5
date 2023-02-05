@@ -234,7 +234,26 @@
         </div>
     </div>
 
-    
+    <div id="myModalExtended" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Extended</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <span id="id_tim_modal" style="display:none"></span>
+                <div class="modal-body">
+                    <img style="max-width:60%" src="{{asset('')}}assets/img/extend.jpeg">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>    
 
     <div class="modal fade" id="showNotifModalThank" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog ">
@@ -306,6 +325,14 @@
                 // action();
             });
         }
+
+        function showExtend() {
+            $('#myModalExtended').modal('show');
+            $('#btn_oke_kuesioner').click(function() {
+                $('#showNotifModalKuesioner').modal('hide');
+                // action();
+            });
+        }       
 
         function showNotifTerimakasih(message) {
             $('#type-form').html(message);
