@@ -244,9 +244,9 @@
                     <ul class="list-inline items">
                     <li class="list-inline-item items-list">
                         <div class="px-2">
-                        <div class="event-date badge bg-info" style="color : white;">26 Jan - 5 Feb</div>
+                        <div class="event-date badge bg-info" style="color : white;">26 Jan - 7 Feb</div>
                         <h5 class="pt-2">Submission</h5>
-                        <p class="text-muted" style="font-size:14px">Closed : 5 Feb Pukul 20.00 WIB</p>
+                        <p class="text-muted" style="font-size:14px">Closed : 7 Feb Pukul 23.59 WIB</p>
                         <!-- <div>
                             <a href="#" class="btn btn-primary btn-sm">Read more</a>
                         </div> -->
@@ -318,22 +318,30 @@
                     <div class="col-lg-3 col-md-7 col-sm-8 issue-img">
                         <img class="shape" src="{{asset('')}}assets/img/first.png" alt="shape">
                         <br>
-                        <h5 class="text-center">1st Place</h5>
+                        <h4 class="text-center">1st Place</h4>
+                        <h5 class="pt-2 text-center">Hadiah Rp. 7.000.000</h5>
+                        <p class="text-muted text-center" style="font-size:14px">Ditentukan saat penjurian final</p>
                     </div>
                     <div class="col-lg-3 col-md-7 col-sm-8 issue-img">
                         <img class="shape" src="{{asset('')}}assets/img/second.png" alt="shape">
                         <br>
-                        <h5 class="text-center">2nd Place</h5>
+                        <h4 class="text-center">2nd Place</h4>
+                        <h5 class="pt-2 text-center">Hadiah Rp. 5.000.000</h5>
+                        <p class="text-muted text-center" style="font-size:14px">Ditentukan saat penjurian final</p>
                     </div>
                     <div class="col-lg-3 col-md-7 col-sm-8 issue-img">
                         <img class="shape" src="{{asset('')}}assets/img/third.png" alt="shape">
                         <br>
-                        <h5 class="text-center">3rd Place</h5>
+                        <h4 class="text-center">3rd Place</h4>
+                        <h5 class="pt-2 text-center">Hadiah Rp. 3.000.000</h5>
+                        <p class="text-muted text-center" style="font-size:14px">Ditentukan saat penjurian final</p>
                     </div>
                     <div class="col-lg-3 col-md-7 col-sm-8 issue-img">
                         <img class="shape" src="{{asset('')}}assets/img/favorite.png" alt="shape">
                         <br>
-                        <h5 class="text-center">Favorite Place</h5>
+                        <h4 class="text-center">Favorite Place</h4>
+                        <h5 class="pt-2 text-center">Hadiah Rp. 1.000.000</h5>
+                        <p class="text-muted text-center" style="font-size:14px">Diraih oleh ide dengan like terbanyak melalui website</p>
                     </div>
                     
                  </div> <!-- row -->
