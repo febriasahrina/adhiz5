@@ -807,11 +807,20 @@
             }
         });
 
+        var arrCheckOption = [];
+        $(document).on("change", "input[name='test']", function () {
+            var $box = $(this);
+            if ($box.is(":checked")) {
+                arrCheckOption.push($box.attr("value"))
+            } else {
+                arrCheckOption.remove($box.attr("value"));
+            }
+        });
+
         function cekPendaftar(){
             $.ajax({
                 type: 'GET',
                 url: "{{url('cek-pendaftar')}}"+"/"+$users,
-                // url: "{{ url('show-drop-down')}}",
                 success: function(data) {
                     if (data.data != null)
                     {
@@ -871,7 +880,7 @@
                     }
                     else
                     {
-                        var tema_ide = passedArray['tema_ide'];
+                        var tema_ide = [passedArray['tema_ide']];
                     }
 
                     let sourceLen = tema_ide.length;
@@ -896,22 +905,6 @@
                             if (passedArray['group'][x-1][key2]) {
                                 if(arrSelect.includes(value2) && x > 1)
                                 {
-                                    console.log('#'+value2+x);
-                                    console.log(passedArray['group'][x-1][key2]);
-
-                                    // $('#'+value2+x).val(passedArray['group'][x-1][key2]).select2().trigger("change");
-                                    // console.log($('#'+value2+x).find(':selected'));
-                                    // if ($('#'+value2+x).find("option[value=" + passedArray['group'][x-1][key2] + "]").length) {
-                                    //     console.log("find");
-                                    //     $('#'+value2+x).val(passedArray['group'][x-1][key2]).trigger('change');
-                                    // } else { 
-                                    //     console.log("nott find");
-                                    //     // Create a DOM Option and pre-select by default
-                                    //     var newOption = new Option(data.text, data.id, true, true);
-                                    //     // Append it to the select
-                                    //     $('#'+value2+x).append(newOption).trigger('change');
-                                    // }
-
                                     const $select = document.querySelector('#'+value2+x);
                                     const $options = Array.from($select.options);
                                     const optionToSelect = $options.find(item => item.value === passedArray['group'][x-1][key2]);
@@ -921,13 +914,6 @@
                                     }
                                     
                                     $('#'+value2+x).val(passedArray['group'][x-1][key2]).trigger("change");
-
-                                    // $("#"+value2+x).select2('destroy');
-                                    // $("#"+value2+x).val(passedArray['group'][x-1][key2]);
-                                    // $("#"+value2+x).select2();
-                                    // $('#'+value2+x).val("2").select2().trigger("change");
-                                    // console.log($("#"+value2+x).val());
-                                    // console.log(document.getElementById(value2+x).value);
                                 }
                                 else
                                 {
@@ -936,8 +922,6 @@
                             }
                         });
                     }
-                    // selectUnitKerja2();
-                    // selectUnitKerja3();
                 }
             }
         
@@ -1187,17 +1171,6 @@
             }
             return this;
         };
-
-        var arrCheckOption = [];
-        $(document).on("change", "input[name='test']", function () {
-            var $box = $(this);
-            if ($box.is(":checked")) {
-                arrCheckOption.push($box.attr("value"))
-            } else {
-                arrCheckOption.remove($box.attr("value"));
-            }
-            console.log(arrCheckOption);
-        });
         
         $("#wizard").steps({
             headerTag: "h4",
@@ -1313,10 +1286,10 @@
                             data: $objEmp,
                             dataType: 'json',
                             success: function(data) {
-                                console.log(data);
+                                // console.log(data);
                             }, error: function(data) {
-                                console.log('Error POST');
-                                console.log(data);
+                                // console.log('Error POST');
+                                // console.log(data);
                             }
                         });
                     //     submitData();
