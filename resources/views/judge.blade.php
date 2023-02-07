@@ -139,11 +139,14 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        $email = "<?php echo Session::get('email'); ?>";
 
         $id_email = "<?php echo $id_email; ?>";
 
         $(document).ready(function() {
-            $('#tableDataJudge').DataTable(
+            if($email == "febria.sahrina@adhi.co.id" || $email == "aini.damayanti@adhi.co.id")
+            {
+                $('#tableDataJudge').DataTable(
                 {
                     "dom": '<"dt-buttons"Bf><"clear">lirtp',
                     "paging": false,
@@ -160,8 +163,21 @@
                 'pdfHtml5',
                         'print'
                     ]
-                }
-            );
+                });
+            }
+            else
+            {
+                $('#tableDataJudge').DataTable(
+                {
+                    "dom": '<"dt-buttons"Bf><"clear">lirtp',
+                    "paging": false,
+                    "autoWidth": true,
+                    "columnDefs": [
+                        { "orderable": false, "targets": 4 }
+                    ],
+                    "ordering": false,
+                });
+            }
         });
 
         function modalValidation(nama,id){            

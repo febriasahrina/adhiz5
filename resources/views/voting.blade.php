@@ -27,6 +27,31 @@
     .toastx {
         display: none;
     }
+
+    .one{
+        bottom: 0;
+        left: 350;
+    }
+
+    .one img{
+        height: 60%;
+    }
+
+    .two{
+        position: absolute;
+        bottom: 50;
+        left: 50;
+    }
+
+    .three{
+        position: absolute;
+        bottom: 20px;
+        right: 80;
+    }
+
+    @media (max-width: 767px) {
+    .one, .two, .three {
+        all: initial; } }
 </style>
 
 @endpush
@@ -37,8 +62,29 @@
 <div id="home" class="header-hero bg_cover" style="background-image: url({{asset('')}}assets/img/banner-bg.svg)">
     <section id="features" class="services-area pt-150">
         <div class="container mb-4">
-            <div class="card card-body" style="border-radius: 20px;background-image: url({{asset('')}}assets/img/confetti2.png);">
-                <div class="span6 mb-4" id="polling-results">
+            <div class="card card-body" style="border-radius: 20px;">
+                <div class="row" id="polling-results">
+                    <h5 class="ml-4">Voting Results</h5><br>
+                    <div class="col-lg-4 col-md-7 col-sm-8 issue-img two" id="progress2" style="display:none">
+                        <img class="shape" src="{{asset('')}}assets/img/two-res.png" alt="shape">
+                        <br>
+                        <h4 class="text-center" id="vote_progress_2"></h4>
+                        <h5 class="pt-2 text-center" id="vote_tim_2"></h5>                       
+                    </div>
+                    <div class="col-lg-4 col-md-7 col-sm-8 issue-img one" id="progress1" style="display:none">
+                        <img class="shape" src="{{asset('')}}assets/img/one-res.png" alt="shape">
+                        <br>
+                        <h4 class="text-center" id="vote_progress_1"></h4>
+                        <h5 class="pt-2 text-center" id="vote_tim_1"></h5>
+                    </div>
+                    <div class="col-lg-4 col-md-7 col-sm-8 issue-img three" id="progress3" style="display:none">
+                        <img class="shape" src="{{asset('')}}assets/img/three-res.png" alt="shape">
+                        <br>
+                        <h4 class="text-center" id="vote_progress_3"></h4>
+                        <h5 class="pt-2 text-center" id="vote_tim_3"></h5>
+                    </div>
+                 </div> <!-- row -->
+                <!-- <div class="span6 mb-4" id="polling-results">
                     <h5>Voting Results</h5><br>
                     <strong id="vote_tim_1"></strong><span class="pull-right" id="vote_label_1"></span>
                     <div class="progress" id="progress1" style="display:none">
@@ -52,7 +98,7 @@
                     <div class="progress" id="progress3" style="display:none">
                         <div class="progress-bar bg-warning" role="progressbar" id="vote_progress_3" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="container">
@@ -192,6 +238,7 @@
         });
 
         $id_email = "<?php echo $id_email; ?>";
+        $email = "<?php echo Session::get('email'); ?>";
         cekHaveVote();
         countVote();
 
@@ -202,6 +249,41 @@
                 selectOnClose: true,
                 width: 'resolve'
             });
+
+            if($email == "febria.sahrina@adhi.co.id" || $email == "aini.damayanti@adhi.co.id")
+            {
+                $('#tableDataVote').DataTable(
+                {
+                    "dom": '<"dt-buttons"Bf><"clear">lirtp',
+                    "paging": false,
+                    "autoWidth": true,
+                    "columnDefs": [
+                        { "orderable": false, "targets": 5 }
+                    ],
+                    "ordering": false,
+                    "buttons": [
+                        'colvis',
+                        'copyHtml5',
+                'csvHtml5',
+                        'excelHtml5',
+                'pdfHtml5',
+                        'print'
+                    ]
+                });
+            }
+            else
+            {
+                $('#tableDataVote').DataTable(
+                {
+                    "dom": '<"dt-buttons"Bf><"clear">lirtp',
+                    "paging": false,
+                    "autoWidth": true,
+                    "columnDefs": [
+                        { "orderable": false, "targets": 5 }
+                    ],
+                    "ordering": false,
+                });
+            }
         });
         
         function letsVote()
@@ -267,11 +349,10 @@
                             {
                                 document.getElementById("polling-results").style.display = "block";
 
-                                document.getElementById("progress"+$no).style.display = "flex";
+                                document.getElementById("progress"+$no).style.display = "";
 
                                 document.getElementById("vote_tim_"+$no).innerText = values['nama_tim'];
-                                document.getElementById("vote_label_"+$no).innerText = parseInt(values['total']/$allVote*100)+"%";
-                                document.getElementById("vote_progress_"+$no).style.width = parseInt(values['total']/$allVote*100)+"%";
+                                document.getElementById("vote_progress_"+$no).innerText = parseInt(values['total']/$allVote*100)+"%";
                             }
                             $no++;
                         });

@@ -61,6 +61,10 @@ class ParticipateController extends Controller
     //     }
     // }
 
+    public function abort(){
+        return abort(404);
+    }
+
     public function showData($id='')
     {
         if (!Session::get('name_employee')) {

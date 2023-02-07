@@ -3,25 +3,6 @@ $(document).ready(function() {
 	//Normally set in the title tag of your page.
 	// document.title='Simple DataTable';
 	// DataTable initialisation
-	$('#tableDataVote').DataTable(
-		{
-			"dom": '<"dt-buttons"Bf><"clear">lirtp',
-			"paging": false,
-			"autoWidth": true,
-			"columnDefs": [
-				{ "orderable": false, "targets": 5 }
-			],
-			"ordering": false,
-			"buttons": [
-				'colvis',
-				'copyHtml5',
-        'csvHtml5',
-				'excelHtml5',
-        'pdfHtml5',
-				'print'
-			]
-		}
-	);
 	//Add row button
 	$('.dt-add').each(function () {
 		$(this).on('click', function(evt){

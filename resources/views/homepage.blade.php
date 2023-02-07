@@ -33,8 +33,6 @@
                         
                         <h3 class="header-sub-title wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.2s">Where Idea Grow and Blow</h3>
                         <!-- <p class="text wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.8s">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p> -->
-                        <a href="{{url('/participate')}}" class="main-btn wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1.1s" style="height: 70px;width: 270px; font-size: 25px; font-weight: 500;">
-                        <span style="margin-top: 10px;">Let's Participate</span></a>
                     </div> <!-- header hero content -->
                 </div>
             </div> <!-- row -->
@@ -246,7 +244,7 @@
                         <div class="px-2">
                         <div class="event-date badge bg-info" style="color : white;">26 Jan - 7 Feb</div>
                         <h5 class="pt-2">Submission</h5>
-                        <p class="text-muted" style="font-size:14px">Closed : 7 Feb Pukul 23.59 WIB</p>
+                        <p class="text-muted" style="font-size:14px">Closed</p>
                         <!-- <div>
                             <a href="#" class="btn btn-primary btn-sm">Read more</a>
                         </div> -->
@@ -354,10 +352,6 @@
     <script>
         var element = document.getElementById("nav-home");
         element.classList.add("active");
-
-        $('document').ready(function() {
-            showExtend();
-        });
         
         $.ajax({
             type: 'GET',

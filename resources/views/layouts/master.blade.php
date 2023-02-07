@@ -144,15 +144,14 @@
                                         <a class="page-scroll" href="{{url('/panduan')}}">Guide</a>
                                     </li>
                                     <li class="nav-item" id="nav-participate">
-                                        <a class="page-scroll" href="{{url('/participate')}}">Participate</a>
+                                        <img src="{{asset('')}}assets/img/close-res.png" alt="Logo" style="position:fixed;z-index: 100;margin-left: 40px;">
+                                        <a class="page-scroll" href="#">Participate</a>
                                     </li>
                                     <li class="nav-item coming">
-                                        <img src="{{asset('')}}assets/img/comingsoon.png" alt="Logo" style="position:absolute;z-index: -1;margin-left: 40px">
-                                        <a class="page-scroll" href="#">Voting</a>
+                                        <a class="page-scroll" href="{{ url('voting') }}">Voting</a>
                                     </li>
                                     <li class="nav-item coming">
-                                        <img src="{{asset('')}}assets/img/comingsoon.png" alt="Logo" style="position:absolute;z-index: -1;margin-left: 40px">
-                                        <a class="page-scroll" href="#">Judges</a>
+                                        <a class="page-scroll" href="{{url('/judge')}}">Judges</a>
                                     </li>
                                     <li class="nav-item coming">
                                         <img src="{{asset('')}}assets/img/comingsoon.png" alt="Logo" style="position:absolute;z-index: -1;margin-left: 40px">
