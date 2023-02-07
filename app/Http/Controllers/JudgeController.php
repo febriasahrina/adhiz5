@@ -29,6 +29,7 @@ class JudgeController extends Controller
     public function showData($id='')
     {
         $varAnggota = [];
+        $varBobot = [];
         if (!Session::get('name_employee')) {
             return redirect('login')->with('alert', 'Mohon untuk login terlebih dulu');
         } else if (Session::get('email') == "febria.sahrina@adhi.co.id" || Session::get('email') == "aini.damayanti@adhi.co.id"){
@@ -65,6 +66,10 @@ class JudgeController extends Controller
                     'tb_department.nama_department'
                 ]);
 
+            $checkHaveBobot = DB::table('tb_view_bobot')
+                ->select('id_judge','bobot','id_kepesertaan')
+                ->get();
+
             foreach ($ide as $key => $value) {
                 $varAnggota[$value->id_kepesertaan] = [];
                 foreach ($anggota as $keys => $values) {
@@ -80,6 +85,25 @@ class JudgeController extends Controller
                     if ($key == $values->id_kepesertaan)
                     {
                         $ide[$keys]->anggota = $value;
+                    }
+                }
+            }
+
+            foreach ($ide as $key => $value) {
+                $varBobot[$value->id_kepesertaan] = [];
+                foreach ($checkHaveBobot as $keys => $values) {
+                    if ($values->id_kepesertaan == $value->id_kepesertaan)
+                    {
+                        array_push($varBobot[$values->id_kepesertaan], $checkHaveBobot[$keys]);
+                    }
+                }
+            }
+
+            foreach ($varBobot as $key => $value) {
+                foreach ($ide as $keys => $values) {
+                    if ($key == $values->id_kepesertaan)
+                    {
+                        $ide[$keys]->bobot = $value;
                     }
                 }
             }
@@ -116,8 +140,6 @@ class JudgeController extends Controller
                 ->where('tb_rate.id_kepesertaan', $participant)
                 ->leftJoin('tb_range', 'tb_range.id_range', '=', 'tb_rate.id_range')
                 ->get(['tb_rate.id_rate','tb_rate.id_criteria','tb_rate.id_range','name_range']);
-
-            // dd($checkHaveRate);
 
             $varDesc = [];
             $varRange = [];
@@ -337,9 +359,36 @@ class JudgeController extends Controller
 
     public function storeRate(Request $request)
     {
+        $arrBobot = [];
         $rate = $request->input('range');
+        $idRate = $request->input('rate');
+        $count = 0;
+        
         foreach ($rate as $key => $value) {
-            $insertRate = DB::table('tb_rate')
+            $countBobot = DB::table('tb_range')
+                ->select('bobot_range')
+                ->where('id_range', $value)
+                ->first();
+
+            array_push($arrBobot, $countBobot->bobot_range);
+            
+            if($idRate[0] != "null")
+            {
+                $insertRate = DB::table('tb_rate')
+                    ->where('id_rate', $request->rate[$count])
+                    ->update([
+                        'id_judge' => $request->id_judge,
+                        'id_kepesertaan' => $request->id_kepesertaan,
+                        'id_criteria' => $key+1,
+                        'id_range' => $value,
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'updated_at' => date('Y-m-d H:i:s')
+                    ]);
+                $count++;
+            }
+            else
+            {
+                $insertRate = DB::table('tb_rate')
                 ->insert([
                     'id_judge' => $request->id_judge,
                     'id_kepesertaan' => $request->id_kepesertaan,
@@ -348,9 +397,37 @@ class JudgeController extends Controller
                     'created_at' => date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s')
                 ]);
+            }
+
         }
 
-        if ($insertRate) {
+        $sumBobot = array_sum($arrBobot);
+        $avgBobot = $sumBobot/5;
+
+        if($idRate[0] != "null")
+        {
+            $insertBobot = DB::table('tb_view_bobot')
+                ->where('id_judge', $request->id_judge)
+                ->where('id_kepesertaan', $request->id_kepesertaan)
+                ->update([
+                    'bobot' => $avgBobot,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ]);
+        }
+        else
+        {
+            $insertBobot = DB::table('tb_view_bobot')
+            ->insert([
+                'id_judge' => $request->id_judge,
+                'id_kepesertaan' => $request->id_kepesertaan,
+                'bobot' => $avgBobot,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+        }     
+
+        if ($insertBobot) {
             return response()->json([
                 'data' => [
                     'success' => true,

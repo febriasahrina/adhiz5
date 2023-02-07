@@ -139,16 +139,19 @@
                                         <select class="form-control" id="range-{{$criteria[$i]->id_criteria}}" name="range">
                                             <option selected="selected" value="null" disabled>Pilih Penilaian</option>
                                             @foreach ($criteria[$i]->range as $range)
-                                            <option @if(count($fill)>0)value="{{$fill[$i]->id_range}}" selected  @else value="{{$range->id_range}} "@endif>{{$range->name_range}}</option>
+                                            <option @if((count($fill)>0) && ($range->id_range == $fill[$i]->id_range)) selected @endif value="{{$range->id_range}}">{{$range->name_range}}</option>
                                             @endforeach
                                         </select>
+                                        @if(count($fill)>0)
+                                        <span id="id-rate-{{$i+1}}" hidden>{{$fill[$i]->id_rate}}</span>
+                                        @else
+                                        <span id="id-rate-{{$i+1}}" hidden>null</span>
+                                        @endif
                                     </td>
                                 </tr>
                                 <?php }} ?>
                         </table>
-                        @if(count($fill)==0)
                         <button id="buttonVote" class="btn btn-success btn-lg px-2 float-right" onclick="modalValidation()" style="font-size: 12px; width: 70px;">Save</button>
-                        @endif
                     </div>
                 </div>
             </div>
@@ -204,7 +207,7 @@
         function modalValidation(){   
             for (var x = 1; x <= 5; x++) {
                 // $objEmp[x] = $objEmp[x] || [];
-                var id_range = $("#range-"+x).val();
+                var id_range = $("#id-rate-"+x).val();
                 if (id_range == null)
                 {
                     showNotifKuesioner("Mohon untuk lengkapi data", null);
@@ -218,9 +221,11 @@
         {
             $objEmp = {};
             $objEmp["range"] = $objEmp["range"] || [];
+            $objEmp["rate"] = $objEmp["rate"] || [];
             for (var x = 1; x <= 5; x++) {
                 // $objEmp[x] = $objEmp[x] || [];
                 var id_range = $("#range-"+x).val();
+                var id_rate = $("#id-rate-"+x).text();
                 if (id_range == null)
                 {
                     showNotifKuesioner("Mohon untuk lengkapi data", null);
@@ -230,10 +235,13 @@
                     x : id_range
                 }                    
                 $objEmp["range"].push(id_range);
+                $objEmp["rate"].push(id_rate);
             }
 
             $objEmp["id_judge"] = "<?php echo $id_judge; ?>";
             $objEmp["id_kepesertaan"] = "<?php echo $id_kepesertaan; ?>";
+
+            console.log($objEmp);
 
             showLoading();
 
@@ -257,8 +265,4 @@
             });
         }
     </script>
-    <!-- <script type='text/javascript'>var myLink = document.querySelector('a[href="#"]');
-    myLink.addEventListener('click', function(e) {
-        e.preventDefault();
-    });</script> -->
 @endpush

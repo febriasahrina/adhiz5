@@ -36,31 +36,29 @@
 </div>
 <div id="home" class="header-hero bg_cover" style="background-image: url({{asset('')}}assets/img/banner-bg.svg)">
     <section id="features" class="services-area pt-150">
+        <div class="container mb-4">
+            <div class="card card-body" style="border-radius: 20px;background-image: url({{asset('')}}assets/img/confetti2.png);">
+                <div class="span6 mb-4" id="polling-results">
+                    <h5>Voting Results</h5><br>
+                    <strong id="vote_tim_1"></strong><span class="pull-right" id="vote_label_1"></span>
+                    <div class="progress" id="progress1" style="display:none">
+                        <div class="progress-bar bg-success" role="progressbar" id="vote_progress_1" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <strong id="vote_tim_2"></strong><span class="pull-right" id="vote_label_2"></span>
+                    <div class="progress" id="progress2" style="display:none">
+                        <div class="progress-bar bg-info" role="progressbar" id="vote_progress_2" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <strong id="vote_tim_3"></strong><span class="pull-right" id="vote_label_3"></span>
+                    <div class="progress" id="progress3" style="display:none">
+                        <div class="progress-bar bg-warning" role="progressbar" id="vote_progress_3" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container">
             <div class="card card-body" style="border-radius: 20px">
                 <div class="about-shape-2">
                     <img src="{{asset('')}}assets/img/about-shape-2.svg" alt="shape">
-                </div>
-                <div>
-                    <div class="span6 mb-4" id="polling-results">
-                        <h5>Voting Results</h5><br>
-                        <strong id="vote_tim_1"></strong><span class="pull-right" id="vote_label_1"></span>
-                        <div class="progress" id="progress1" style="display:none">
-                            <div class="progress-bar bg-success" role="progressbar" id="vote_progress_1" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <strong id="vote_tim_2"></strong><span class="pull-right" id="vote_label_2"></span>
-                        <div class="progress" id="progress2" style="display:none">
-                            <div class="progress-bar bg-info" role="progressbar" id="vote_progress_2" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <strong id="vote_tim_3"></strong><span class="pull-right" id="vote_label_3"></span>
-                        <div class="progress" id="progress3" style="display:none">
-                            <div class="progress-bar bg-warning" role="progressbar" id="vote_progress_3" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <strong id="vote_tim_4"></strong><span class="pull-right" id="vote_label_4"></span>
-                        <div class="progress" id="progress4" style="display:none">
-                            <div class="progress-bar bg-danger" role="progressbar" id="vote_progress_4" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
                 </div>
                 <table id="tableDataVote" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
@@ -265,13 +263,16 @@
                     if ($allVote != 0)
                     {
                         $.each(datas.data.data, function(keys, values) {
-                            document.getElementById("polling-results").style.display = "block";
+                            if ($no <= 3)
+                            {
+                                document.getElementById("polling-results").style.display = "block";
 
-                            document.getElementById("progress"+$no).style.display = "flex";
+                                document.getElementById("progress"+$no).style.display = "flex";
 
-                            document.getElementById("vote_tim_"+$no).innerText = values['nama_tim'];
-                            document.getElementById("vote_label_"+$no).innerText = parseInt(values['total']/$allVote*100)+"%";
-                            document.getElementById("vote_progress_"+$no).style.width = parseInt(values['total']/$allVote*100)+"%";
+                                document.getElementById("vote_tim_"+$no).innerText = values['nama_tim'];
+                                document.getElementById("vote_label_"+$no).innerText = parseInt(values['total']/$allVote*100)+"%";
+                                document.getElementById("vote_progress_"+$no).style.width = parseInt(values['total']/$allVote*100)+"%";
+                            }
                             $no++;
                         });
                     }

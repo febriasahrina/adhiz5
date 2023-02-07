@@ -77,7 +77,7 @@
                             <td>{{$showData[$i]->nama_tim}}</td>
                             <td>{{$showData[$i]->judul_ide}}</td>
                             <td>{{$showData[$i]->deskripsi}}</td>
-                            <td style="text-align:center;">Nilai: <span>0</span></td>
+                            <td style="text-align:center;">Nilai: <span id="nilai_bobot">@if(count($showData[$i]->bobot)>0){{$showData[$i]->bobot[0]->bobot}}%@else 0 @endif</span></td>
                             <td class=" dt-center align-middle">
                                 <div class="align-middle" style="width: 100px;">
                                     <div class="col">
@@ -146,7 +146,7 @@
             $('#tableDataJudge').DataTable(
                 {
                     "dom": '<"dt-buttons"Bf><"clear">lirtp',
-                    "pagingType": 'simple_numbers',
+                    "paging": false,
                     "autoWidth": true,
                     "columnDefs": [
                         { "orderable": false, "targets": 4 }
