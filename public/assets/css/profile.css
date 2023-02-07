@@ -30,14 +30,28 @@ body {
     border-radius: 5px 0 0 5px;
 }
 
+.user-card-full .user-rate {
+    border-radius: 10px;
+}
+
 .bg-c-lite-green {
         background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
     /* background: linear-gradient(to right, #ee5a6f, #f29263); */
     background: linear-gradient(to right, #c3d668, #839a3b);
 }
 
+.bg-c-lite-blue {
+    background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
+/* background: linear-gradient(to right, #ee5a6f, #f29263); */
+background: linear-gradient(to right, #4B8FA8, #76CBD3);
+}
+
 .user-profile {
     padding: 20px 0;
+}
+
+.user-rate {
+    padding: 6px 0;
 }
 
 .card-block {

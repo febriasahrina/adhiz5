@@ -6,7 +6,7 @@ $(document).ready(function() {
 	$('#tableDataVote').DataTable(
 		{
 			"dom": '<"dt-buttons"Bf><"clear">lirtp',
-			"paging": false,
+			"pagingType": 'simple_numbers',
 			"autoWidth": true,
 			"columnDefs": [
 				{ "orderable": false, "targets": 5 }

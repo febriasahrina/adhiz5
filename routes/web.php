@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ParticipateController;
 use App\Http\Controllers\VotingController;
 use App\Http\Controllers\DetailsController;
+use App\Http\Controllers\JudgeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,14 @@ Route::get('/participate', ['as' => 'participate', 'uses' => 'ParticipateControl
 Route::get('/details/{id}', ['as' => 'details', 'uses' => 'DetailsController@showData']);
 Route::get('/details', ['as' => 'details', 'uses' => 'DetailsController@showData']);
 Route::post('convertPdf', ['as' => 'convertPdf', 'uses' => 'DetailsController@convertPdf']);
+
+Route::get('/judge', ['as' => 'judge', 'uses' => 'JudgeController@showData']);
+Route::get('/judge/{id}', ['as' => 'judge', 'uses' => 'JudgeController@showData']);
+Route::get('/rate/{id}', ['as' => 'rate', 'uses' => 'JudgeController@showRate']);
+Route::post('insert-rate', [
+    'as' => 'insert-rate',
+    'uses' => 'JudgeController@storeRate']);
+Route::get('/detail-judge/{id}', ['as' => 'detail-judge', 'uses' => 'JudgeController@detail']);
 
 Route::get('/showFilePdf/{id}', ['as' => 'showFilePdf', 'uses' => 'ParticipateController@showFilePdf']);
 
