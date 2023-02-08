@@ -22,8 +22,8 @@ Route::get('/token', function () {
     return csrf_token();
 });
 Route::get('/', function () {return view('homepage');});
-Route::get('/participate/{id}', ['as' => 'participate', 'uses' => 'ParticipateController@abort']);
-Route::get('/participate', ['as' => 'participate', 'uses' => 'ParticipateController@abort']);
+Route::get('/participate/{id}', ['as' => 'participate', 'uses' => 'ParticipateController@showData']);
+Route::get('/participate', ['as' => 'participate', 'uses' => 'ParticipateController@showData']);
 
 Route::get('/details/{id}', ['as' => 'details', 'uses' => 'DetailsController@showData']);
 Route::get('/details', ['as' => 'details', 'uses' => 'DetailsController@showData']);

@@ -145,7 +145,7 @@
                                     </li>
                                     <li class="nav-item" id="nav-participate">
                                         <img src="{{asset('')}}assets/img/close-res.png" alt="Logo" style="position:fixed;z-index: 100;margin-left: 40px;">
-                                        <a class="page-scroll" href="#">Participate</a>
+                                        <a class="page-scroll" href="{{url('/participate')}}">Participate</a>
                                     </li>
                                     <li class="nav-item coming">
                                         <a class="page-scroll" href="{{ url('voting') }}">Voting</a>
