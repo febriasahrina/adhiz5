@@ -148,6 +148,7 @@
                                         <a class="page-scroll" href="{{url('/participate')}}">Participate</a>
                                     </li>
                                     <li class="nav-item coming">
+                                        <img src="{{asset('')}}assets/img/comingsoon.png" alt="Logo" style="position:absolute;z-index: -1;margin-left: 40px">
                                         <a class="page-scroll" href="{{ url('voting') }}">Voting</a>
                                     </li>
                                     <li class="nav-item coming">
