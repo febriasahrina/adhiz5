@@ -42,6 +42,7 @@ class JudgeController extends Controller
 
             if($checkJudge != null)
             {
+
                 $ide = DB::table('tb_kepesertaan')
                     ->join('tb_ide', 'tb_ide.id_kepesertaan', '=', 'tb_kepesertaan.id_kepesertaan')
                     ->where('tb_kepesertaan.deleted_at', null)
@@ -77,6 +78,7 @@ class JudgeController extends Controller
 
                 $checkHaveBobot = DB::table('tb_view_bobot')
                     ->select('id_judge','bobot','id_kepesertaan')
+                    ->where('id_judge', $checkJudge->id_judge)
                     ->get();
 
                 foreach ($ide as $key => $value) {
@@ -228,73 +230,73 @@ class JudgeController extends Controller
 
         }
 
-        $varAnggota = [];
-        if (!Session::get('name_employee')) {
-            return redirect('login')->with('alert', 'Mohon untuk login terlebih dulu');
-        } else if (Session::get('email') == "febria.sahrina@adhi.co.id" || Session::get('email') == "aini.damayanti@adhi.co.id"){
-            $ide = DB::table('tb_kepesertaan')
-                ->join('tb_ide', 'tb_ide.id_kepesertaan', '=', 'tb_kepesertaan.id_kepesertaan')
-                ->where('tb_kepesertaan.deleted_at', null)
-                ->get([
-                    'tb_kepesertaan.id_kepesertaan',
-                    'tb_kepesertaan.status_kepesertaan',
-                    'tb_kepesertaan.created_at',
-                    'tb_ide.id_ide',
-                    'tb_ide.nama_tim',
-                    'tb_ide.tema_ide',
-                    'tb_ide.judul_ide',
-                    'tb_ide.deskripsi',
-                ]);
+        // $varAnggota = [];
+        // if (!Session::get('name_employee')) {
+        //     return redirect('login')->with('alert', 'Mohon untuk login terlebih dulu');
+        // } else if (Session::get('email') == "febria.sahrina@adhi.co.id" || Session::get('email') == "aini.damayanti@adhi.co.id"){
+        //     $ide = DB::table('tb_kepesertaan')
+        //         ->join('tb_ide', 'tb_ide.id_kepesertaan', '=', 'tb_kepesertaan.id_kepesertaan')
+        //         ->where('tb_kepesertaan.deleted_at', null)
+        //         ->get([
+        //             'tb_kepesertaan.id_kepesertaan',
+        //             'tb_kepesertaan.status_kepesertaan',
+        //             'tb_kepesertaan.created_at',
+        //             'tb_ide.id_ide',
+        //             'tb_ide.nama_tim',
+        //             'tb_ide.tema_ide',
+        //             'tb_ide.judul_ide',
+        //             'tb_ide.deskripsi',
+        //         ]);
 
-            $anggota = DB::table('tb_kepesertaan')
-                ->join('tb_tim', 'tb_tim.id_kepesertaan', '=', 'tb_kepesertaan.id_kepesertaan')
-                ->leftjoin('tb_unit_kerja', 'tb_unit_kerja.id_unit_kerja', '=', 'tb_tim.unit_kerja')
-                ->leftjoin('tb_department', 'tb_department.id_department', '=', 'tb_tim.id_department')
-                ->where('tb_kepesertaan.deleted_at', null)
-                ->get([
-                    'tb_kepesertaan.id_kepesertaan',
-                    'tb_kepesertaan.status_kepesertaan',
-                    'tb_kepesertaan.created_at',
-                    'tb_tim.nama',
-                    'tb_tim.npp',
-                    'tb_tim.unit_kerja',
-                    'tb_tim.email',
-                    'tb_tim.no_hp',
-                    'tb_tim.status_tim',
-                    'tb_unit_kerja.nama_unit_kerja',
-                    'tb_department.nama_department'
-                ]);
+        //     $anggota = DB::table('tb_kepesertaan')
+        //         ->join('tb_tim', 'tb_tim.id_kepesertaan', '=', 'tb_kepesertaan.id_kepesertaan')
+        //         ->leftjoin('tb_unit_kerja', 'tb_unit_kerja.id_unit_kerja', '=', 'tb_tim.unit_kerja')
+        //         ->leftjoin('tb_department', 'tb_department.id_department', '=', 'tb_tim.id_department')
+        //         ->where('tb_kepesertaan.deleted_at', null)
+        //         ->get([
+        //             'tb_kepesertaan.id_kepesertaan',
+        //             'tb_kepesertaan.status_kepesertaan',
+        //             'tb_kepesertaan.created_at',
+        //             'tb_tim.nama',
+        //             'tb_tim.npp',
+        //             'tb_tim.unit_kerja',
+        //             'tb_tim.email',
+        //             'tb_tim.no_hp',
+        //             'tb_tim.status_tim',
+        //             'tb_unit_kerja.nama_unit_kerja',
+        //             'tb_department.nama_department'
+        //         ]);
 
-            foreach ($ide as $key => $value) {
-                $varAnggota[$value->id_kepesertaan] = [];
-                foreach ($anggota as $keys => $values) {
-                    if ($values->id_kepesertaan == $value->id_kepesertaan)
-                    {
-                        array_push($varAnggota[$values->id_kepesertaan], $anggota[$keys]);
-                    }
-                }
-            }
+        //     foreach ($ide as $key => $value) {
+        //         $varAnggota[$value->id_kepesertaan] = [];
+        //         foreach ($anggota as $keys => $values) {
+        //             if ($values->id_kepesertaan == $value->id_kepesertaan)
+        //             {
+        //                 array_push($varAnggota[$values->id_kepesertaan], $anggota[$keys]);
+        //             }
+        //         }
+        //     }
 
-            foreach ($varAnggota as $key => $value) {
-                foreach ($ide as $keys => $values) {
-                    if ($key == $values->id_kepesertaan)
-                    {
-                        $ide[$keys]->anggota = $value;
-                    }
-                }
-            }
+        //     foreach ($varAnggota as $key => $value) {
+        //         foreach ($ide as $keys => $values) {
+        //             if ($key == $values->id_kepesertaan)
+        //             {
+        //                 $ide[$keys]->anggota = $value;
+        //             }
+        //         }
+        //     }
 
-            if (count($ide)==0)
-            {
-                $ide = [];
-            }
-            return view('/judge', [
-                "showData" => $ide
-            ]);
-        }
-        else{
-            return abort(404);
-        }
+        //     if (count($ide)==0)
+        //     {
+        //         $ide = [];
+        //     }
+        //     return view('/judge', [
+        //         "showData" => $ide
+        //     ]);
+        // }
+        // else{
+        //     return abort(404);
+        // }
     }
    
     public function detail($id='')
