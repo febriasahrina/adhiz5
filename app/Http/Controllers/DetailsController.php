@@ -30,7 +30,7 @@ class DetailsController extends Controller
     {
         if (!Session::get('name_employee')) {
             return redirect('login')->with('alert', 'Mohon untuk login terlebih dulu');
-        } else if (Session::get('email') == "febria.sahrina@adhi.co.id" || Session::get('email') == "aini.damayanti@adhi.co.id"){
+        } else if (Session::get('email') == "febria.sahrina@adhi.co.id" || Session::get('email') == "aini.damayanti@adhi.co.id" || Session::get('email') == "reza.tp@adhi.co.id"){
             if($id != '') {
                 $variable = DB::table('tb_kepesertaan')
                 ->join('tb_tim', 'tb_tim.id_kepesertaan', '=', 'tb_kepesertaan.id_kepesertaan')

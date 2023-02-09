@@ -135,6 +135,60 @@ class JudgeController extends Controller
         }
     }
 
+    public function showDataAdmin()
+    {
+        $varAnggota = [];
+        $varBobot = [];
+        if (!Session::get('email')) {
+            return redirect('login')->with('alert', 'Mohon untuk login terlebih dulu');
+        } 
+        else if(Session::get('email') == "febria.sahrina@adhi.co.id" || Session::get('email') == "aini.damayanti@adhi.co.id" || Session::get('email') == "reza.tp@adhi.co.id")
+        {
+            $judgeName = DB::table('tb_judge')
+                ->select('tb_judge.id_judge','tb_judge.email','tb_judge.judge_name',DB::raw('count(*) as total'))
+                ->join('tb_view_bobot', 'tb_view_bobot.id_judge', '=', 'tb_judge.id_judge')
+                ->groupBy('tb_view_bobot.id_judge', 'tb_judge.id_judge', 'tb_judge.email', 'tb_judge.judge_name')
+                ->get();
+
+            return view('/judgeAdmin', [
+                "showData" => $judgeName,
+            ]);
+        }
+        else
+        {
+            return abort(404);
+        }
+    }
+
+    public function detailAdmin($id='')
+    {
+        if (!Session::get('email')) {
+            return redirect('login')->with('alert', 'Mohon untuk login terlebih dulu');
+        } 
+        else if(Session::get('email') == "febria.sahrina@adhi.co.id" || Session::get('email') == "aini.damayanti@adhi.co.id" || Session::get('email') == "reza.tp@adhi.co.id")
+        {
+            $detailTim = DB::table('tb_view_bobot')
+                ->join('tb_ide', 'tb_ide.id_kepesertaan', '=', 'tb_view_bobot.id_kepesertaan')
+                ->join('tb_judge', 'tb_judge.id_judge', '=', 'tb_view_bobot.id_judge')
+                ->where('tb_view_bobot.id_judge', $id)
+                ->get([
+                    'tb_view_bobot.id_kepesertaan',
+                    'tb_view_bobot.bobot',
+                    'tb_view_bobot.id_judge',
+                    'tb_ide.nama_tim',
+                    'tb_judge.judge_name'
+                ]);
+
+            return view('/judgeDetailsAdmin', [
+                "showData" => $detailTim,
+            ]);
+        }
+        else
+        {
+            return abort(404);
+        }
+    }
+
     public function showRate($participant='')
     {
         if (!Session::get('email')) {
@@ -297,6 +351,99 @@ class JudgeController extends Controller
         // else{
         //     return abort(404);
         // }
+    }
+
+    public function showRateAdmin($participant='',$judge='')
+    {
+        if (!Session::get('email')) {
+            return redirect('login')->with('alert', 'Mohon untuk login terlebih dulu');
+        }
+        else if(Session::get('email') == "febria.sahrina@adhi.co.id" || Session::get('email') == "aini.damayanti@adhi.co.id" || Session::get('email') == "reza.tp@adhi.co.id")
+        {
+            $detailJudge = DB::table('tb_judge')
+                ->select('judge_name')
+                ->where('id_judge', $judge)
+                ->first();
+
+            $checkHaveRate = DB::table('tb_rate')
+                ->where('tb_rate.id_judge', $judge)
+                ->where('tb_rate.id_kepesertaan', $participant)
+                ->leftJoin('tb_range', 'tb_range.id_range', '=', 'tb_rate.id_range')
+                ->get(['tb_rate.id_rate','tb_rate.id_criteria','tb_rate.id_range','name_range']);
+
+            $varDesc = [];
+            $varRange = [];
+
+            $ide = DB::table('tb_ide')
+            ->select('id_kepesertaan','nama_tim','judul_ide','deskripsi')
+            ->where('id_kepesertaan', $participant)
+            ->first();
+
+            $criteria = DB::table('tb_criteria')
+                ->select('tb_criteria.id_criteria','tb_criteria.criteria_name')
+                ->get();
+
+            $criteriaDesc = DB::table('tb_criteria_desc')
+                ->select('tb_criteria_desc.id_criteria','tb_criteria_desc.id_criteria_desc','tb_criteria_desc.name_criteria_desc')
+                ->get();
+            
+            $range = DB::table('tb_range')
+                ->select('tb_range.id_criteria','tb_range.id_range','tb_range.name_range','tb_range.bobot_range')
+                ->get();
+
+            // concat desc
+            foreach ($criteria as $key => $value) {
+                $varDesc[$value->id_criteria] = [];
+                foreach ($criteriaDesc as $keys => $values) {
+                    if ($values->id_criteria == $value->id_criteria)
+                    {
+                        array_push($varDesc[$values->id_criteria], $criteriaDesc[$keys]);
+                    }
+                }
+            }
+
+            foreach ($varDesc as $key => $value) {
+                foreach ($criteria as $keys => $values) {
+                    if ($key == $values->id_criteria)
+                    {
+                        $criteria[$keys]->criteriaDesc = $value;
+                    }
+                }
+            }
+
+            // concat range
+            foreach ($criteria as $key => $value) {
+                $varDesc[$value->id_criteria] = [];
+                foreach ($range as $keys => $values) {
+                    if ($values->id_criteria == $value->id_criteria)
+                    {
+                        array_push($varDesc[$values->id_criteria], $range[$keys]);
+                    }
+                }
+            }
+
+            foreach ($varDesc as $key => $value) {
+                foreach ($criteria as $keys => $values) {
+                    if ($key == $values->id_criteria)
+                    {
+                        $criteria[$keys]->range = $value;
+                    }
+                }
+            }
+            
+            return view('/rateAdmin', [
+                    "id_judge" => $detailJudge->judge_name,
+                    "id_kepesertaan" => $participant,
+                    "ide" => $ide,
+                    "criteria" => $criteria,
+                    "fill" => $checkHaveRate
+                ]);
+            
+        }
+        else
+        {
+            return abort(404);
+        }
     }
    
     public function detail($id='')

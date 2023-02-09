@@ -30,13 +30,15 @@ Route::get('/details', ['as' => 'details', 'uses' => 'DetailsController@showData
 Route::post('convertPdf', ['as' => 'convertPdf', 'uses' => 'DetailsController@convertPdf']);
 
 Route::get('/judge', ['as' => 'judge', 'uses' => 'JudgeController@showData']);
+Route::get('/judge-admin', ['as' => 'judge-admin', 'uses' => 'JudgeController@showDataAdmin']);
 Route::get('/judge/{id}', ['as' => 'judge', 'uses' => 'JudgeController@showData']);
 Route::get('/rate/{id}', ['as' => 'rate', 'uses' => 'JudgeController@showRate']);
 Route::post('insert-rate', [
     'as' => 'insert-rate',
     'uses' => 'JudgeController@storeRate']);
 Route::get('/detail-judge/{id}', ['as' => 'detail-judge', 'uses' => 'JudgeController@detail']);
-
+Route::get('/detail-judge-admin/{id}', ['as' => 'detail-judge', 'uses' => 'JudgeController@detailAdmin']);
+Route::get('/detail-judge-tim-admin/{id}/{id2}', ['as' => 'detail-judge-admin', 'uses' => 'JudgeController@showRateAdmin']);
 Route::get('/showFilePdf/{id}', ['as' => 'showFilePdf', 'uses' => 'ParticipateController@showFilePdf']);
 
 Route::get('/voting', ['as' => 'voting', 'uses' => 'VotingController@showData']);

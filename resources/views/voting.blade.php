@@ -250,7 +250,7 @@
                 width: 'resolve'
             });
 
-            if($email == "febria.sahrina@adhi.co.id" || $email == "aini.damayanti@adhi.co.id")
+            if($email == "febria.sahrina@adhi.co.id" || $email == "aini.damayanti@adhi.co.id" || $email == "reza.tp@adhi.co.id")
             {
                 $('#tableDataVote').DataTable(
                 {

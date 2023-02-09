@@ -26,7 +26,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="header-hero-content text-center">
-                        @if(Session::get('email') == "febria.sahrina@adhi.co.id" || Session::get('email') == "aini.damayanti@adhi.co.id")
+                        @if(Session::get('email') == "febria.sahrina@adhi.co.id" || Session::get('email') == "aini.damayanti@adhi.co.id" || Session::get('email') == "reza.tp@adhi.co.id")
                         <h4 style="color:#fff"><i class="lni lni-eye"><span id="count-visitor"></span></i></h4>
                         @endif
                         <h2 class="header-title wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.5s">ADHI - Z</h2>

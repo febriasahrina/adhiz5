@@ -70,7 +70,7 @@ class ParticipateController extends Controller
         if (!Session::get('email')) {
             return redirect('login')->with('alert', 'Mohon untuk login terlebih dulu');
         }
-        else if(Session::get('email') == "febria.sahrina@adhi.co.id" || Session::get('email') == "aini.damayanti@adhi.co.id")
+        else if(Session::get('email') == "febria.sahrina@adhi.co.id" || Session::get('email') == "aini.damayanti@adhi.co.id" || Session::get('email') == "reza.tp@adhi.co.id")
         {
             if (!Session::get('name_employee')) {
                 return redirect('login')->with('alert', 'Mohon untuk login terlebih dulu');
