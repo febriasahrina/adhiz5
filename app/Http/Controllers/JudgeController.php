@@ -135,6 +135,105 @@ class JudgeController extends Controller
         }
     }
 
+    public function showTop5Admin()
+    {
+        $varAnggota = [];
+        $varBobot = [];
+        if (!Session::get('email')) {
+            return redirect('login')->with('alert', 'Mohon untuk login terlebih dulu');
+        } 
+        else if(Session::get('email') == "febria.sahrina@adhi.co.id" || Session::get('email') == "aini.damayanti@adhi.co.id" || Session::get('email') == "reza.tp@adhi.co.id")
+        {
+            $ide = DB::table('tb_kepesertaan')
+                ->join('tb_ide', 'tb_ide.id_kepesertaan', '=', 'tb_kepesertaan.id_kepesertaan')
+                ->where('tb_kepesertaan.deleted_at', null)
+                ->get([
+                    'tb_kepesertaan.id_kepesertaan',
+                    'tb_kepesertaan.status_kepesertaan',
+                    'tb_kepesertaan.created_at',
+                    'tb_ide.id_ide',
+                    'tb_ide.nama_tim',
+                    'tb_ide.tema_ide',
+                    'tb_ide.judul_ide',
+                    'tb_ide.deskripsi',
+                ]);
+
+            $anggota = DB::table('tb_kepesertaan')
+                ->join('tb_tim', 'tb_tim.id_kepesertaan', '=', 'tb_kepesertaan.id_kepesertaan')
+                ->leftjoin('tb_unit_kerja', 'tb_unit_kerja.id_unit_kerja', '=', 'tb_tim.unit_kerja')
+                ->leftjoin('tb_department', 'tb_department.id_department', '=', 'tb_tim.id_department')
+                ->where('tb_kepesertaan.deleted_at', null)
+                ->get([
+                    'tb_kepesertaan.id_kepesertaan',
+                    'tb_kepesertaan.status_kepesertaan',
+                    'tb_kepesertaan.created_at',
+                    'tb_tim.nama',
+                    'tb_tim.npp',
+                    'tb_tim.unit_kerja',
+                    'tb_tim.email',
+                    'tb_tim.no_hp',
+                    'tb_tim.status_tim',
+                    'tb_unit_kerja.nama_unit_kerja',
+                    'tb_department.nama_department'
+                ]);
+
+            $penilaian = DB::table('tb_view_bobot')
+                ->groupBy('id_kepesertaan')
+                ->get(['id_kepesertaan',DB::raw("SUM(bobot)/3 as totalBobot")]);
+
+            foreach ($ide as $key => $value) {
+                $varAnggota[$value->id_kepesertaan] = [];
+                foreach ($anggota as $keys => $values) {
+                    if ($values->id_kepesertaan == $value->id_kepesertaan)
+                    {
+                        array_push($varAnggota[$values->id_kepesertaan], $anggota[$keys]);
+                    }
+                }
+            }
+
+            foreach ($ide as $key => $value) {
+                $varBobot[$value->id_kepesertaan] = [];
+                foreach ($penilaian as $keys => $values) {
+                    if ($values->id_kepesertaan == $value->id_kepesertaan)
+                    {
+                        array_push($varBobot[$values->id_kepesertaan], $penilaian[$keys]);
+                    }
+                }
+            }
+
+            foreach ($varAnggota as $key => $value) {
+                foreach ($ide as $keys => $values) {
+                    if ($key == $values->id_kepesertaan)
+                    {
+                        $ide[$keys]->anggota = $value;
+                    }
+                }
+            }
+
+            foreach ($varBobot as $key => $value) {
+                foreach ($ide as $keys => $values) {
+                    if ($key == $values->id_kepesertaan)
+                    {
+                        $ide[$keys]->penilaian = round($value[0]->totalBobot, 2);
+                    }
+                }
+            }
+            if (count($ide)==0)
+            {
+                $ide = [];
+            }
+
+            return view('/top5Admin', [
+                "showData" => $ide,
+            ]);
+        }
+        else
+        {
+            return abort(404);
+        }
+    }
+
+
     public function showDataAdmin()
     {
         $varAnggota = [];
@@ -152,6 +251,35 @@ class JudgeController extends Controller
 
             return view('/judgeAdmin', [
                 "showData" => $judgeName,
+            ]);
+        }
+        else
+        {
+            return abort(404);
+        }
+    }
+
+    public function detailTop5Admin($id='')
+    {
+        if (!Session::get('email')) {
+            return redirect('login')->with('alert', 'Mohon untuk login terlebih dulu');
+        } 
+        else if(Session::get('email') == "febria.sahrina@adhi.co.id" || Session::get('email') == "aini.damayanti@adhi.co.id" || Session::get('email') == "reza.tp@adhi.co.id")
+        {
+            $detailTim = DB::table('tb_view_bobot')
+                ->join('tb_ide', 'tb_ide.id_kepesertaan', '=', 'tb_view_bobot.id_kepesertaan')
+                ->join('tb_judge', 'tb_judge.id_judge', '=', 'tb_view_bobot.id_judge')
+                ->where('tb_view_bobot.id_kepesertaan', $id)
+                ->get([
+                    'tb_view_bobot.id_kepesertaan',
+                    'tb_view_bobot.bobot',
+                    'tb_view_bobot.id_judge',
+                    'tb_ide.nama_tim',
+                    'tb_judge.judge_name'
+                ]);
+
+            return view('/judgeTop5Admin', [
+                "showData" => $detailTim,
             ]);
         }
         else

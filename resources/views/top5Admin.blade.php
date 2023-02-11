@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'ADHIZ - Judges')
+@section('title', 'ADHIZ - Top 5 Admin')
 
 @push('custom-css')
 <link rel="stylesheet" href="{{asset('')}}assets/js/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -38,16 +38,6 @@
     <section id="features" class="services-area pt-150">
         <div class="container">
             <div class="card card-body" style="border-radius: 20px">
-                @if ($isSuccess == 'success')
-                    <div class="alert alert-success alert-block">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        <strong>Berhasil melakukan penilaian.</strong>
-                    </div>
-                @endif
-                @if(Session::get('email') == "febria.sahrina@adhi.co.id" || Session::get('email') == "aini.damayanti@adhi.co.id" || Session::get('email') == "reza.tp@adhi.co.id")
-                <a href="{{ url('judge-admin')}}" class="btn btn-primary btn-lg px-2 mb-2" style="font-size: 12px; width: 100px;">All Judges</a>
-                <a href="{{ url('top5-admin')}}" class="btn btn-warning btn-lg px-2 mb-5" style="font-size: 12px; width: 100px;">All Rates</a>
-                @endif
                 <div class="about-shape-2">
                     <img src="{{asset('')}}assets/img/about-shape-2.svg" alt="shape">
                 </div>
@@ -56,11 +46,9 @@
                         <tr>
                             <th style="width:10px">No</th>
                             <th>Nama Tim</th>
-                            <th>Judul Ide</th>
-                            <th>Deskripsi Ide</th>
-                            <th style="width:20px">Keterangan</th>
-                            <th style="text-align:center;width:100px;">Action
-                            </th>
+                            <th>Anggota</th>
+                            <th>Total Bobot</th>
+                            <th style="text-align:center;width:100px;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -79,17 +67,23 @@
                         <tr>
                             <td>{{$i+1}}</td>
                             <td>{{$showData[$i]->nama_tim}}</td>
-                            <td>{{$showData[$i]->judul_ide}}</td>
-                            <td>{{$showData[$i]->deskripsi}}</td>
-                            <td style="text-align:center;">Nilai: <span id="nilai_bobot">@if(count($showData[$i]->bobot)>0){{$showData[$i]->bobot[0]->bobot}}%@else 0 @endif</span></td>
+                            <td>
+                            <?php
+                                for($j=0; $j<count($showData[$i]->anggota); $j++)
+                                {                                
+                            ?>
+                                @if($showData[$i]->anggota[$j]->nama_unit_kerja == null)
+                                <li>{{$showData[$i]->anggota[$j]->nama}} ({{$showData[$i]->anggota[$j]->unit_kerja}})</li>
+                                @else
+                                <li>{{$showData[$i]->anggota[$j]->nama}} ({{$showData[$i]->anggota[$j]->nama_unit_kerja}})</li>
+                                @endif
+                                <?php } ?>
+                            </td>
+                            <td>{{$showData[$i]->penilaian}}%</td>
                             <td class=" dt-center align-middle">
                                 <div class="align-middle" style="width: 100px;">
                                     <div class="col">
-                                        <a href="{{ url('detail-judge')}}/{{$showData[$i]->id_kepesertaan}}" class="btn btn-primary btn-sm px-2" style="font-size: 12px; width: 70px;">Detail</a>
-                                    </div>
-                                    <div class="col mt-2">
-                                    <a href="{{ url('rate')}}/{{$showData[$i]->id_kepesertaan}}" class="btn btn-success btn-sm px-2" style="font-size: 12px; width: 70px;">Rate</a>
-                                        <!-- <a href="" class="btn btn-success btn-sm px-2" onclick="modalValidation()" style="font-size: 12px; width: 70px;">Vote</a> -->
+                                        <a href="{{ url('detail-top5-admin')}}/{{$showData[$i]->id_kepesertaan}}" class="btn btn-primary btn-sm px-2" style="font-size: 12px; width: 70px;">Detail</a>
                                     </div>
                                 </div>
                             </td>
