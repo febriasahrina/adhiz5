@@ -28,11 +28,12 @@ class VotingController extends Controller
         $varAnggota = [];
         if (!Session::get('email')) {
             return redirect('login')->with('alert', 'Mohon untuk login terlebih dulu');
-        } else if(Session::get('email') == "febria.sahrina@adhi.co.id" || Session::get('email') == "aini.damayanti@adhi.co.id" || Session::get('email') == "reza.tp@adhi.co.id")
-        {
+        } 
+        else {
             $ide = DB::table('tb_kepesertaan')
                 ->join('tb_ide', 'tb_ide.id_kepesertaan', '=', 'tb_kepesertaan.id_kepesertaan')
                 ->where('tb_kepesertaan.deleted_at', null)
+                ->orderBy('tb_ide.nama_tim')
                 ->get([
                     'tb_kepesertaan.id_kepesertaan',
                     'tb_kepesertaan.status_kepesertaan',
@@ -88,10 +89,6 @@ class VotingController extends Controller
             return view('/voting', [
                 "showData" => $ide
             ]);
-        }
-        else
-        {
-            return abort(404);
         }
     }
 

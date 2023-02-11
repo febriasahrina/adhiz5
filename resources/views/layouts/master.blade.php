@@ -148,7 +148,6 @@
                                         <a class="page-scroll" href="{{url('/participate')}}">Participate</a>
                                     </li>
                                     <li class="nav-item coming">
-                                        <img src="{{asset('')}}assets/img/comingsoon.png" alt="Logo" style="position:absolute;z-index: -1;margin-left: 40px">
                                         <a class="page-scroll" href="{{ url('voting') }}">Voting</a>
                                     </li>
                                     <li class="nav-item coming">
@@ -239,14 +238,15 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Extended</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Announcement</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <span id="id_tim_modal" style="display:none"></span>
-                <div class="modal-body">
-                    <img style="max-width:60%" src="{{asset('')}}assets/img/extend.jpeg">
+                <div class="modal-body row">
+                    <img style="max-width:70%" src="{{asset('')}}assets/img/top5.jpeg">
+                    <img class="mt-5" style="max-width:70%" src="{{asset('')}}assets/img/letsvote.jpeg">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

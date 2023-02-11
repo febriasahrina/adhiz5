@@ -30,7 +30,7 @@ class DetailsController extends Controller
     {
         if (!Session::get('name_employee')) {
             return redirect('login')->with('alert', 'Mohon untuk login terlebih dulu');
-        } else if (Session::get('email') == "febria.sahrina@adhi.co.id" || Session::get('email') == "aini.damayanti@adhi.co.id" || Session::get('email') == "reza.tp@adhi.co.id"){
+        } else{
             if($id != '') {
                 $variable = DB::table('tb_kepesertaan')
                 ->join('tb_tim', 'tb_tim.id_kepesertaan', '=', 'tb_kepesertaan.id_kepesertaan')
@@ -67,35 +67,6 @@ class DetailsController extends Controller
                     "showData" => $variable
                 ]);
             }
-        }
-        else{
-            if(Session::get('id_employee'))
-            {
-                $id_employee = Session::get('id_employee');
-                $variable = DB::table('tb_tim')
-                    ->where('deleted_at', null)
-                    ->where('id_employee', '=', $id_employee)
-                    ->pluck('id_kepesertaan');
-
-                if(count($variable)>0)
-                {
-                    return redirect('details/'.$variable[0]);
-                    // dd($variable[0]);
-                }
-                else
-                {
-                    $variable = [];
-                    return view('details', [
-                        "showData" => $variable
-                    ]);
-                }
-            }
-
-
-            $variable = [];
-            return view('details', [
-                "showData" => $variable
-            ]);
         }
     }
 

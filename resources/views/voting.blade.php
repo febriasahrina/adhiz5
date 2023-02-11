@@ -65,40 +65,14 @@
             <div class="card card-body" style="border-radius: 20px;">
                 <div class="row" id="polling-results">
                     <h5 class="ml-4">Voting Results</h5><br>
-                    <div class="col-lg-4 col-md-7 col-sm-8 issue-img two" id="progress2" style="display:none">
-                        <img class="shape" src="{{asset('')}}assets/img/two-res.png" alt="shape">
-                        <br>
-                        <h4 class="text-center" id="vote_progress_2"></h4>
-                        <h5 class="pt-2 text-center" id="vote_tim_2"></h5>                       
-                    </div>
                     <div class="col-lg-4 col-md-7 col-sm-8 issue-img one" id="progress1" style="display:none">
-                        <img class="shape" src="{{asset('')}}assets/img/one-res.png" alt="shape">
+                        <img class="shape" src="{{asset('')}}assets/img/favoritecup.png" alt="shape">
                         <br>
-                        <h4 class="text-center" id="vote_progress_1"></h4>
+                        <h4 class="text-center">Favorit</h4>
                         <h5 class="pt-2 text-center" id="vote_tim_1"></h5>
+                        <p class="pt-2 text-center" id="countdown"></p>
                     </div>
-                    <div class="col-lg-4 col-md-7 col-sm-8 issue-img three" id="progress3" style="display:none">
-                        <img class="shape" src="{{asset('')}}assets/img/three-res.png" alt="shape">
-                        <br>
-                        <h4 class="text-center" id="vote_progress_3"></h4>
-                        <h5 class="pt-2 text-center" id="vote_tim_3"></h5>
-                    </div>
-                 </div> <!-- row -->
-                <!-- <div class="span6 mb-4" id="polling-results">
-                    <h5>Voting Results</h5><br>
-                    <strong id="vote_tim_1"></strong><span class="pull-right" id="vote_label_1"></span>
-                    <div class="progress" id="progress1" style="display:none">
-                        <div class="progress-bar bg-success" role="progressbar" id="vote_progress_1" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <strong id="vote_tim_2"></strong><span class="pull-right" id="vote_label_2"></span>
-                    <div class="progress" id="progress2" style="display:none">
-                        <div class="progress-bar bg-info" role="progressbar" id="vote_progress_2" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <strong id="vote_tim_3"></strong><span class="pull-right" id="vote_label_3"></span>
-                    <div class="progress" id="progress3" style="display:none">
-                        <div class="progress-bar bg-warning" role="progressbar" id="vote_progress_3" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div> -->
+                 </div>
             </div>
         </div>
         <div class="container">
@@ -241,6 +215,7 @@
         $email = "<?php echo Session::get('email'); ?>";
         cekHaveVote();
         countVote();
+        CountDownTimer('02/23/2023 11:59 PM', 'countdown');
 
         $(document).ready(function() {
             $('#id_ide').select2({
@@ -288,7 +263,6 @@
         
         function letsVote()
         {
-            // let id_employee = $("input[name=id_employee]").val();
             let id_ide = $('#id_tim_modal').text();
 
             var sendVote = {
@@ -339,20 +313,18 @@
             $.ajax({
                 type: 'GET',
                 url: "{{url('count-vote')}}",
-                // url: "{{ url('show-drop-down')}}",
                 success: function(datas) {
                     $allVote = datas.data.countAll;
                     if ($allVote != 0)
                     {
                         $.each(datas.data.data, function(keys, values) {
-                            if ($no <= 3)
+                            if ($no <= 1)
                             {
                                 document.getElementById("polling-results").style.display = "block";
 
                                 document.getElementById("progress"+$no).style.display = "";
 
                                 document.getElementById("vote_tim_"+$no).innerText = values['nama_tim'];
-                                document.getElementById("vote_progress_"+$no).innerText = parseInt(values['total']/$allVote*100)+"%";
                             }
                             $no++;
                         });
@@ -368,7 +340,6 @@
         function modalValidation(nama,id){            
             document.getElementById('nama_tim').innerText = nama;
             document.getElementById('id_tim_modal').innerText = id;
-            // $('#myModalValidation').modal('show');
 
             cekHaveVote('add');
         }
@@ -398,6 +369,41 @@
                     }
                 }
             });
+        }
+
+        function CountDownTimer(dt, id)
+        {
+            var end = new Date(dt);
+            console.log(end);
+
+            var _second = 1000;
+            var _minute = _second * 60;
+            var _hour = _minute * 60;
+            var _day = _hour * 24;
+            var timer;
+
+            function showRemaining() {
+                var now = new Date();
+                var distance = end - now;
+                if (distance < 0) {
+
+                    clearInterval(timer);
+                    document.getElementById(id).innerHTML = 'END VOTE!';
+
+                    return;
+                }
+                var days = Math.floor(distance / _day);
+                var hours = Math.floor((distance % _day) / _hour);
+                var minutes = Math.floor((distance % _hour) / _minute);
+                var seconds = Math.floor((distance % _minute) / _second);
+
+                document.getElementById(id).innerHTML = days + ' Hari ';
+                document.getElementById(id).innerHTML += hours + ' Jam ';
+                document.getElementById(id).innerHTML += minutes + ' Menit ';
+                document.getElementById(id).innerHTML += seconds + ' Detik';
+            }
+
+            timer = setInterval(showRemaining, 1000);
         }
 
     </script>
