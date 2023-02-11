@@ -61,34 +61,41 @@
 
                             if(count($showData)>0)
                             {
-                                for($i=0; $i<count($showData); $i++)
+                                $showDataSort = $showData->sortByDesc('penilaian');
+                                $len = count($showData);
+                                if ($len > 5)
+                                    $len = 5;
+
+                                $i=0;
+                                foreach ($showDataSort as $key => $value) 
                                 {
                         ?>
                         <tr>
                             <td>{{$i+1}}</td>
-                            <td>{{$showData[$i]->nama_tim}}</td>
+                            <td>{{$value->nama_tim}}</td>
                             <td>
                             <?php
-                                for($j=0; $j<count($showData[$i]->anggota); $j++)
+                                for($j=0; $j<count($value->anggota); $j++)
                                 {                                
                             ?>
-                                @if($showData[$i]->anggota[$j]->nama_unit_kerja == null)
-                                <li>{{$showData[$i]->anggota[$j]->nama}} ({{$showData[$i]->anggota[$j]->unit_kerja}})</li>
+                                @if($value->anggota[$j]->nama_unit_kerja == null)
+                                <li>{{$value->anggota[$j]->nama}} ({{$value->anggota[$j]->unit_kerja}})</li>
                                 @else
-                                <li>{{$showData[$i]->anggota[$j]->nama}} ({{$showData[$i]->anggota[$j]->nama_unit_kerja}})</li>
+                                <li>{{$value->anggota[$j]->nama}} ({{$value->anggota[$j]->nama_unit_kerja}})</li>
                                 @endif
                                 <?php } ?>
                             </td>
-                            <td>{{$showData[$i]->penilaian}}%</td>
+                            <td>{{$value->penilaian}}%</td>
                             <td class=" dt-center align-middle">
                                 <div class="align-middle" style="width: 100px;">
                                     <div class="col">
-                                        <a href="{{ url('detail-top5-admin')}}/{{$showData[$i]->id_kepesertaan}}" class="btn btn-primary btn-sm px-2" style="font-size: 12px; width: 70px;">Detail</a>
+                                        <a href="{{ url('detail-top5-admin')}}/{{$value->id_kepesertaan}}" class="btn btn-primary btn-sm px-2" style="font-size: 12px; width: 70px;">Detail</a>
                                     </div>
                                 </div>
                             </td>
                         </tr>
                         <?php
+                            $i++;
                             }}
                         ?>
                     </tbody>

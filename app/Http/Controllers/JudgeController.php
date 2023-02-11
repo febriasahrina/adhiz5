@@ -223,8 +223,12 @@ class JudgeController extends Controller
                 $ide = [];
             }
 
+            $sorted = $ide->sortByDesc(function ($item, $key) {
+                return $item->penilaian;
+            });
+
             return view('/top5Admin', [
-                "showData" => $ide,
+                "showData" => $ide
             ]);
         }
         else
