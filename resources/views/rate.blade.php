@@ -136,16 +136,10 @@
                                         @endforeach
                                     </td>
                                     <td>
-                                        <select class="form-control" id="range-{{$criteria[$i]->id_criteria}}" name="range">
-                                            <option selected="selected" value="null" disabled>Pilih Penilaian</option>
-                                            @foreach ($criteria[$i]->range as $range)
-                                            <option @if((count($fill)>0) && ($range->id_range == $fill[$i]->id_range)) selected @endif value="{{$range->id_range}}">{{$range->name_range}}</option>
-                                            @endforeach
-                                        </select>
                                         @if(count($fill)>0)
-                                        <span id="id-rate-{{$i+1}}" hidden>{{$fill[$i]->id_rate}}</span>
+                                        <p>{{$fill[$i]->name_range}}</p>
                                         @else
-                                        <span id="id-rate-{{$i+1}}" hidden>null</span>
+                                        <p>-</p>
                                         @endif
                                     </td>
                                 </tr>
