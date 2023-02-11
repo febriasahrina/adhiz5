@@ -313,32 +313,25 @@
                     <h3 class="title">Winner <span> Category</span></h3>
                 </div> <!-- section title -->
                 <div class="row">
-                    <div class="col-lg-3 col-md-7 col-sm-8 issue-img">
-                        <img class="shape" src="{{asset('')}}assets/img/first.png" alt="shape">
+                    <div class="col-lg-4 col-md-7 col-sm-8 issue-img">
+                        <img class="shape" src="{{asset('')}}assets/img/bestidea.png" alt="shape">
                         <br>
-                        <h4 class="text-center">1st Place</h4>
-                        <h5 class="pt-2 text-center">Hadiah Rp. 7.000.000</h5>
+                        <h4 class="text-center">Best Idea</h4>
+                        <h5 class="pt-2 text-center">Hadiah Rp. 6.000.000</h5>
                         <p class="text-muted text-center" style="font-size:14px">Ditentukan saat penjurian final</p>
                     </div>
-                    <div class="col-lg-3 col-md-7 col-sm-8 issue-img">
-                        <img class="shape" src="{{asset('')}}assets/img/second.png" alt="shape">
+                    <div class="col-lg-4 col-md-7 col-sm-8 issue-img">
+                        <img class="shape" src="{{asset('')}}assets/img/bestspeaker.png" alt="shape">
                         <br>
-                        <h4 class="text-center">2nd Place</h4>
-                        <h5 class="pt-2 text-center">Hadiah Rp. 5.000.000</h5>
+                        <h4 class="text-center">Best Speaker</h4>
+                        <h5 class="pt-2 text-center">Hadiah Rp. 6.000.000</h5>
                         <p class="text-muted text-center" style="font-size:14px">Ditentukan saat penjurian final</p>
                     </div>
-                    <div class="col-lg-3 col-md-7 col-sm-8 issue-img">
-                        <img class="shape" src="{{asset('')}}assets/img/third.png" alt="shape">
-                        <br>
-                        <h4 class="text-center">3rd Place</h4>
-                        <h5 class="pt-2 text-center">Hadiah Rp. 3.000.000</h5>
-                        <p class="text-muted text-center" style="font-size:14px">Ditentukan saat penjurian final</p>
-                    </div>
-                    <div class="col-lg-3 col-md-7 col-sm-8 issue-img">
-                        <img class="shape" src="{{asset('')}}assets/img/favorite.png" alt="shape">
+                    <div class="col-lg-4 col-md-7 col-sm-8 issue-img">
+                        <img class="shape" src="{{asset('')}}assets/img/favor.png" alt="shape">
                         <br>
                         <h4 class="text-center">Favorite Place</h4>
-                        <h5 class="pt-2 text-center">Hadiah Rp. 1.000.000</h5>
+                        <h5 class="pt-2 text-center">Hadiah Rp. 3.000.000</h5>
                         <p class="text-muted text-center" style="font-size:14px">Diraih oleh ide dengan like terbanyak melalui website</p>
                     </div>
                     
