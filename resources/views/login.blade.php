@@ -162,7 +162,7 @@
           const email = $('#'+id).val();
           $result.text('');
 
-          if (validateEmail(email) && validateAdhi(email)) {
+          if (validateEmail(email)) {
             $result.text(email + ' is valid');
             $result.css('color', 'green');
           } else {
