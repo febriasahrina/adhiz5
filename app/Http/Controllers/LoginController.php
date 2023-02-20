@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Schema;
-use Laravel\Socialite\Facades\Socialite;
+// use Laravel\Socialite\Facades\Socialite;
+use Socialite;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
@@ -153,6 +154,31 @@ class LoginController extends Controller
         // $redis->hSet($siteVisitsMap, $visitorHashKey, $totalVisits);
 
         // echo "Welcome, you've visited this page " .  $totalVisits . " times\n";
+    }
+
+    public function google()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleProviderCallback()
+    {
+        // $data_call = Socialite::driver('google')->stateless()->user();
+        $user = Socialite::driver('google')->user();
+
+        Session::put('name', $user->getName());
+        Session::put('email', $user->getEmail());
+        Session::put('email_verified_at', date('Y-m-d H:i:s', time()));
+
+        $update_tb_respondent = DB::table('tb_login_google')
+                            ->insert([
+                                'name' => $user->getName(), 
+                                'email' => $user->getEmail(),
+                                'created_at' => date('Y-m-d H:i:s'),
+                                'updated_at' => date('Y-m-d H:i:s')
+                            ]);
+        // return redirect(route('/'));
+        return redirect('/');
     }
 
 }

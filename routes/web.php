@@ -18,6 +18,12 @@ use App\Http\Controllers\JudgeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// google route
+Route::get('/sign-in-google', ['as' => 'user.login.google', 'uses' => 'LoginController@google']);
+Route::get('/auth/google/callback', ['as' => 'client.google.callback', 'uses' => 'LoginController@handleProviderCallback']);
+
+
 Route::get('/token', function () {
     return csrf_token();
 });
@@ -65,6 +71,7 @@ Route::get('cek-pendaftar/{id}', [
 
 Route::get('/panduan', function () { return view('panduan');});
 Route::get('/login', function () { return view('login');});
+Route::get('/login-ex', function () { return view('loginEx');});
 
 Route::get('/upload', function () { return view('upload');});
 

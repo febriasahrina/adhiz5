@@ -11,6 +11,7 @@
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="expires" content="0">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="google-site-verification" content="US3UP-HGEgjGFFdd8Or4ZydHbpoO2wI9tWGDb5RSNVk" />
     <!--====== Title ======-->
     <title>@yield('title', 'ADHIZ | XX')</title>
     
