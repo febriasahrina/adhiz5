@@ -102,7 +102,7 @@
                             <i class="lni-grow"></i>
                         </div>
                         <div class="services-content mt-30">
-                            <h4 class="services-title"><a href="#">Environment</a></h4>
+                            <h4 class="services-title"><a href="#">Environmental</a></h4>
                             <p class="text text-justify">Mencakup energi yang digunakan perusahaan dan limbah yang dibuangnya, sumber daya alam yang dibutuhkan, 
                                 dan dampaknya bagi makhluk hidup. Paling tidak, <i>environment</i> mencakup emisi karbon & perubahan iklim. 
                                 Setiap perusahaan menggunakan energi dan sumber daya alam, setiap perusahaan mempengaruhi dan dipengaruhi oleh lingkungan.</p>
@@ -254,17 +254,14 @@
                         <div class="px-2">
                         <div class="event-date badge bg-warning" style="color : white;">11 Februari</div>
                         <h6 class="pt-2">Pengumuman Tahap</h6>
-                        <p class="text-muted pt-2"><h6 style="font-size:15px">Awal</h6></p>
-                        <!-- <div>
-                            <a href="#" class="btn btn-primary btn-sm">Read more</a>
-                        </div> -->
+                        <p class="text-muted pt-2"><h6 style="font-size:15px">Awal <span class="text-muted" style="font-size:14px">(Closed)</span></h6></p>
                         </div>
                     </li>
                     <li class="list-inline-item items-list">
                         <div class="px-2">
                         <div class="event-date badge bg-secondary" style="color : white;">13 - 15 Februari</div>
                         <h5 class="pt-2">Feedback</h5>
-                        <p class="text-muted"></p><br>
+                        <p class="text-muted" style="font-size:14px">Closed</p>
                         <!-- <div>
                             <a href="#" class="btn btn-primary btn-sm">Read more</a>
                         </div> -->

@@ -245,8 +245,7 @@
                 </div>
                 <span id="id_tim_modal" style="display:none"></span>
                 <div class="modal-body row">
-                    <img style="max-width:70%" src="{{asset('')}}assets/img/top5.jpeg">
-                    <img class="mt-5" style="max-width:70%" src="{{asset('')}}assets/img/letsvote.jpeg">
+                    <img style="max-width:70%" src="{{asset('')}}assets/img/votez.jpeg">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
