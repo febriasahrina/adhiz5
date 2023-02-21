@@ -71,6 +71,11 @@
                   <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit" id="signin" value="signin">Sign
                     in</button>
                 </div>
+                <br>
+                <div class="d-grid signin">
+                  <div class="btn btn-warning btn-login text-uppercase fw-bold" type="submit" id="signin-google" value="signin-google"><a style="color:white" href="login-ex"> Sign
+                    in Juri External</a></div>
+                </div>
                 <hr class="my-4">
               </form>
             </div>

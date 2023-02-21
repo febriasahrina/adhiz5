@@ -152,17 +152,21 @@
                                         <a class="page-scroll" href="{{ url('voting') }}">Voting</a>
                                     </li>
                                     <li class="nav-item coming">
-                                        <a class="page-scroll" href="{{url('/judge')}}">Judges</a>
+                                        <a class="page-scroll" href="{{url('/judge-final')}}">Judges</a>
                                     </li>
                                     <li class="nav-item coming">
                                         <img src="{{asset('')}}assets/img/comingsoon.png" alt="Logo" style="position:absolute;z-index: -1;margin-left: 40px">
                                         <a class="page-scroll" href="#">Recap</a>
                                     </li>
-                                    @if(Session::get('loginStatus') == TRUE)
+                                    @if(Session::get('loginStatus') == TRUE || Session::get('name') != '')
                                     <li class="nav-item dropdown align-self-center">
                                         <a class=" btn nav-link p-0 mr-3 text-left" data-toggle="dropdown" href="#" aria-expanded="false">
                                             <div>
+                                                @if(Session::get('name_employee'))
                                                 <b>Hi, {{Session::get('name_employee')}}</b>
+                                                @else
+                                                <b>Hi, {{Session::get('name')}} (juri)</b>
+                                                @endif
                                             </div>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right">

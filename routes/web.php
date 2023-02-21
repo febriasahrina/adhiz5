@@ -36,13 +36,20 @@ Route::get('/details', ['as' => 'details', 'uses' => 'DetailsController@showData
 Route::post('convertPdf', ['as' => 'convertPdf', 'uses' => 'DetailsController@convertPdf']);
 
 Route::get('/judge', ['as' => 'judge', 'uses' => 'JudgeController@showData']);
+Route::get('/judge-final', ['as' => 'judge-final', 'uses' => 'JudgeController@showDataFinal']);
 Route::get('/judge-admin', ['as' => 'judge-admin', 'uses' => 'JudgeController@showDataAdmin']);
 Route::get('/top5-admin', ['as' => 'top5-admin', 'uses' => 'JudgeController@showTop5Admin']);
 Route::get('/judge/{id}', ['as' => 'judge', 'uses' => 'JudgeController@showData']);
+Route::get('/judge-final/{id}', ['as' => 'judge-final', 'uses' => 'JudgeController@showDataFinal']);
 Route::get('/rate/{id}', ['as' => 'rate', 'uses' => 'JudgeController@showRate']);
+Route::get('/rate-final/{id}', ['as' => 'rate-final', 'uses' => 'JudgeController@showRateFinal']);
+Route::get('/minmax/{id}', ['as' => 'minmax', 'uses' => 'JudgeController@minmax']);
 Route::post('insert-rate', [
     'as' => 'insert-rate',
     'uses' => 'JudgeController@storeRate']);
+Route::post('insert-rate-ex', [
+    'as' => 'insert-rate',
+    'uses' => 'JudgeController@storeRateEx']);
 Route::get('/detail-judge/{id}', ['as' => 'detail-judge', 'uses' => 'JudgeController@detail']);
 Route::get('/detail-judge-admin/{id}', ['as' => 'detail-judge', 'uses' => 'JudgeController@detailAdmin']);
 Route::get('/detail-top5-admin/{id}', ['as' => 'detail-top5-admin', 'uses' => 'JudgeController@detailTop5Admin']);

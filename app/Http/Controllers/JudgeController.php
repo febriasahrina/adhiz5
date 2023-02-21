@@ -135,6 +135,116 @@ class JudgeController extends Controller
         }
     }
 
+    public function showDataFinal($id='')
+    {
+        $varAnggota = [];
+        $varBobot = [];
+        if (!Session::get('email')) {
+            return redirect('login')->with('alert', 'Mohon untuk login terlebih dulu');
+        } 
+        else{
+            $email = Session::get('email');
+            $checkJudge = DB::table('tb_judge_ex')
+                ->select('id_judge_ex')
+                ->where('email_ex', $email)
+                ->first();
+
+            if($checkJudge != null)
+            {
+
+                $ide = DB::table('tb_kepesertaan')
+                    ->join('tb_ide', 'tb_ide.id_kepesertaan', '=', 'tb_kepesertaan.id_kepesertaan')
+                    ->join('tb_top5', 'tb_ide.id_ide', '=', 'tb_top5.id_ide')
+                    ->where('tb_kepesertaan.deleted_at', null)
+                    ->get([
+                        'tb_kepesertaan.id_kepesertaan',
+                        'tb_kepesertaan.status_kepesertaan',
+                        'tb_kepesertaan.created_at',
+                        'tb_ide.id_ide',
+                        'tb_ide.nama_tim',
+                        'tb_ide.tema_ide',
+                        'tb_ide.judul_ide',
+                        'tb_ide.deskripsi',
+                    ]);
+
+                $anggota = DB::table('tb_kepesertaan')
+                    ->join('tb_tim', 'tb_tim.id_kepesertaan', '=', 'tb_kepesertaan.id_kepesertaan')
+                    ->leftjoin('tb_unit_kerja', 'tb_unit_kerja.id_unit_kerja', '=', 'tb_tim.unit_kerja')
+                    ->leftjoin('tb_department', 'tb_department.id_department', '=', 'tb_tim.id_department')
+                    ->where('tb_kepesertaan.deleted_at', null)
+                    ->get([
+                        'tb_kepesertaan.id_kepesertaan',
+                        'tb_kepesertaan.status_kepesertaan',
+                        'tb_kepesertaan.created_at',
+                        'tb_tim.nama',
+                        'tb_tim.npp',
+                        'tb_tim.unit_kerja',
+                        'tb_tim.email',
+                        'tb_tim.no_hp',
+                        'tb_tim.status_tim',
+                        'tb_unit_kerja.nama_unit_kerja',
+                        'tb_department.nama_department'
+                    ]);
+
+                // $checkHaveBobot = DB::table('tb_view_bobot')
+                //     ->select('id_judge','bobot','id_kepesertaan')
+                //     ->where('id_judge', $checkJudge->id_judge)
+                //     ->get();
+
+                foreach ($ide as $key => $value) {
+                    $varAnggota[$value->id_kepesertaan] = [];
+                    foreach ($anggota as $keys => $values) {
+                        if ($values->id_kepesertaan == $value->id_kepesertaan)
+                        {
+                            array_push($varAnggota[$values->id_kepesertaan], $anggota[$keys]);
+                        }
+                    }
+                }
+
+                foreach ($varAnggota as $key => $value) {
+                    foreach ($ide as $keys => $values) {
+                        if ($key == $values->id_kepesertaan)
+                        {
+                            $ide[$keys]->anggota = $value;
+                        }
+                    }
+                }
+
+                // foreach ($ide as $key => $value) {
+                //     $varBobot[$value->id_kepesertaan] = [];
+                //     foreach ($checkHaveBobot as $keys => $values) {
+                //         if ($values->id_kepesertaan == $value->id_kepesertaan)
+                //         {
+                //             array_push($varBobot[$values->id_kepesertaan], $checkHaveBobot[$keys]);
+                //         }
+                //     }
+                // }
+
+                // foreach ($varBobot as $key => $value) {
+                //     foreach ($ide as $keys => $values) {
+                //         if ($key == $values->id_kepesertaan)
+                //         {
+                //             $ide[$keys]->bobot = $value;
+                //         }
+                //     }
+                // }
+
+                if (count($ide)==0)
+                {
+                    $ide = [];
+                }
+                return view('/judgeFinal', [
+                    "showData" => $ide,
+                    "isSuccess" => $id
+                ]);
+            }
+            else
+            {
+                return abort(404);
+            }
+        }
+    }
+
     public function showTop5Admin()
     {
         $varAnggota = [];
@@ -485,6 +595,124 @@ class JudgeController extends Controller
         // }
     }
 
+    public function minmax($id="")
+    {
+        $range = DB::table('tb_range_ex')
+            ->select('tb_range_ex.id_range_ex','tb_range_ex.bobot_range_ex_start','tb_range_ex.bobot_range_ex_end')
+            ->where('id_range_ex', $id)
+            ->first();
+
+        if ($range) {
+            return response()->json([
+                'data' => [
+                    'success' => true,
+                    'message' => 'Insert Data Berhasil.',
+                    'data' => $range
+                ]
+            ], 201);
+        } else {
+            return response()->json([
+                'data' => [
+                    'success' => false,
+                    'message' => 'Insert Data Gagal.'
+                ]
+            ], 504);
+        }
+    }
+
+    public function showRateFinal($participant='')
+    {
+            $email = Session::get('email');
+            $checkJudge = DB::table('tb_judge_ex')
+                ->select('id_judge_ex')
+                ->where('email_ex', $email)
+                ->first();
+
+            $checkHaveRate = DB::table('tb_rate_ex')
+                ->where('tb_rate_ex.id_judge_ex', $checkJudge->id_judge_ex)
+                ->where('tb_rate_ex.id_kepesertaan', $participant)
+                ->leftJoin('tb_range_ex', 'tb_range_ex.id_range_ex', '=', 'tb_rate_ex.id_range_ex')
+                ->get(['tb_rate_ex.id_rate_ex','tb_rate_ex.id_criteria_ex','tb_rate_ex.id_range_ex','tb_rate_ex.range_ex','tb_range_ex.bobot_range_ex_start','tb_range_ex.bobot_range_ex_end']);
+
+            $varDesc = [];
+            $varRange = [];
+            if($checkJudge != null)
+            {
+                $ide = DB::table('tb_ide')
+                ->select('id_kepesertaan','nama_tim','judul_ide','deskripsi')
+                ->where('id_kepesertaan', $participant)
+                ->first();
+
+                $criteria = DB::table('tb_criteria_ex')
+                    ->select('tb_criteria_ex.id_criteria_ex','tb_criteria_ex.criteria_name_ex','tb_criteria_ex.id_criteria_ket_ex')
+                    ->get();
+
+                $criteriaDesc = DB::table('tb_criteria_ket_ex')
+                    ->select('tb_criteria_ket_ex.id_criteria_ket_ex','tb_criteria_ket_ex.name_criteria_ket_ex')
+                    ->get();
+                
+                $range = DB::table('tb_range_ex')
+                    ->select('tb_range_ex.id_criteria_ex','tb_range_ex.id_range_ex','tb_range_ex.name_range_ex','tb_range_ex.bobot_range_ex_start','tb_range_ex.bobot_range_ex_end')
+                    ->get();
+
+                // concat desc
+                foreach ($criteria as $key => $value) {
+                    $varDesc[$value->id_criteria_ex] = [];
+                    foreach ($criteriaDesc as $keys => $values) {
+                        if ($values->id_criteria_ket_ex == $value->id_criteria_ket_ex)
+                        {
+                            array_push($varDesc[$value->id_criteria_ex], $criteriaDesc[$keys]);
+                        }
+                    }
+                }
+    
+                foreach ($varDesc as $key => $value) {
+                    foreach ($criteria as $keys => $values) {
+                        if ($key == $values->id_criteria_ex)
+                        {
+                            $criteria[$keys]->criteriaDesc = $value;
+                        }
+                    }
+                }
+
+                // concat range
+                foreach ($criteria as $key => $value) {
+                    $varDesc[$value->id_criteria_ex] = [];
+                    foreach ($range as $keys => $values) {
+                        if ($values->id_criteria_ex == $value->id_criteria_ex)
+                        {
+                            array_push($varDesc[$values->id_criteria_ex], $range[$keys]);
+                        }
+                    }
+                }
+    
+                foreach ($varDesc as $key => $value) {
+                    foreach ($criteria as $keys => $values) {
+                        if ($key == $values->id_criteria_ex)
+                        {
+                            $criteria[$keys]->range = $value;
+                        }
+                    }
+                }
+
+                // dd($checkHaveRate);
+                
+                return view('/rateFinal', [
+                        "id_judge" => $checkJudge->id_judge_ex,
+                        "id_kepesertaan" => $participant,
+                        "ide" => $ide,
+                        "criteria" => $criteria,
+                        "fill" => $checkHaveRate
+                    ]);
+                
+            }
+            else{
+                return abort(404);
+            }
+
+        
+    }
+
     public function showRateAdmin($participant='',$judge='')
     {
         if (!Session::get('email')) {
@@ -580,7 +808,7 @@ class JudgeController extends Controller
    
     public function detail($id='')
     {
-        if (!Session::get('name_employee')) {
+        if (!Session::get('email')) {
             return redirect('login')->with('alert', 'Mohon untuk login terlebih dulu');
         } else if($id != '') {
             $variable = DB::table('tb_kepesertaan')
@@ -720,6 +948,95 @@ class JudgeController extends Controller
         }     
 
         if ($insertBobot) {
+            return response()->json([
+                'data' => [
+                    'success' => true,
+                    'message' => 'Insert Data Berhasil.'
+                ]
+            ], 201);
+        } else {
+            return response()->json([
+                'data' => [
+                    'success' => false,
+                    'message' => 'Insert Data Gagal.'
+                ]
+            ], 504);
+        }
+    }
+
+    public function storeRateEx(Request $request)
+    {
+        $arrBobot = [];
+        $rate = $request->input('range');
+        $idRate = $request->input('rate');
+        $count = 0;
+        
+        foreach ($rate as $key => $value) {
+            // $countBobot = DB::table('tb_range')
+            //     ->select('bobot_range')
+            //     ->where('id_range', $value)
+            //     ->first();
+
+            // array_push($arrBobot, $countBobot->bobot_range);
+            
+            if($idRate[0] != "null")
+            {
+                $insertRate = DB::table('tb_rate_ex')
+                    ->where('id_rate_ex', $request->rate[$count])
+                    ->update([
+                        'id_judge_ex' => $request->id_judge,
+                        'id_kepesertaan' => $request->id_kepesertaan,
+                        'id_criteria_ex' => $key+1,
+                        'range_ex' => $value,
+                        'id_range_ex' => $request->id_range[$key],
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'updated_at' => date('Y-m-d H:i:s')
+                    ]);
+                $count++;
+            }
+            else
+            {
+                $insertRate = DB::table('tb_rate_ex')
+                ->insert([
+                    'id_judge_ex' => $request->id_judge,
+                    'id_kepesertaan' => $request->id_kepesertaan,
+                    'id_criteria_ex' => $key+1,
+                    'range_ex' => $value,
+                    'id_range_ex' => $request->id_range[$key],
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ]);
+            }
+
+        }
+
+        // $sumBobot = array_sum($arrBobot);
+        // $avgBobot = $sumBobot/5;
+
+        // if($idRate[0] != "null")
+        // {
+        //     $insertBobot = DB::table('tb_view_bobot')
+        //         ->where('id_judge', $request->id_judge)
+        //         ->where('id_kepesertaan', $request->id_kepesertaan)
+        //         ->update([
+        //             'bobot' => $avgBobot,
+        //             'created_at' => date('Y-m-d H:i:s'),
+        //             'updated_at' => date('Y-m-d H:i:s')
+        //         ]);
+        // }
+        // else
+        // {
+        //     $insertBobot = DB::table('tb_view_bobot')
+        //     ->insert([
+        //         'id_judge' => $request->id_judge,
+        //         'id_kepesertaan' => $request->id_kepesertaan,
+        //         'bobot' => $avgBobot,
+        //         'created_at' => date('Y-m-d H:i:s'),
+        //         'updated_at' => date('Y-m-d H:i:s')
+        //     ]);
+        // }     
+
+        if ($insertRate) {
             return response()->json([
                 'data' => [
                     'success' => true,

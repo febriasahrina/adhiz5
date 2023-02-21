@@ -50,18 +50,18 @@
               <div class="col-sm">
                 <div class="container-fluid" style="text-align: center;">
                   <a href="{{url('/')}}">
-                    <img class="shape-1" src="{{asset('')}}assets/img/adhi-z-fix-resize.png" alt="shape">
+                    <img class="shape-1" src="{{asset('')}}assets/img/adhiz-x-google.png" alt="shape">
                   </a>
                   <hr>
-                  <h1 class="header-third mt-3" style="font-size:4vh;">
+                  <h4 class="header-third mt-3"">
                       Login Juri External
-                  </h1>
-                  <h5 class="mt-2" style="font-size:2vh;">
+                  </h4>
+                  <h7 class="mt-2" style="font-size:2vh;">
                       Silahkan login menggunakan SSO Google.
-                  </h5>
+                  </h7>
                   <br>
-                  <a class="btn btn-primary" href="{{route('user.login.google')}}">
-                      <img src="{{asset('assets/img/ic_google.svg')}}" class="icon" alt=""> Sign In with Google
+                  <a class="btn btn-primary mt-3" href="{{route('user.login.google')}}">
+                    Sign In with Google
                   </a>
                 </div>
             </div>
