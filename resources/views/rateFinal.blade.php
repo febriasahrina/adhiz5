@@ -264,7 +264,7 @@
 
         function modalValidation(){   
             var color = "";
-            for (var x = 1; x <= 4; x++) {
+            for (var x = 1; x <= 5; x++) {
                 var id_range = $("#range-"+x).val();
                 const $result = $('#bobot-range-'+x);
 
@@ -293,7 +293,7 @@
             $objEmp["range"] = $objEmp["range"] || [];
             $objEmp["rate"] = $objEmp["rate"] || [];
             $objEmp["id_range"] = $objEmp["id_range"] || [];
-            for (var x = 1; x <= 4; x++) {
+            for (var x = 1; x <= 5; x++) {
                 // $objEmp[x] = $objEmp[x] || [];
                 var id_range = $("#bobot-"+x).val();
                 var id_range_ex = $("#range-"+x).val();
