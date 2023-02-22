@@ -86,9 +86,15 @@
                                         <a href="{{ url('detail-judge')}}/{{$showData[$i]->id_kepesertaan}}" class="btn btn-primary btn-sm px-2" style="font-size: 12px; width: 70px;">Detail</a>
                                     </div>
                                     <div class="col mt-2">
+                                    @if (isset($fill[$i]) && $fill[$i]->id_kepesertaan == $showData[$i]->id_kepesertaan)
+                                    <a href="{{ url('rate-final')}}/{{$showData[$i]->id_kepesertaan}}" class="btn btn-warning btn-sm px-2" style="font-size: 12px; width: 70px;">Edit</a>
+                                        <!-- <a href="" class="btn btn-success btn-sm px-2" onclick="modalValidation()" style="font-size: 12px; width: 70px;">Vote</a> -->
+                                    </div>
+                                    @else
                                     <a href="{{ url('rate-final')}}/{{$showData[$i]->id_kepesertaan}}" class="btn btn-success btn-sm px-2" style="font-size: 12px; width: 70px;">Rate</a>
                                         <!-- <a href="" class="btn btn-success btn-sm px-2" onclick="modalValidation()" style="font-size: 12px; width: 70px;">Vote</a> -->
                                     </div>
+                                    @endif
                                 </div>
                             </td>
                         </tr>

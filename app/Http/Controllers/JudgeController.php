@@ -149,6 +149,15 @@ class JudgeController extends Controller
                 ->where('email_ex', $email)
                 ->first();
 
+            $checkHaveRate = DB::table('tb_rate_ex')
+            ->select('tb_rate_ex.id_kepesertaan')
+            ->where('tb_rate_ex.id_judge_ex', $checkJudge->id_judge_ex)
+            ->distinct('tb_rate_ex.id_kepesertaan')
+            // ->count('tb_rate_ex.id_kepesertaan');
+            ->get();
+
+            // dd($checkHaveRate);
+
             if($checkJudge != null)
             {
 
@@ -229,13 +238,16 @@ class JudgeController extends Controller
                 //     }
                 // }
 
+                // dd($ide);
+
                 if (count($ide)==0)
                 {
                     $ide = [];
                 }
                 return view('/judgeFinal', [
                     "showData" => $ide,
-                    "isSuccess" => $id
+                    "isSuccess" => $id,
+                    "fill" => $checkHaveRate
                 ]);
             }
             else
