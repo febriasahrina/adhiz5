@@ -385,6 +385,53 @@ class JudgeController extends Controller
         }
     }
 
+    public function showDataAdminFinal()
+    {
+        $varAnggota = [];
+        $varBobot = [];
+        if (!Session::get('email')) {
+            return redirect('login')->with('alert', 'Mohon untuk login terlebih dulu');
+        } 
+        else if(Session::get('email') == "febria.sahrina@adhi.co.id" || Session::get('email') == "aini.damayanti@adhi.co.id" || Session::get('email') == "reza.tp@adhi.co.id")
+        {
+            $judgeName = DB::table('tb_judge_ex')
+                ->select('tb_judge_ex.id_judge_ex','tb_judge_ex.email_ex','tb_judge_ex.judge_name_ex')               
+                ->get();
+
+            $fillRate = DB::table('tb_rate_ex')
+                ->select('tb_rate_ex.id_judge_ex','tb_rate_ex.id_kepesertaan')
+                ->distinct('tb_rate_ex.id_kepesertaan')
+                ->get();
+
+            foreach ($judgeName as $key => $value) {
+                $varAnggota[$value->id_judge_ex] = [];
+                foreach ($fillRate as $keys => $values) {
+                    if ($values->id_judge_ex == $value->id_judge_ex)
+                    {
+                        array_push($varAnggota[$values->id_judge_ex], $fillRate[$keys]);
+                    }
+                }
+            }
+
+            foreach ($varAnggota as $key => $value) {
+                foreach ($judgeName as $keys => $values) {
+                    if ($key == $values->id_judge_ex)
+                    {
+                        $judgeName[$keys]->fillRate = $value;
+                    }
+                }
+            }
+
+            return view('/judgeAdminFinal', [
+                "showData" => $judgeName,
+            ]);
+        }
+        else
+        {
+            return abort(404);
+        }
+    }
+
     public function detailTop5Admin($id='')
     {
         if (!Session::get('email')) {
