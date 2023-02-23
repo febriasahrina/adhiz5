@@ -344,27 +344,34 @@
             cekHaveVote('add');
         }
 
-        function cekHaveVote($param){
+        function cekHaveVote($param=''){
             $.ajax({
                 type: 'GET',
                 url: "{{url('cek-have-vote')}}"+"/"+$id_email,
                 success: function(data) {
-                    if (data.data != null)
+                    if (data.message == 'Voting closed!')
                     {
-                        if ($param == 'add')
-                        {
-                            alert("Mohon maaf, Anda sudah melakukan voting!");      
-                        }
-                        else
-                        {
-                            $('[id=buttonVote]').prop("disabled", true);
-                        }                        
+                        alert(data.message);    
                     }
                     else
                     {
-                        if ($param == 'add')
+                        if (data.data != null)
                         {
-                            $('#myModalValidation').modal('show');
+                            if ($param == 'add')
+                            {
+                                alert("Mohon maaf, Anda sudah melakukan voting!");      
+                            }
+                            else
+                            {
+                                $('[id=buttonVote]').prop("disabled", true);
+                            }                        
+                        }
+                        else
+                        {
+                            if ($param == 'add')
+                            {
+                                $('#myModalValidation').modal('show');
+                            }
                         }
                     }
                 }
@@ -388,7 +395,8 @@
                 if (distance < 0) {
 
                     clearInterval(timer);
-                    document.getElementById(id).innerHTML = 'END VOTE!';
+                    document.getElementById(id).innerHTML = 'VOTING CLOSED';
+                    const box = $('[id=buttonVote]').remove();
 
                     return;
                 }

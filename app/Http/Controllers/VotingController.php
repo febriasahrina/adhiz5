@@ -14,6 +14,7 @@ use Storage;
 use DataTables;
 use Exception;
 use Response;
+use Carbon\Carbon;
 
 class VotingController extends Controller
 {
@@ -94,6 +95,18 @@ class VotingController extends Controller
 
     public function cekHaveVote($id = '')
     {
+        $currentTime = Carbon::now();
+        $day = $currentTime->toArray()['day'];
+        $month = $currentTime->toArray()['month'];
+
+        if($day == 24 && $month >= 2)
+        {
+            return response()->json([
+                'success' => true,
+                'message' => 'Voting closed!'
+            ], 201);
+        }
+        
         $id_employee = $id;
         $checkVote = DB::table('tb_vote')
             ->where('tb_vote.id_employee', '=', $id_employee)
