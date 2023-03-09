@@ -46,16 +46,16 @@
                 <div class="img-wrap">
                     <div class="owl-carousel slide-one-item hero-slider" onchange="slide()">
                         <div class="slide" id="slide_inner">
-                            <img src="{{asset('')}}assets/documentary/best-performance.jpg" alt="Best Idea">  
+                            <img src="{{asset('')}}assets/documentary/best-performance-res.jpg" alt="Best Idea">  
                         </div>
                         <div class="slide" id="slide_inner">
-                            <img src="{{asset('')}}assets/documentary/best-idea.jpg" alt="Penyerahan plakat kepada Prof. SIDHARTA UTAMA PhD CA CFA">  
+                            <img src="{{asset('')}}assets/documentary/best-idea-res.jpg" alt="Penyerahan plakat kepada Prof. SIDHARTA UTAMA PhD CA CFA">  
                         </div>
                         <div class="slide" id="slide_inner">
-                            <img src="{{asset('')}}assets/documentary/plakat-1.jpg" alt="Penyerahan plakat kepada Ibrahim Arsyad, Ir. MT. DR (Cand.)">  
+                            <img src="{{asset('')}}assets/documentary/plakat-1-res.jpg" alt="Penyerahan plakat kepada Ibrahim Arsyad, Ir. MT. DR (Cand.)">  
                         </div>
                         <div class="slide" id="slide_inner">
-                            <img src="{{asset('')}}assets/documentary/plakat-2.jpg" alt="Best Performance">  
+                            <img src="{{asset('')}}assets/documentary/plakat-2-res.jpg" alt="Best Performance">  
                         </div>
                     </div>
                 </div>
@@ -105,13 +105,13 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
                         <img
-                        src="{{asset('')}}assets/documentary/img-1.jpg"
+                        src="{{asset('')}}assets/documentary/img-1-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Boat on Calm Water"
                         />
 
                         <img
-                        src="{{asset('')}}assets/documentary/img-2.jpg"
+                        src="{{asset('')}}assets/documentary/img-2-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Wintry Mountain Landscape"
                         />
@@ -119,13 +119,13 @@
 
                     <div class="col-lg-4 mb-4 mb-lg-0">
                         <img
-                        src="{{asset('')}}assets/documentary/img-3.jpg"
+                        src="{{asset('')}}assets/documentary/img-3-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Mountains in the Clouds"
                         />
 
                         <img
-                        src="{{asset('')}}assets/documentary/img-4.jpg"
+                        src="{{asset('')}}assets/documentary/img-4-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Boat on Calm Water"
                         />
@@ -133,13 +133,13 @@
 
                     <div class="col-lg-4 mb-4 mb-lg-0">
                         <img
-                        src="{{asset('')}}assets/documentary/img-5.jpg"
+                        src="{{asset('')}}assets/documentary/img-5-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Waves at Sea"
                         />
 
                         <img
-                        src="{{asset('')}}assets/documentary/img-6.jpg"
+                        src="{{asset('')}}assets/documentary/img-6-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Yosemite National Park"
                         />
@@ -147,13 +147,13 @@
 
                     <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
                         <img
-                        src="{{asset('')}}assets/documentary/img-7.jpg"
+                        src="{{asset('')}}assets/documentary/img-7-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Boat on Calm Water"
                         />
 
                         <img
-                        src="{{asset('')}}assets/documentary/img-8.jpg"
+                        src="{{asset('')}}assets/documentary/img-8-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Wintry Mountain Landscape"
                         />
@@ -161,13 +161,13 @@
 
                     <div class="col-lg-4 mb-4 mb-lg-0">
                         <img
-                        src="{{asset('')}}assets/documentary/img-9.jpg"
+                        src="{{asset('')}}assets/documentary/img-9-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Mountains in the Clouds"
                         />
 
                         <img
-                        src="{{asset('')}}assets/documentary/img-10.jpg"
+                        src="{{asset('')}}assets/documentary/img-10-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Boat on Calm Water"
                         />
@@ -175,13 +175,13 @@
 
                     <div class="col-lg-4 mb-4 mb-lg-0">
                         <img
-                        src="{{asset('')}}assets/documentary/img-11.jpg"
+                        src="{{asset('')}}assets/documentary/img-11-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Waves at Sea"
                         />
 
                         <img
-                        src="{{asset('')}}assets/documentary/img-12.jpg"
+                        src="{{asset('')}}assets/documentary/img-12-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Yosemite National Park"
                         />
@@ -189,13 +189,13 @@
 
                     <div class="col-lg-4 mb-4 mb-lg-0">
                         <img
-                        src="{{asset('')}}assets/documentary/img-13.jpg"
+                        src="{{asset('')}}assets/documentary/img-13-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Waves at Sea"
                         />
 
                         <img
-                        src="{{asset('')}}assets/documentary/img-14.jpg"
+                        src="{{asset('')}}assets/documentary/img-14-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Yosemite National Park"
                         />
@@ -203,13 +203,13 @@
 
                     <div class="col-lg-4 mb-4 mb-lg-0">
                         <img
-                        src="{{asset('')}}assets/documentary/img-15.jpg"
+                        src="{{asset('')}}assets/documentary/img-15-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Waves at Sea"
                         />
 
                         <img
-                        src="{{asset('')}}assets/documentary/img-16.jpg"
+                        src="{{asset('')}}assets/documentary/img-16-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Yosemite National Park"
                         />
@@ -217,13 +217,13 @@
 
                     <div class="col-lg-4 mb-4 mb-lg-0">
                         <img
-                        src="{{asset('')}}assets/documentary/img-17.jpg"
+                        src="{{asset('')}}assets/documentary/img-17-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Waves at Sea"
                         />
 
                         <img
-                        src="{{asset('')}}assets/documentary/img-18.jpg"
+                        src="{{asset('')}}assets/documentary/img-18-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Yosemite National Park"
                         />
@@ -234,13 +234,13 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
                         <img
-                        src="{{asset('')}}assets/documentary/img-peserta-1.jpg"
+                        src="{{asset('')}}assets/documentary/img-peserta-1-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Boat on Calm Water"
                         />
 
                         <img
-                        src="{{asset('')}}assets/documentary/img-peserta-1a.jpg"
+                        src="{{asset('')}}assets/documentary/img-peserta-1a-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Wintry Mountain Landscape"
                         />
@@ -248,13 +248,13 @@
 
                     <div class="col-lg-4 mb-4 mb-lg-0">
                         <img
-                        src="{{asset('')}}assets/documentary/img-peserta-2.jpg"
+                        src="{{asset('')}}assets/documentary/img-peserta-2-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Mountains in the Clouds"
                         />
 
                         <img
-                        src="{{asset('')}}assets/documentary/img-peserta-2a.jpg"
+                        src="{{asset('')}}assets/documentary/img-peserta-2a-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Boat on Calm Water"
                         />
@@ -262,27 +262,13 @@
 
                     <div class="col-lg-4 mb-4 mb-lg-0">
                         <img
-                        src="{{asset('')}}assets/documentary/img-peserta-3.jpg"
+                        src="{{asset('')}}assets/documentary/img-peserta-3-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Waves at Sea"
                         />
 
                         <img
-                        src="{{asset('')}}assets/documentary/img-peserta-3a.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4"
-                        alt="Waves at Sea"
-                        />
-                    </div>
-
-                    <div class="col-lg-4 mb-4 mb-lg-0">
-                        <img
-                        src="{{asset('')}}assets/documentary/img-peserta-4.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4"
-                        alt="Waves at Sea"
-                        />
-
-                        <img
-                        src="{{asset('')}}assets/documentary/img-peserta-4a.jpg"
+                        src="{{asset('')}}assets/documentary/img-peserta-3a-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Waves at Sea"
                         />
@@ -290,13 +276,13 @@
 
                     <div class="col-lg-4 mb-4 mb-lg-0">
                         <img
-                        src="{{asset('')}}assets/documentary/img-peserta-5.jpg"
+                        src="{{asset('')}}assets/documentary/img-peserta-4-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Waves at Sea"
                         />
 
                         <img
-                        src="{{asset('')}}assets/documentary/img-peserta-5a.jpg"
+                        src="{{asset('')}}assets/documentary/img-peserta-4a-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Waves at Sea"
                         />
@@ -304,13 +290,27 @@
 
                     <div class="col-lg-4 mb-4 mb-lg-0">
                         <img
-                        src="{{asset('')}}assets/documentary/best-1.jpg"
+                        src="{{asset('')}}assets/documentary/img-peserta-5-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Waves at Sea"
                         />
 
                         <img
-                        src="{{asset('')}}assets/documentary/best-2.jpg"
+                        src="{{asset('')}}assets/documentary/img-peserta-5a-res.jpg"
+                        class="w-100 shadow-1-strong rounded mb-4"
+                        alt="Waves at Sea"
+                        />
+                    </div>
+
+                    <div class="col-lg-4 mb-4 mb-lg-0">
+                        <img
+                        src="{{asset('')}}assets/documentary/best-1-res.jpg"
+                        class="w-100 shadow-1-strong rounded mb-4"
+                        alt="Waves at Sea"
+                        />
+
+                        <img
+                        src="{{asset('')}}assets/documentary/best-2-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Waves at Sea"
                         />
@@ -320,13 +320,13 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
                         <img
-                        src="{{asset('')}}assets/documentary/santai/santai-1.jpg"
+                        src="{{asset('')}}assets/documentary/santai/santai-1-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Boat on Calm Water"
                         />
 
                         <img
-                        src="{{asset('')}}assets/documentary/santai/santai-2.jpg"
+                        src="{{asset('')}}assets/documentary/santai/santai-2-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Wintry Mountain Landscape"
                         />
@@ -334,13 +334,13 @@
 
                     <div class="col-lg-4 mb-4 mb-lg-0">
                         <img
-                        src="{{asset('')}}assets/documentary/santai/santai-3.jpg"
+                        src="{{asset('')}}assets/documentary/santai/santai-3-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Mountains in the Clouds"
                         />
 
                         <img
-                        src="{{asset('')}}assets/documentary/santai/santai-4.jpg"
+                        src="{{asset('')}}assets/documentary/santai/santai-4-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Boat on Calm Water"
                         />
@@ -348,27 +348,13 @@
 
                     <div class="col-lg-4 mb-4 mb-lg-0">
                         <img
-                        src="{{asset('')}}assets/documentary/santai/santai-5.jpg"
+                        src="{{asset('')}}assets/documentary/santai/santai-5-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Waves at Sea"
                         />
 
                         <img
-                        src="{{asset('')}}assets/documentary/santai/santai-6.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4"
-                        alt="Waves at Sea"
-                        />
-                    </div>
-
-                    <div class="col-lg-4 mb-4 mb-lg-0">
-                        <img
-                        src="{{asset('')}}assets/documentary/santai/santai-8.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4"
-                        alt="Waves at Sea"
-                        />
-
-                        <img
-                        src="{{asset('')}}assets/documentary/santai/santai-9.jpg"
+                        src="{{asset('')}}assets/documentary/santai/santai-6-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Waves at Sea"
                         />
@@ -376,13 +362,13 @@
 
                     <div class="col-lg-4 mb-4 mb-lg-0">
                         <img
-                        src="{{asset('')}}assets/documentary/santai/santai-10.jpg"
+                        src="{{asset('')}}assets/documentary/santai/santai-8-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Waves at Sea"
                         />
 
                         <img
-                        src="{{asset('')}}assets/documentary/santai/santai-11.jpg"
+                        src="{{asset('')}}assets/documentary/santai/santai-9-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Waves at Sea"
                         />
@@ -390,13 +376,27 @@
 
                     <div class="col-lg-4 mb-4 mb-lg-0">
                         <img
-                        src="{{asset('')}}assets/documentary/santai/santai-12.jpg"
+                        src="{{asset('')}}assets/documentary/santai/santai-10-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Waves at Sea"
                         />
 
                         <img
-                        src="{{asset('')}}assets/documentary/santai/santai-13.jpg"
+                        src="{{asset('')}}assets/documentary/santai/santai-11-res.jpg"
+                        class="w-100 shadow-1-strong rounded mb-4"
+                        alt="Waves at Sea"
+                        />
+                    </div>
+
+                    <div class="col-lg-4 mb-4 mb-lg-0">
+                        <img
+                        src="{{asset('')}}assets/documentary/santai/santai-12-res.jpg"
+                        class="w-100 shadow-1-strong rounded mb-4"
+                        alt="Waves at Sea"
+                        />
+
+                        <img
+                        src="{{asset('')}}assets/documentary/santai/santai-13-res.jpg"
                         class="w-100 shadow-1-strong rounded mb-4"
                         alt="Waves at Sea"
                         />

@@ -150,12 +150,8 @@
                                     </li>
                                     <li class="nav-item">
                                         <img src="{{asset('')}}assets/img/close-res.png" alt="Logo" style="position:fixed;z-index: 100;margin-left: 40px;">
-                                    <li class="nav-item">
-                                        <img src="{{asset('')}}assets/img/close-res.png" alt="Logo" style="position:fixed;z-index: 100;margin-left: 40px;">
                                         <a class="page-scroll" href="{{ url('voting') }}">Voting</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <img src="{{asset('')}}assets/img/close-res.png" alt="Logo" style="position:fixed;z-index: 100;margin-left: 40px;">
                                     <li class="nav-item">
                                         <img src="{{asset('')}}assets/img/close-res.png" alt="Logo" style="position:fixed;z-index: 100;margin-left: 40px;">
                                         <a class="page-scroll" href="{{url('/judge-final')}}">Judges</a>
