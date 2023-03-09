@@ -91,7 +91,7 @@
                 </div>
                 <div class="container pb-20">
                     <div class="row">
-                        <div class="col-lg-6 order-lg-last">
+                        <div class="col-lg-6">
                             <div class="counter-wrapper mt-10 wow fadeIn pl-0" data-wow-duration="1s" data-wow-delay="0.5s">
                                 <div class="section-title">
                                     <div class="line"></div>

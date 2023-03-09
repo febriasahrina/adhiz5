@@ -61,6 +61,13 @@
 </div>
 <div id="home" class="header-hero bg_cover" style="background-image: url({{asset('')}}assets/img/banner-bg.svg)">
     <section id="features" class="services-area pt-150">
+        <?php
+            $id_email = "";
+            if(Session::get('id_employee'))
+            {
+                $id_email = Session::get('id_employee');
+            }
+        ?>
         <div class="container mb-4">
             <div class="card card-body" style="border-radius: 20px;">
                 <div class="row" id="polling-results">
@@ -68,78 +75,12 @@
                     <div class="col-lg-4 col-md-7 col-sm-8 issue-img one" id="progress1" style="display:none">
                         <img class="shape" src="{{asset('')}}assets/img/favoritecup.png" alt="shape">
                         <br>
+                        <h3 class="text-center">CONGRATULATIONS</h3>
                         <h4 class="text-center">Favorit</h4>
                         <h5 class="pt-2 text-center" id="vote_tim_1"></h5>
-                        <p class="pt-2 text-center" id="countdown"></p>
+                        <p class="pt-2 text-center" id="anggota_tim_1"></p>
                     </div>
                  </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="card card-body" style="border-radius: 20px">
-                <div class="about-shape-2">
-                    <img src="{{asset('')}}assets/img/about-shape-2.svg" alt="shape">
-                </div>
-                <table id="tableDataVote" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th style="width:10px">No</th>
-                            <th>Judul Ide</th>
-                            <th>Nama Tim</th>
-                            <th>Anggota Tim</th>
-                            <th style="display:none">Deskripsi Ide</th>
-                            <th style="text-align:center;width:100px;">Action
-                                <!-- <button type="button" data-func="dt-add" class="btn btn-success btn-xs dt-add">
-                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                </button> -->
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                            $id_email = "";
-                            if(Session::get('id_employee'))
-                            {
-                                $id_email = Session::get('id_employee');
-                            }
-
-                            if(count($showData)>0)
-                            {
-                                for($i=0; $i<count($showData); $i++)
-                                {
-                        ?>
-                        <tr>
-                            <td>{{$i+1}}</td>
-                            <td>{{$showData[$i]->judul_ide}}</td>
-                            <td>{{$showData[$i]->nama_tim}}</td>
-                            <td>
-                            <?php
-                                for($j=0; $j<count($showData[$i]->anggota); $j++)
-                                {
-                                    $email = $showData[$i]->anggota[0]->email;                                    
-                            ?>
-                            
-                                <li>{{$showData[$i]->anggota[$j]->nama}}</li>
-                                <?php } ?>
-                            </td>
-                            <td id="deskripsi_ide_{{$email}}" style="display:none">{{$showData[$i]->deskripsi}}</td>
-                            <td class=" dt-center align-middle">
-                                <div class="align-middle" style="width: 100px;">
-                                    <div class="col">
-                                        <a href="{{ url('details')}}/{{$showData[$i]->id_kepesertaan}}" class="btn btn-primary btn-sm px-2" style="font-size: 12px; width: 70px;">Detail</a>
-                                    </div>
-                                    <div class="col mt-2">
-                                        <button id="buttonVote" class="btn btn-success btn-sm px-2" onclick="modalValidation('{{$showData[$i]->nama_tim}}',{{$showData[$i]->id_ide}})" style="font-size: 12px; width: 70px;">Vote</button>
-                                        <!-- <a href="" class="btn btn-success btn-sm px-2" onclick="modalValidation()" style="font-size: 12px; width: 70px;">Vote</a> -->
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <?php
-                            }}
-                        ?>
-                    </tbody>
-                </table>
             </div>
         </div>
     </section>
@@ -310,6 +251,7 @@
         function countVote()
         {
             $no = 1;
+            var anggota = '';
             $.ajax({
                 type: 'GET',
                 url: "{{url('count-vote')}}",
@@ -325,6 +267,16 @@
                                 document.getElementById("progress"+$no).style.display = "";
 
                                 document.getElementById("vote_tim_"+$no).innerText = values['nama_tim'];
+
+                                $.each(values['anggota'], function(keys_anggota, values_anggota) {
+                                    if (keys_anggota > 0)
+                                    {
+                                        anggota = anggota + ' dan ';
+                                    }
+                                    anggota = anggota + values_anggota['nama'];
+                                });
+
+                                document.getElementById("anggota_tim_"+$no).innerText = anggota;
                             }
                             $no++;
                         });
@@ -395,7 +347,7 @@
                 if (distance < 0) {
 
                     clearInterval(timer);
-                    document.getElementById(id).innerHTML = 'VOTING CLOSED';
+                    // document.getElementById(id).innerHTML = 'VOTING CLOSED';
                     const box = $('[id=buttonVote]').remove();
 
                     return;

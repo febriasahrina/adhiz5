@@ -115,3 +115,5 @@ Route::post('set-session', [
 Route::post('insert-file/{route}', [
     'as' => 'insert-file',
     'uses' => 'ParticipateController@store_file']);
+
+Route::get('/recap', ['as' => 'recap', 'uses' => 'RecapController@index']);

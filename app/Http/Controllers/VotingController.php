@@ -122,7 +122,7 @@ class VotingController extends Controller
 
     public function countVote()
     {
-
+        $varAnggota = [];
         $countVote = DB::table('tb_vote')
             ->select('tb_vote.id_ide', 'tb_ide.nama_tim', DB::raw('count(*) as total'))
             ->join('tb_ide', 'tb_ide.id_ide', '=', 'tb_vote.id_ide')
@@ -131,8 +131,35 @@ class VotingController extends Controller
             ->orderBy('total', 'DESC')
             ->get();
 
+        $anggota = DB::table('tb_ide')
+            ->join('tb_tim', 'tb_tim.id_kepesertaan', '=', 'tb_ide.id_kepesertaan')
+            ->where('tb_ide.deleted_at', null)
+            ->get([
+                'tb_ide.id_ide',
+                'tb_tim.nama'
+            ]);
+
+        foreach ($countVote as $key => $value) {
+            $varAnggota[$value->id_ide] = [];
+            foreach ($anggota as $keys => $values) {
+                if ($values->id_ide == $value->id_ide)
+                {
+                    array_push($varAnggota[$values->id_ide], $anggota[$keys]);
+                }
+            }
+        }
+
+        foreach ($varAnggota as $key => $value) {
+            foreach ($countVote as $keys => $values) {
+                if ($key == $values->id_ide)
+                {
+                    $countVote[$keys]->anggota = $value;
+                }
+            }
+        }
+
         $countAllVote = DB::table('tb_vote')
-                    ->count();
+            ->count();
 
         if ($countVote) {
             return response()->json([

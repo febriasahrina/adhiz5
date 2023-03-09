@@ -148,15 +148,16 @@
                                         <img src="{{asset('')}}assets/img/close-res.png" alt="Logo" style="position:fixed;z-index: 100;margin-left: 40px;">
                                         <a class="page-scroll" href="{{url('/participate')}}">Participate</a>
                                     </li>
-                                    <li class="nav-item coming">
+                                    <li class="nav-item">
+                                        <img src="{{asset('')}}assets/img/close-res.png" alt="Logo" style="position:fixed;z-index: 100;margin-left: 40px;">
                                         <a class="page-scroll" href="{{ url('voting') }}">Voting</a>
                                     </li>
-                                    <li class="nav-item coming">
+                                    <li class="nav-item">
+                                        <img src="{{asset('')}}assets/img/close-res.png" alt="Logo" style="position:fixed;z-index: 100;margin-left: 40px;">
                                         <a class="page-scroll" href="{{url('/judge-final')}}">Judges</a>
                                     </li>
-                                    <li class="nav-item coming">
-                                        <img src="{{asset('')}}assets/img/comingsoon.png" alt="Logo" style="position:absolute;z-index: -1;margin-left: 40px">
-                                        <a class="page-scroll" href="#">Recap</a>
+                                    <li class="nav-item">
+                                        <a class="page-scroll" href="{{url('/recap')}}">Recap</a>
                                     </li>
                                     @if(Session::get('loginStatus') == TRUE || Session::get('name') != '')
                                     <li class="nav-item dropdown align-self-center">
@@ -200,7 +201,7 @@
     </header>
 
     <!-- Main content -->
-    <section class="content">
+    <section class="">
         @yield('content')
     </section>
     <div class="modal fade" id="showNotifModalKuesioner" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

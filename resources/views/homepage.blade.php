@@ -271,7 +271,7 @@
                         <div class="px-2">
                         <div class="event-date badge bg-success" style="color : white;">23 Februari</div>
                         <h5 class="pt-2">Penjurian Final</h5>
-                        <p class="text-muted"></p><br>
+                        <p class="text-muted" style="font-size:14px">Closed</p>
                         <!-- <div>
                             <a href="#" class="btn btn-primary btn-sm">Read more</a>
                         </div> -->
@@ -342,9 +342,6 @@
     <script>
         var element = document.getElementById("nav-home");
         element.classList.add("active");
-        $(document).ready(function(){
-            showExtend();
-        });
         
         $.ajax({
             type: 'GET',
