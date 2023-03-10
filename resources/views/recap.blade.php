@@ -15,6 +15,10 @@
     .check{
         display: none;
     }
+
+    img{
+        white-space:pre
+    }
 </style>
 
 @push('custom-css')
@@ -46,16 +50,16 @@
                 <div class="img-wrap">
                     <div class="owl-carousel slide-one-item hero-slider" onchange="slide()">
                         <div class="slide" id="slide_inner">
-                            <img src="{{asset('')}}assets/documentary/best-performance-res.jpg" alt="Best Idea">  
+                            <img src="{{asset('')}}assets/documentary/best-performance-res.jpg" alt="Best Idea - ADATON">  
                         </div>
                         <div class="slide" id="slide_inner">
-                            <img src="{{asset('')}}assets/documentary/best-idea-res.jpg" alt="Penyerahan plakat kepada Prof. SIDHARTA UTAMA PhD CA CFA">  
+                            <img src="{{asset('')}}assets/documentary/best-idea-res.jpg" alt="Penyerahan plakat kepada <br>Prof. Sidharta Utama PhD CA CFA">  
                         </div>
                         <div class="slide" id="slide_inner">
-                            <img src="{{asset('')}}assets/documentary/plakat-1-res.jpg" alt="Penyerahan plakat kepada Ibrahim Arsyad, Ir. MT. DR (Cand.)">  
+                            <img src="{{asset('')}}assets/documentary/plakat-1-res.jpg" alt="Penyerahan plakat kepada <br>Ibrahim Arsyad, Ir. MT. DR (Cand.)">  
                         </div>
                         <div class="slide" id="slide_inner">
-                            <img src="{{asset('')}}assets/documentary/plakat-2-res.jpg" alt="Best Performance">  
+                            <img src="{{asset('')}}assets/documentary/plakat-2-res.jpg" alt="Best Performance - Waste Avengers">  
                         </div>
                     </div>
                 </div>
@@ -67,7 +71,7 @@
                                 <h1 class="text-white font-weight-bold">Highlight</h1>
                             </div>
                             <div class="text sub-text">
-                                <h3 class="text-white" id="text-highlight">Best Performance ADHI Z</h3>
+                                <h3 class="text-white" id="text-highlight">Best Performance - Waste Avengers</h3>
                             </div>
                             </div>
                         </div>

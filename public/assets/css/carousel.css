@@ -68,7 +68,8 @@ h2 {
     right: 50%;
     min-height: 600px;
     overflow: hidden;
-    border-bottom-right-radius: 200px; }
+    border-bottom-right-radius: 200px;
+    border-top-right-radius: 200px; }
     @media (max-width: 991.98px) {
       .site-blocks-cover .img-wrap {
         width: 100%;
